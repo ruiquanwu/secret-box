@@ -29,6 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass'
 
+# User Authentication
+gem 'devise'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
