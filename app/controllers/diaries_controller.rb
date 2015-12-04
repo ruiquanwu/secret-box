@@ -1,6 +1,7 @@
 class DiariesController < ApplicationController
   def index
     @diaries = Diary.all
+    authorize @diaries
   end
 
   def show
@@ -9,11 +10,13 @@ class DiariesController < ApplicationController
 
   def new
     @diary = Diary.new
+    authorize @diary
   end
   
   def create
     @diary = Diary.new(params.require(:diary).permit(:title, :body))
     @diary.user = current_user
+    authorize @diary
      if @diary.save
        flash[:notice] = "Diary was saved."
        redirect_to @diary

@@ -1,0 +1,2 @@
+class DiaryPolicy < ApplicationPolicy
+end

@@ -35,7 +35,11 @@ gem 'devise'
 # handle environment variables
 gem 'figaro', '1.0'
 
+# make fake data
 gem 'faker'
+
+# User Authorization
+gem 'pundit'
 
 group :production do
   gem 'pg'
