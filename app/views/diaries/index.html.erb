@@ -1,0 +1,13 @@
+ <h1>All Diaries</h1>
+  <% @diaries.each do |diary| %>
+   <div class="media">
+     <div class="media-body">
+       <h4 class="media-heading">
+         <%= link_to diary.title, diary %>
+       </h4>
+       <small>
+         submitted <%= time_ago_in_words(diary.created_at) %> ago by <%= diary.user.name %><br>
+       </small>
+     </div>
+   </div>
+ <% end %>

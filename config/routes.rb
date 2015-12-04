@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :diarys
+  resources :diaries
 
   get 'about' => 'welcome#about'
   
