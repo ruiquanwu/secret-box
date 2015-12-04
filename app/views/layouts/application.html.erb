@@ -20,11 +20,41 @@
        </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <% if current_user %>
+          Hello <%= current_user.email %>! 
+          <%= link_to destroy_user_session_path, method: :delete do%>
+            <span class="glyphicon glyphicon-log-out"></span> Logout
+          <% end %>
+        <% else %>
+          <li><%= link_to new_user_registration_path do%>
+            <span class="glyphicon glyphicon-user"></span> Sign Up
+          <% end %>
+          
+          <li><%= link_to new_user_session_path do%>
+            <span class="glyphicon glyphicon-log-in"></span> Login
+          <% end %>
+          </li>
+        <% end %>
       </ul>
-    
+
     </div>
+    
+    <% if flash[:notice] %>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:notice] %>
+    </div>
+    <% elsif flash[:error] %>
+    <div class="alert alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:error] %>
+    </div>
+    <% elsif flash[:alert] %>
+    <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:alert] %>
+    </div>
+    <% end %>
 
     <%= yield %>
   </div>

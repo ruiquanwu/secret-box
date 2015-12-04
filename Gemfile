@@ -32,6 +32,9 @@ gem 'bootstrap-sass'
 # User Authentication
 gem 'devise'
 
+# handle environment variables
+gem 'figaro', '1.0'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
