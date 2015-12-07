@@ -1,4 +1,7 @@
- <h1>All Diaries</h1>
+<h1>
+  All Diaries
+  <%= link_to "New Diary", new_diary_path, class: 'btn btn-success' %>
+</h1>
   <% @diaries.each do |diary| %>
    <div class="media">
      <div class="media-body">

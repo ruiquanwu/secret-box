@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :diaries
 
   get 'about' => 'welcome#about'
+  get 'welcome' => 'welcome#index'
   
-  root to: 'welcome#index'
+  root to: 'home#index'
 
 end

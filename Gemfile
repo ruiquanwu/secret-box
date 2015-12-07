@@ -41,6 +41,8 @@ gem 'faker'
 # User Authorization
 gem 'pundit'
 
+gem 'activerecord-session_store'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
