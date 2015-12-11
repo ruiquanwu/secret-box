@@ -11,7 +11,13 @@
   <div class="container">
     <div class="row">
       <div class="navbar-header">
-        <div class="navbar-brand"><%= link_to "SecretBox", root_url %></div>
+        <div class="navbar-brand">
+          <% if current_user %>
+            <%= link_to "SecretBox", welcome_path %>
+          <% else %>
+            <%= link_to "SecretBox", root_url %>
+          <% end %>
+        </div>
       </div>
       <ul class="nav navbar-nav navbar-left">
         <% if current_user %>

@@ -8,9 +8,17 @@
        <h4 class="media-heading">
          <%= link_to diary.title, diary %>
        </h4>
+       
+       <div class="diary-detail">
+         <p>
+           <%= markdown_to_html diary.bodyOverView %>
+         </p>
+       </div>
        <small>
-         submitted <%= time_ago_in_words(diary.created_at) %> ago by <%= diary.user.name %><br>
+         <%= diary.created_at.to_date.to_formatted_s(:long_ordinal)%>
+         <%= link_to "view_all", diary %>
        </small>
      </div>
    </div>
  <% end %>
+ <%= will_paginate @diaries %>

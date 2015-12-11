@@ -1,7 +1,7 @@
 class DiariesController < ApplicationController
   def index
-    if current_user   
-      @diaries = current_user.diaries
+    if current_user  
+      @diaries = current_user.diaries.paginate(page: params[:page], per_page: 5)
      # authorize @diaries
     else
       render 'welcome/index'
