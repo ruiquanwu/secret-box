@@ -1,3 +1,18 @@
 // Place all the styles related to the Diarys controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.diary-detail {
+  height: 100px;
+  padding: 8px 0 20px;
+  border-width: 0 0 1px;
+  border-style: dashed;
+  overflow: hidden;
+}
+
+.diary_body {
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  padding: 10px;
+}

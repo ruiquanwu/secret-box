@@ -35,7 +35,19 @@ gem 'devise'
 # handle environment variables
 gem 'figaro', '1.0'
 
+# make fake data
 gem 'faker'
+
+# User Authorization
+gem 'pundit'
+
+gem 'activerecord-session_store'
+
+# markdown
+gem 'redcarpet'
+
+# Pagination
+gem 'will_paginate', '~> 3.0.5'
 
 group :production do
   gem 'pg'
