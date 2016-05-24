@@ -1,0 +1,15 @@
+<div class="row text-left" style="padding: 10px; height: 40px">
+
+      <div class="col-md-8">
+      <%= link_to "Insert", insert_album_photo_path(@album, photo), class: 'btn btn-success', :method => :post%>
+      <%= link_to "Append", append_album_photo_path(@album, photo), class: 'btn btn-success', :method => :post%>
+      <%= link_to "Delete", album_photo_path(@album, photo), class: 'btn btn-danger', data: {:confirm => 'Are you sure to delete this photo?'}, :method => :delete%>
+    </div>
+    <div class="col-md-4 text-right">
+      <p> Photo_Number:
+        <%= photo.photo_number %>
+      </p>
+    </div>
+
+
+  </div>

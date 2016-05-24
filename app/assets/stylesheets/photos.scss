@@ -1,0 +1,125 @@
+// Place all the styles related to the Photos controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.memo {
+  word-wrap: break-word;
+  border: 1px solid black;
+  height: 417px;
+}
+
+#edit_memo {
+  position: absolute;
+  margin-left: 15px;
+}
+
+#memo_body {
+  background: #eeeeee;
+  width: 100px;
+  height: 70%;
+}
+
+.jumbotron {
+  min-width: 850px;
+}
+
+.landscape-picture {
+  background-image: url("http://placehold.it/750x500");
+  background-position: center; 
+  padding-left: 0px;
+  padding-right: 0px;
+  border: 1px solid black;
+  max-width: 750px;
+  min-height: 417px;
+  max-height: 500px;
+}
+
+.landscape-photo-page {
+  max-width: 750px;
+  max-height: 500px;
+}
+
+.portrait-picture {
+  max-width: 500px;
+  max-height: 750px;
+}
+
+.portrait-photo-page {
+  max-width: 500px;
+  max-height: 750px;
+}
+
+.photo-page-left {
+  border-top: 10px solid black;
+  border-bottom: 10px solid black;
+  border-left: 20px solid black;
+  border-radius: 10px;
+}
+
+.photo-page-right {
+  border-top: 10px solid black;
+  border-bottom: 10px solid black;
+  border-right: 20px solid black;
+  border-radius: 10px;
+}
+
+.jumbotron {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+/* left panel relative class
+    beigin here
+*/
+span.glyphicon {
+    font-size: 30px;  
+}
+
+.right-panel-toggle {
+  position: fixed;
+  right: 0%;
+  top: 16%;
+}
+
+.right-panel {
+  position: fixed;
+  right: 50px;
+  bottom: 20px;
+  width: 20%;
+  height: 80%;
+  border: 1px solid black;
+  display: none;
+  background: #eeeeee;
+}
+
+.photo-box-content {
+  height: 85%;
+  overflow: scroll;
+}
+
+.photo-box-footer {
+  height: 10%;
+  border: 1px solid green;
+}
+
+.right-panel img {
+  width: 50%;
+  padding: 10px;
+  display: inline;
+  float: left;
+}
+
+.photo-box {
+  width: 200px;
+  height: 30px;
+  margin-bottom: 0;
+  bottom: 0;
+  right: 50px;
+  position: fixed;
+}
+
+.photo-box-btn {
+  width: 100%;
+  color: white;
+}

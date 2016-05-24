@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="row photo-page">
+    <div class="col-md-2 memo">
+      <%= @photo.memo %>
+    </div>
+
+    <div class="col-md-10 picture">
+      <%= image_tag(@photo.picture.url, class: "img-responsive")%>
+    </div>
+  </div>
+</div>

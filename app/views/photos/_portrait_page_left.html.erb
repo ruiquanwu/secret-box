@@ -1,0 +1,25 @@
+<div class="row album-page-body">
+  <div class="row text-left" style="height: 40px">
+    <div class="col-md-8">
+      <%= link_to "Edit", edit_album_photo_path(@album, photo), class: 'btn btn-success'%>
+      <%= link_to "Insert", insert_album_photo_path(@album, photo), class: 'btn btn-success'%>
+    </div>
+
+    <div class="col-md-4 text-right">
+      <p> Photo_Number:
+        <%= photo.photo_number %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row portrait-photo-page" >
+    <div class="col-md-10 portrait-picture">
+      <%= image_tag(photo.picture.portrait.url, class: "img-responsive")%>
+    </div>
+
+    <div class="col-md-2 memo">
+      <h3> Memo: </h3>
+      <%= photo.memo %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<h1> Album Management </h1>
+
+<% @albums.each do |album| %>
+  <div class="row">
+    <div class="col-md-3">
+      <%= image_tag(album.avatar, class: "img-responsive") %>
+    </div>
+
+    <div class="col-md-3">
+      <%= image_tag(album.album_layout, class: "img-responsive") %>
+    </div>
+
+    <div class="col-md-6 text-left">
+      <div class="row">
+        <p> Album Name: <%= album.name%> </p>
+      </div>
+      <div class="row">
+        <p> Album Description: <%= album.description%> </p>
+      </div>
+    </div>
+  </div>
+  
+<% end %>

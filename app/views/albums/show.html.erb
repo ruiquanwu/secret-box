@@ -1,0 +1,22 @@
+<div class="row text-center">
+  <h1 class="text-center">
+    <%= @album.name %>
+  </h1>
+  <div class="col-md-9 cover-page" >
+    <%= link_to album_photos_path(@album) do %>
+      <img class="img-responsive" src=<%=@album.front_cover %> alt="photo album cover page">
+    <% end %>
+  </div>
+
+  <div class="col-md-3 album-status">
+    <ul>
+      <li> Total Photos: </li>
+      <li> Number of Photos remains:</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row">
+  <%= link_to "Open Photo Album", album_photos_path(@album), class: 'btn btn-success'%>
+  <%= link_to "Delete Photo Album", album_path(@album), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete%>
+</div>

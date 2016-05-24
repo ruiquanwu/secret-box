@@ -15,21 +15,33 @@ class DiariesController < ApplicationController
   end
 
   def new
-    @diary = Diary.new
+    @diary = Diary.new          
     authorize @diary
+    respond_to do |format|
+      format.html
+      format.json {render json: @diaries}
+    end
   end
   
   def create
     @diary = Diary.new(diary_params)
     @diary.user = current_user
     authorize @diary
-     if @diary.save
-       flash[:notice] = "Diary was saved."
-       redirect_to @diary
-     else
-       flash[:error] = "There was an error saving the diary. Please try again."
-       render :new
-     end
+
+    respond_to do |format|
+      if @diary.save
+        format.html {
+          flash[:notice] = "Diary was saved."
+          redirect_to @diary
+        }
+        format.json {
+          render json: @diary, status: :created, location: @product
+        }
+      else
+        flash[:error] = "There was an error saving the diary. Please try again."
+        render :new
+      end
+    end
   end
 
   def edit

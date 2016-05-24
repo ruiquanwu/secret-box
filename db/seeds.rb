@@ -26,7 +26,7 @@ diaries = Diary.all
  user.skip_reconfirmation!
  user.update_attributes!(
    email: 'ruiquanwu@gmail.com',
-   password: 'helloworld'
+   password: '123456abc'
  )
 
  puts "Seed finished"

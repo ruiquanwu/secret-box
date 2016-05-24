@@ -11,7 +11,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207163533) do
+ActiveRecord::Schema.define(version: 20160518000740) do
+
+  create_table "albums", force: :cascade do |t|
+    t.string   "name"
+    t.string   "front_cover"
+    t.string   "style"
+    t.string   "avatar"
+    t.integer  "max_page"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "user_id"
+    t.string   "orientation"
+    t.integer  "photo_per_page"
+    t.string   "album_layout"
+    t.string   "description"
+    t.boolean  "has_memo"
+    t.integer  "number_in_stock"
+    t.float    "price"
+  end
+
+  add_index "albums", ["orientation"], name: "index_albums_on_orientation"
+  add_index "albums", ["photo_per_page"], name: "index_albums_on_photo_per_page"
+  add_index "albums", ["user_id"], name: "index_albums_on_user_id"
 
   create_table "diaries", force: :cascade do |t|
     t.string   "title"
@@ -22,6 +44,27 @@ ActiveRecord::Schema.define(version: 20151207163533) do
   end
 
   add_index "diaries", ["user_id"], name: "index_diaries_on_user_id"
+
+  create_table "freephotos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "picture"
+    t.integer  "album_id"
+  end
+
+  add_index "freephotos", ["album_id"], name: "index_freephotos_on_album_id"
+
+  create_table "photos", force: :cascade do |t|
+    t.string   "memo"
+    t.string   "picture"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "album_id"
+    t.integer  "photo_number"
+  end
+
+  add_index "photos", ["album_id"], name: "index_photos_on_album_id"
+  add_index "photos", ["photo_number"], name: "index_photos_on_photo_number"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

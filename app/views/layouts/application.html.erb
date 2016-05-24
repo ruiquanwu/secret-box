@@ -7,9 +7,8 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <div class="container">
-    <div class="row">
+<body class="<%= controller_name %> <%= action_name %>">
+  <div class="row header">
       <div class="navbar-header">
         <div class="navbar-brand">
           <% if current_user %>
@@ -22,6 +21,7 @@
       <ul class="nav navbar-nav navbar-left">
         <% if current_user %>
         <li><%= link_to "Diaries", diaries_path %></li>
+        <li><%= link_to "Albums", albums_path %></li>
         <% else %>
           <li><a href="#">Home</a></li>
           <li><a href="#">About</a></li>
@@ -47,9 +47,10 @@
           </li>
         <% end %>
       </ul>
+</div>
+  <div class="container text-center">
+    <div class="center">
 
-    </div>
-    
     <% if flash[:notice] %>
     <div class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -67,7 +68,9 @@
     </div>
     <% end %>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
   </div>
+
 </body>
 </html>

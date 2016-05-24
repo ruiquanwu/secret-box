@@ -1,0 +1,5 @@
+<div class="col-md-10 landscape-picture" data-album-id=<%= @album.id %> data-existing-photo=<%= photo.id %> data-photo-number=<%= photo.photo_number %> ondrop="drop(event)" ondragover="allowDrop(event)">
+  <% if photo.picture.url %>
+    <%= image_tag(photo.picture.url, class: "img-responsive", draggable: "true", ondragstart: "drag(event)", id: "album_photo_" + photo.photo_number.to_s, data: {type: "Photos", replace_photo_id: photo.id}) %>
+  <% end %>
+</div>

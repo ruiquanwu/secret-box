@@ -49,6 +49,19 @@ gem 'redcarpet'
 # Pagination
 gem 'will_paginate', '~> 3.0.5'
 
+# handling images
+gem 'carrierwave'
+gem 'mini_magick'
+
+# images crop
+gem 'carrierwave-crop'
+
+gem 'fog'
+
+gem 'will_paginate', '~> 3.0.5'
+
+gem 'byebug'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

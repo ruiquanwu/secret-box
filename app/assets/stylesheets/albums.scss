@@ -1,0 +1,56 @@
+// Place all the styles related to the albums controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.album-page-header {
+  background: #d5e9f6;
+}
+
+.album-page-body {
+}
+
+#album_cover {
+  max-width: 550px;
+  max-height: 550px;
+}
+
+#album_attrs {
+  background: #eeeeee;
+  text-align: left;
+  margin-top: 100px;
+}
+
+#album_attr {
+  padding: 10px;
+}
+
+.album_layout {
+  border: 1px solid black;
+}
+
+.album_page_attrs {
+ margin-top: 50px; 
+ text-align: left;
+}
+
+.odd-row{
+  background: #dfebed;
+}
+
+.cell {
+  padding-left: 30px;
+  width: 200px;
+  height: 30px;
+}
+
+.cover-page {
+ max-width: 640px; 
+}
+
+.album-status {
+  padding-top: 50px;
+}
+
+label {
+  padding: 6px;
+}
