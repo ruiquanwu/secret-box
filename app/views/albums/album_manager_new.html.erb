@@ -1,3 +1,11 @@
+<% if @album.errors.any? %>
+  <% @album.errors.full_messages.each do |msg| %>
+    <ul>
+      <li> <%= msg %> </li>
+    </ul>
+  <% end %>
+<% end %>
+
 <h1> Album Management Create New Album</h1>
 
 <%= form_for @album, :url => {:action => "album_manager_create"} do |f| %>

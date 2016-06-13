@@ -29,8 +29,8 @@ class AlbumsController < ApplicationController
       flash[:notice] = "Album was saved."
       redirect_to @album
     else
-      flash[:notice] = "There is error on saving album"
-      redirect_to :new
+      flash.now[:notice] = "There is error on saving album"
+      render :new
     end
 
   end
@@ -55,8 +55,8 @@ class AlbumsController < ApplicationController
       flash[:notice] = "Album was saved."
       redirect_to @album
     else
-      flash[:notice] = "There is error on saving album"
-      redirect_to :album_manager_new
+      flash.now[:notice] = "There is error on saving album"
+      render :album_manager_new
     end
   end
 
