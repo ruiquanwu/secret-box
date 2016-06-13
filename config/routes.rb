@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'sample_albums/new'
+
+  get 'sample_albums/edit'
+
+  get 'sample_albums/index'
+
   get 'free_photos/index'
 
   get 'free_photos/new'
 
   devise_for :users
   resources :diaries
+  
+  resources :sample_albums
   
   resources :albums do
     get 'album_manager_new', on: :collection

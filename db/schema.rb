@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518000740) do
+ActiveRecord::Schema.define(version: 20160613175923) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -65,6 +65,21 @@ ActiveRecord::Schema.define(version: 20160518000740) do
 
   add_index "photos", ["album_id"], name: "index_photos_on_album_id"
   add_index "photos", ["photo_number"], name: "index_photos_on_photo_number"
+
+  create_table "sample_albums", force: :cascade do |t|
+    t.string   "name"
+    t.string   "avatar"
+    t.integer  "max_page"
+    t.string   "orientation"
+    t.integer  "photo_per_page"
+    t.string   "album_layout"
+    t.string   "description"
+    t.boolean  "has_memo"
+    t.integer  "number_in_stock"
+    t.float    "price"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

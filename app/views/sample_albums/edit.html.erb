@@ -1,0 +1,10 @@
+<% if @sample_album.errors.any? %>
+  <% @sample_album.errors.full_messages.each do |msg| %>
+    <ul>
+      <li> <%= msg %> </li>
+    </ul>
+  <% end %>
+<% end %>
+
+<h1> Edit Sample Album</h1>
+<%= render partial: 'form' %>

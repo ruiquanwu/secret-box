@@ -56,7 +56,7 @@ class DiariesController < ApplicationController
        flash[:notice] = "Diary was updated."
        redirect_to @diary
      else
-       flash[:error] = "There was an error saving the diary. Please try again."
+       flash.now[:error] = "There was an error saving the diary. Please try again."
        render :edit
      end
   end
