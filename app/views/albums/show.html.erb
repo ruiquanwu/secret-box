@@ -4,7 +4,7 @@
   </h1>
   <div class="col-md-9 cover-page" >
     <%= link_to album_photos_path(@album) do %>
-      <img class="img-responsive" src=<%=@album.front_cover %> alt="photo album cover page">
+      <img class="img-responsive" src=<%=@album.avatar.url %> alt="photo album cover page">
     <% end %>
   </div>
 

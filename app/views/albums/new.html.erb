@@ -15,7 +15,7 @@
         <%= f.label :style, "Album_Style:" %>
       </div>
       <div class="col-md-10 text-left">
-        <%= f.select :style, options_for_select(@album_samples.collect{ |a| [a.name, a.style, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout}]}) %>
+        <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout}]}) %>
 
       <!--  <%= f.select :style, options_for_select([['Style1', 1], ['Style2', 2], ['Style3', 3], ['Style4', 4]], params[:style]),
           {}, {:class => 'span3 controls controls-row'} %> -->
@@ -26,7 +26,7 @@
         <%= f.label :style, "Cover Preview:" %>
       </div>
       <div class="col-md-6">
-        <%= image_tag(@album_samples.first.avatar.url, class: "img-responsive", id: "album_cover") %>
+        <%= image_tag(@sample_albums.first.avatar.url, class: "img-responsive", id: "album_cover") %>
        <!--  <img id="album_cover" class="img-responsive" src="/assets/PhotoAlbums1.jpg"> -->
       </div>
 
@@ -47,7 +47,7 @@
         <%= f.label :style, "Page Preview:" %>
       </div>
       <div class="col-md-6">
-        <%= image_tag(@album_samples.first.album_layout.url, class: "img-responsive album_layout", id: "album_layout") %>
+        <%= image_tag(@sample_albums.first.album_layout.url, class: "img-responsive album_layout", id: "album_layout") %>
         <!-- <img class="img-responsive album_layout" src="/assets/album_page1.jpg"> -->
       </div>
 

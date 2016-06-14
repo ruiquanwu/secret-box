@@ -32,7 +32,7 @@ class SampleAlbumsController < ApplicationController
   end
 
   def index
-    @sample_albums = SampleAlbum.all
+    @sample_albums = SampleAlbum.all.paginate(page: params[:page], per_page: 6)
   end
   
   def destroy
@@ -46,6 +46,6 @@ class SampleAlbumsController < ApplicationController
   
   def sample_album_params
     params.require(:sample_album).permit(:name, :max_page, :photo_per_page,
-      :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo)
+      :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo, :features)
   end
 end

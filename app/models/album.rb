@@ -8,25 +8,17 @@ class Album < ActiveRecord::Base
   # scope to show Album sample
   scope :album_samples, -> {Album.where('user is NULL')}
 
-  def setAttributes
-    self.front_cover = "/assets/PhotoAlbums" + self.style + ".jpg"
-    case self.style
-      when "1"
-        self.orientation = "landscape"
-        self.photo_per_page = 2
-        self.max_page = 100
-      when "2"
-        self.orientation = "landscape"
-        self.photo_per_page = 1
-        self.max_page = 80
-      when "3"
-        self.orientation = "landscape"
-        self.photo_per_page = 3
-        self.max_page = 100
-      when "4"
-        self.orientation = "portrait"
-        self.photo_per_page = 2
-        self.max_page = 100
-    end
+  def setAttributes(sample_album)
+    self.style = sample_album.id
+    self.description = sample_album.description
+    self.features = sample_album.features
+    self.has_memo = sample_album.has_memo
+    self.avatar = sample_album.avatar
+    self.album_layout = sample_album.album_layout
+    self.max_page = sample_album.max_page
+    self.photo_per_page = sample_album.photo_per_page
+    self.orientation = sample_album.orientation
+    self.number_in_stock = sample_album.number_in_stock
+    self.price = sample_album.price
   end
 end

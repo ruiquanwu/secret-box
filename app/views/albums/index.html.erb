@@ -8,9 +8,9 @@
   <% @albums.each do |album| %>
     <div class="col-md-4" width=300px height=200px>
 
-      <% if album.front_cover %>
+      <% if album.avatar.url %>
       <%= link_to album do %>
-       <img class="img-responsive" src=<%= album.front_cover %> alt="photo album cover page">
+        <%= image_tag(album.avatar.url, class: "img-responsive")%>
       <% end %>
       <% else %>
         <%= image_tag("http://placehold.it/270x270", class: "img-responsive")%>
