@@ -20,5 +20,7 @@ class Album < ActiveRecord::Base
     self.orientation = sample_album.orientation
     self.number_in_stock = sample_album.number_in_stock
     self.price = sample_album.price
+    self.color = sample_album.color
   end
+  
 end

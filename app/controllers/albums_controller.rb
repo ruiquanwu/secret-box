@@ -18,6 +18,7 @@ class AlbumsController < ApplicationController
   def new
     @album = Album.new
     @sample_albums  = SampleAlbum.all
+    @default_sample_album = @sample_albums.first
   end
 
   def create
@@ -51,7 +52,7 @@ class AlbumsController < ApplicationController
   end
 
   def album_manager_params
-    params.require(:album).permit(:name, :style, :max_page, :photo_per_page,
+    params.require(:album).permit(:name, :style, :max_page, :photo_per_page, :color,
       :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo)
   end
 end

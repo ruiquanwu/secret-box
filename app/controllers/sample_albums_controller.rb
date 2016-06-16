@@ -8,7 +8,7 @@ class SampleAlbumsController < ApplicationController
 
     if @sample_album.save
       flash[:notice] = "Sample Album was saved."
-      redirect_to sample_albums_index_path
+      redirect_to sample_albums_path
     else
       flash.now[:error] = "There is error on saving sample album"
       render :new
@@ -24,7 +24,7 @@ class SampleAlbumsController < ApplicationController
 
     if @sample_album.update_attributes(sample_album_params)
       flash[:notice] = "Sample Album was saved."
-      redirect_to sample_albums_index_path
+      redirect_to sample_albums_path
     else
       flash.now[:error] = "There is error on saving sample album"
       render :new
@@ -39,13 +39,13 @@ class SampleAlbumsController < ApplicationController
     @sample_album = SampleAlbum.find(params[:id])
     @sample_album.destroy
     
-    redirect_to sample_albums_index_path
+    redirect_to sample_albums_path
   end
   
   private
   
   def sample_album_params
-    params.require(:sample_album).permit(:name, :max_page, :photo_per_page,
+    params.require(:sample_album).permit(:name, :max_page, :photo_per_page, :color,
       :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo, :features)
   end
 end

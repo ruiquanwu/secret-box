@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160614223316) do
+ActiveRecord::Schema.define(version: 20160615222011) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20160614223316) do
     t.integer  "number_in_stock"
     t.float    "price"
     t.string   "features"
+    t.string   "color"
   end
 
   add_index "albums", ["orientation"], name: "index_albums_on_orientation"
@@ -81,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160614223316) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "features"
+    t.string   "color"
   end
 
   create_table "sessions", force: :cascade do |t|

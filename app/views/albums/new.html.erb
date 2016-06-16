@@ -1,4 +1,4 @@
-<h1>Create new Photo Album</h1>
+<h1>Create New Photo Album</h1>
   <%= form_for @album do |f| %>
   <div class="row">
     <div class="form-group">
@@ -15,7 +15,8 @@
         <%= f.label :style, "Album_Style:" %>
       </div>
       <div class="col-md-10 text-left">
-        <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout}]}) %>
+        <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout,
+          'data-description'=>a.description, 'data-features'=>a.formatFeatures, 'data-specifications'=>a.format_specifications}]}) %>
 
       <!--  <%= f.select :style, options_for_select([['Style1', 1], ['Style2', 2], ['Style3', 3], ['Style4', 4]], params[:style]),
           {}, {:class => 'span3 controls controls-row'} %> -->
@@ -26,19 +27,23 @@
         <%= f.label :style, "Cover Preview:" %>
       </div>
       <div class="col-md-6">
-        <%= image_tag(@sample_albums.first.avatar.url, class: "img-responsive", id: "album_cover") %>
+        <%= image_tag(@default_sample_album.avatar.url, class: "img-responsive", id: "album_cover") %>
        <!--  <img id="album_cover" class="img-responsive" src="/assets/PhotoAlbums1.jpg"> -->
       </div>
 
       <div class="col-md-4" id="album_cover_descption">
+        <h4 class="text-left"> Description </h4>
+        <div>
+          <p id='album_description' class="text-left"> <%= @default_sample_album.description %></p>
+        </div>
         <h4 class="text-left"> Features </h4>
-        <ul id='album_attrs'>
-            <li id='album_attr'> Holds 4x6 photos </li>
-            <li id='album_attr'> Memo area </li>
-            <li id='album_attr'> Deluxe, rounded bookbound spine </li>
-            <li id='album_attr'> Sewn cover with embroidery </li>
-            <li id='album_attr'> These live, laugh, love 4x6 photo albums are ideal for people looking to protect their cherished memories </li>
-        </ul>
+        <div id="album_features">
+          <ul id='album_attrs'>
+            <% @default_sample_album.features.split(';').each do |feature| %>
+            <li id='album_attr'> <%= feature %></li>
+            <% end %>
+          </ul>
+        </div>
       </div>
       </div>
 
@@ -47,28 +52,29 @@
         <%= f.label :style, "Page Preview:" %>
       </div>
       <div class="col-md-6">
-        <%= image_tag(@sample_albums.first.album_layout.url, class: "img-responsive album_layout", id: "album_layout") %>
+        <%= image_tag(@default_sample_album.album_layout.url, class: "img-responsive album_layout", id: "album_layout") %>
         <!-- <img class="img-responsive album_layout" src="/assets/album_page1.jpg"> -->
       </div>
 
       <div class="col-md-4 album_page_attrs">
         <h4> Specifications </h4>
-        <table>
-          <tr class="odd-row">
-            <td class="cell"> Color:</td>
-            <td class="cell"> White </td>
-          </tr>
-          <tr class="even-row">
-            <td class="cell"> Capacity:</td>
-            <td class="cell"> 100 pages, 200 photos</td>
-          <tr class="odd-row">
-            <td class="cell"> Color:</td>
-            <td class="cell"> White </td>
-          </tr>
-          <tr class="even-row">
-            <td class="cell"> Capacity:</td>
-            <td class="cell"> 100 pages, 200 photos</td>
-        </table>
+        <div id="album_specifications">
+          <table>
+            <% @default_sample_album.specifications.each_with_index do |(key, value), index| %>
+              <% if index%2 == 0 %>
+                <tr class="even-row">
+                  <td class="cell"> <%= key %>: </td>
+                  <td class="cell"> <%= value %></td>
+                </tr>
+              <% else %>
+                <tr class="odd-row"> 
+                  <td class="cell"> <%= key %>: </td>
+                  <td class="cell"> <%= value %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          </table>
+        </div>
       </div>
     </div>
     <div class="text-center">
