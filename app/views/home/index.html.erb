@@ -1,68 +1,108 @@
 <div class="row">
   <div class="col-md-12 jumbotron">
     <div class="text-center">
-      <h1> SecretBox: an non-instant sharing website</h1>
-      <p> Spend some time, share the amazing moment with your love one.</p>
+      <div class="headline">
+        <h1>Tired of Instant Sharing?</h1> 
+      </div>
+      <p class="subtitle">Spend some time, make an album for the one you care.</p>
       <a href="#" class="btn btn-lg btn-success">Learn More</a>
     </div>
   </div> 
 </div>
 
-<div class="row">
-  <div class="col-md-4">
-    <h2>Solves world hunger</h2>
-    <p>Bloccit will deliver food and water to those in need, all over the world.</p>
+<div class="container">
+  <div class="about-header">
+    <h2 class="about-title">What's this All About？</h2>
+    <h4 class="about-description">Basically,This is the website we hope you to spend some time,
+      value the one you care about, putting effort on making them a physical photo album. this
+    is all about:
+    </h4>
   </div>
-  <div class="col-md-4">
-    <h2>Eliminates poverty</h2>
-    <p>Bloccit will deliver money and education to those in need, all over the world.</p>
-  </div>
-  <div class="col-md-4">
-    <h2>Makes you better looking</h2>
-    <p>Bloccit will make you better looking: it's scientifically proven to make men look like Ryan Gosling and women look like Shakira.</p>
+  <div class="row text-center about section">
+    <div class="col-md-4">
+      <div class="about-icon">
+        <%= image_tag(image_url("sign-ban-icon")) %>
+      </div>
+      <h2>Old-Fashion photo album</h2>
+      <p>No instant sharing, no showing off, no fancy stuff.</p>
+    </div>
+    <div class="col-md-4">
+      <div class="about-icon">
+        <%= image_tag(image_url("sign-check-icon"), class: "img-responsive") %>
+      </div>
+      <h2>Best Gift to give away</h2>
+      <p>Best Gift for Special day (Birthday, Valentine's Day, Anniversary)</p>
+    </div>
+    <div class="col-md-4">
+      <div class="about-icon">
+        <%= image_tag(image_url("sign-love-icon"), class: "img-responsive") %>
+      </div>
+      <h2>Full of love and memories</h2>
+      <p>Feel the love and memories along the way</p>
+    </div>
   </div>
 </div>
 
-
-<div class="row">
-  <div class="well">
-    <h2 class="text-left">Secret Diary</h2>            
-    <div class="row">
-      <div class="col-md-12">
-        <div class="text-center">
-          <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-              <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-              <li data-target="#myCarousel" data-slide-to="1"></li>
-              <li data-target="#myCarousel" data-slide-to="2"></li>
-              <li data-target="#myCarousel" data-slide-to="3"></li>
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-              <div class="item active">
-                <img class="img-responsive" src="http://dummyimage.com/800x360" alt="Chania" width="800" height="360">
-              </div>
-
-              <div class="item">
-                <img class="img-responsive" src="http://dummyimage.com/800x361" alt="Chania" width="800" height="360">
-              </div>
-    
-              <div class="item">                
-                <img class="img-responsive" src="http://dummyimage.com/800x362" alt="Flower" width="800" height="360">
-              </div>
-
-              <div class="item">
-                <img class="img-responsive" src="http://dummyimage.com/800x363" alt="Flower" width="800" height="360">
-              </div>
-            </div>
-          </div>                
-          <p>ssssskkkk</p>
+<div class="container">
+  <h2> How it Works? </h2>
+  <p> Simple, just follow the below four steps </p>
+  <div class="row how-it-works section">
+    <div class="col-md-12">
+      <div class="how-it-works-step">
+        <div class="col-md-3 step-icon">
+          <%= image_tag("http://placehold.it/100x100") %>
+          <h2 class="step-text">Step1</h2>
         </div>
-
+        <div class="col-md-9">
+          <h3>Register or Login</h3>
+          <p>you will need an account to and save your work.</p>
+        </div>
       </div>
     </div>
-
+    
+    <div class="col-md-12">
+      <div class="how-it-works-step">
+        <div class="col-md-3 step-icon">
+          <%= image_tag("http://placehold.it/100x100") %>
+          <h2 class="step-text">Step2</h2>
+        </div>
+        <div class="col-md-9">
+          <h3>Choose an Album to Start</h3>
+          <p>you can choose different albums based on your need, all the albums are available online.</p>
+        </div>
+      </div>        
+    </div>
+       
+    <div class="col-md-12">
+      <div class="how-it-works-step">
+        <div class="col-md-3 step-icon">
+          <%= image_tag("http://placehold.it/100x100") %>
+          <h2 class="step-text">Step3</h2>
+        </div>
+        <div class="col-md-9">
+          <h3>Upload and place photos to album</h3>
+          <p>Upload photos and drag them to the album, just like the way real photo album wroks.</p>
+        </div>
+      </div>        
+    </div>
+    
+    <div class="col-md-12">
+      <div class="how-it-works-step">
+        <div class="col-md-3 step-icon">
+          <%= image_tag("http://placehold.it/100x100") %>
+          <h2 class="step-text">Step4</h2>
+        </div>
+        <div class="col-md-9">
+          <h3>Submit your order or Keep it as refrence</h3>
+          <p>After completing your album, you can either keep it as refrence and build the actual album yourself
+           or you can submit your order to us, and we will help you build the exact same album you have created.</p>
+        </div>
+      </div>        
+    </div>
+    
   </div>
+</div>
+
+<div class="footer">
+  <p class="text-center footer-text">this is footer!</p>
 </div>

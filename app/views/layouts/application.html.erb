@@ -3,11 +3,31 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SecretBox</title>
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller_name %> <%= action_name %>">
+  
+    <% if flash[:notice] %>
+    <div class="alert alert-success text-center">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:notice] %>
+    </div>
+    <% elsif flash[:error] %>
+    <div class="alert alert-danger text-center">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:error] %>
+    </div>
+    <% elsif flash[:alert] %>
+    <div class="alert alert-warning text-center">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <%= flash[:alert] %>
+    </div>
+    <% end %>
+  
   <div class="row header">
       <div class="navbar-header">
         <div class="navbar-brand">
@@ -48,29 +68,8 @@
         <% end %>
       </ul>
 </div>
-  <div class="container text-center">
-    <div class="center">
-
-    <% if flash[:notice] %>
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= flash[:notice] %>
-    </div>
-    <% elsif flash[:error] %>
-    <div class="alert alert-danger">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= flash[:error] %>
-    </div>
-    <% elsif flash[:alert] %>
-    <div class="alert alert-warning">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%= flash[:alert] %>
-    </div>
-    <% end %>
 
       <%= yield %>
-    </div>
-  </div>
 
 </body>
 </html>
