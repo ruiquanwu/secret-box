@@ -2,9 +2,12 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SecretBox</title>
+  <title>SecretAlbum</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lora:700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -27,25 +30,17 @@
       <%= flash[:alert] %>
     </div>
     <% end %>
-  
-  <div class="row header">
+
+  <div class="navigation">
       <div class="navbar-header">
         <div class="navbar-brand">
-          <% if current_user %>
-            <%= link_to "SecretBox", welcome_path %>
-          <% else %>
-            <%= link_to "SecretBox", root_url %>
-          <% end %>
+          <%= link_to "SecretAlbum", root_url %>
         </div>
       </div>
       <ul class="nav navbar-nav navbar-left">
         <% if current_user %>
         <li><%= link_to "Diaries", diaries_path %></li>
         <li><%= link_to "Albums", albums_path %></li>
-        <% else %>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
         <% end %>
        </ul>
       

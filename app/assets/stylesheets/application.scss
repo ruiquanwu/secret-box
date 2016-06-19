@@ -24,11 +24,28 @@
     display: inline-block;
 }
 
-.container {
+.navigation-bar {
+  height: 40px;
+  width: 100%;
+  background: #333333;
+}
+
+.navigation {
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow: auto;
+  background: #333333;
 }
 
 .header {
   display: block;
+}
+
+.navbar-brand {
+  padding: 20px 20px;
+  font-size: 1.8em;
 }
 
 .navbar-right {
