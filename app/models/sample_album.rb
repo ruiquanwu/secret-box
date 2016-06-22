@@ -3,7 +3,7 @@ class SampleAlbum < ActiveRecord::Base
   mount_uploader :album_layout, AlbumLayoutUploader
   
   
-  def formatFeatures
+  def format_features
     result = "<ul id='album_attrs'>"
     features = self.features.split(';')
     features.each do |feature|

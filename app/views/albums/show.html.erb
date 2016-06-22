@@ -1,22 +1,49 @@
-<div class="row text-center">
+<div class="container">
   <h1 class="text-center">
     <%= @album.name %>
   </h1>
+  
+  <div class="col-md-12">
+    <div class="col-md-2">
+      <span>Complete Percentage:</span>
+    </div>
+    <div class="col-md-10">
+      <div class="album-show-progress-container">
+        <div class="album-show-progress-bar"><div class="text-center progress-text">55%</div></div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-md-12 album-show">
   <div class="col-md-9 cover-page" >
-    <%= link_to album_photos_path(@album) do %>
-      <img class="img-responsive" src=<%=@album.avatar.url %> alt="photo album cover page">
+    <%= link_to album_photos_path(@album), {title: "click to open album"} do %>
+      <%= image_tag(@album.avatar.url, class:"img-responsive") %>
     <% end %>
   </div>
 
-  <div class="col-md-3 album-status">
-    <ul>
-      <li> Total Photos: </li>
-      <li> Number of Photos remains:</li>
-    </ul>
+  <div class="col-md-3">
+    <div class="album-show-layout">
+      <h4>Album Page:</h4>
+      <%= image_tag(@album.album_layout.url, class:"img-responsive") %>
+    </div>
+    <div class="album-status">
+      <h4> Album Status: </h4>
+      
+      <table>
+        <tr>
+          <td>Total Page:</td>
+          <td><%= @album.max_page %></td>
+        </tr>
+        <tr>
+          <td>Total Photos Uploaded:</td>
+          <td><%= @album.photos.count %></td>
+        </tr>
+        <tr>
+          <td>Number of Photos remains:</td>
+          <td><%= @album.photos.count %></td>
+        </tr>
+      </table>
+    </div>
   </div>
-</div>
-
-<div class="row">
-  <%= link_to "Open Photo Album", album_photos_path(@album), class: 'btn btn-success'%>
-  <%= link_to "Delete Photo Album", album_path(@album), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete%>
+  </div>
 </div>

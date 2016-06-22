@@ -58,6 +58,8 @@ gem 'carrierwave-crop'
 
 gem 'fog'
 
+gem 'angularjs-rails'
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

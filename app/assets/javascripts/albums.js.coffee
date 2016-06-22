@@ -8,5 +8,5 @@ $(document).on "page:change", ->
     $('#album_cover').attr('src', album_cover)
     $('#album_layout').attr('src', album_layout)
     $('#album_description').text(album_description)
-    $('#album_features').html(album_features)  
+    $('#album_features').html(album_features)
     $('#album_specifications').html(album_specifications)

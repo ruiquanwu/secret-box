@@ -1,6 +1,16 @@
-// Place all the styles related to the albums controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.outer-container {
+  background: #f1f1f1;
+}
+
+.album-new-content {
+  font-family: 'Oswald', sans-serif;
+  background: white;
+  
+}
+
+.form-input {
+  padding:10px;
+}
 
 .album-page-header {
   background: #d5e9f6;
@@ -9,18 +19,35 @@
 .album-page-body {
 }
 
+.album-summary-title {
+  font-size: 2.0em;
+}
+
+#album_cover_descption {
+  margin-top: 10px;
+}
+
+#album_description {
+  word-wrap: break-word;
+  font-size: 1.2em;
+}
+
 #album_cover {
-  max-width: 550px;
-  max-height: 550px;
+  width: 100%;
 }
 
 #album_attrs {
-  background: #eeeeee;
+  font-family: 'Oswald', sans-serif;
   text-align: left;
+  font-size: 1.2em;
 }
 
 #album_attr {
   padding: 10px;
+}
+
+.page-preview {
+  margin-top: 20px;
 }
 
 .album_layout {
@@ -28,8 +55,9 @@
 }
 
 .album_page_attrs {
- margin-top: 50px; 
- text-align: left;
+  font-size: 1.2em;
+  margin-top: 50px; 
+  text-align: left;
 }
 
 .odd-row{
@@ -51,5 +79,55 @@
 }
 
 label {
+  font-size: 1.5em;
   padding: 6px;
+}
+
+.new-album-btn {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.albums-index {
+  font-family: 'Oswald', sans-serif;
+}
+
+.albums-index-header {
+  margin-bottom: 30px;
+}
+
+.albums-index-list {
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.album-index-album-name {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.album-show {
+  font-family: 'Oswald', sans-serif;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.album-show-layout {
+  margin-top: 40px;
+}
+
+.album-show-progress-container {
+  width: 100%;
+  background: #eeeeee;
+}
+
+.album-show-progress-bar {
+  width: 55%;
+  background: green;
+}
+
+.progress-text {
+  color: white;
 }

@@ -1,13 +1,17 @@
-<div class="row">
-  <h1>My Albums
-    <%= link_to "New Album", new_album_path, class: 'btn btn-success' %>
-  </h1>
-</div>
+<div class="container albums-index">
+  <div class="albums-index-header">
+    <h1>My Albums
+      <%= link_to "New Album", new_album_path, class: 'btn btn-success' %>
+    </h1>
+  </div>
 
-<div class="row"> 
-  <% @albums.each do |album| %>
-    <div class="col-md-4" width=300px height=200px>
-
+  <div class="row  albums-index-list"> 
+    <% @albums.each do |album| %>
+    <div class="col-md-4">
+      <p class="album-index-album-name"> <%= album.name %> 
+        <%= link_to "Delete", album_path(album), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete%>
+      </p>
+      
       <% if album.avatar.url %>
       <%= link_to album do %>
         <%= image_tag(album.avatar.url, class: "img-responsive")%>
@@ -15,13 +19,13 @@
       <% else %>
         <%= image_tag("http://placehold.it/270x270", class: "img-responsive")%>
       <% end %>
-      <p class="text-center"> <%= album.name %> </p>
     </div>
 
   <% end %>
 
-<div class="col-md-12 text-center">
-  <%= will_paginate @albums %>
-</div>
+    <div class="col-md-12 text-center">
+    <%= will_paginate @albums %>
+    </div>
+  </div>
 </div>
 

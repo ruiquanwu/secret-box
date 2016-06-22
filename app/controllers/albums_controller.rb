@@ -1,4 +1,9 @@
 class AlbumsController < ApplicationController
+  def test
+    @sample_albums  = SampleAlbum.all
+    respond_with @sample_albums
+  end
+  
   def index
     #@albums = current_user.albums
     @albums = current_user.albums.paginate(page: params[:page], per_page: 6)

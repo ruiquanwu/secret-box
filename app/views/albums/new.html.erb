@@ -1,53 +1,48 @@
-<h1>Create New Photo Album</h1>
-  <%= form_for @album do |f| %>
-  <div class="row">
-    <div class="form-group">
-      <div class="col-md-2">
-        <%= f.label :name, "Album_name:" %>
+<div class="outer-container">
+  <div class="container">
+    <div class="album-new-content">
+    <h1>Create New Photo Album</h1>
+    <%= form_for @album do |f| %>
+      <div class="form-group row">
+        <div class="col-md-2">
+          <%= f.label :name, "Album Name:" %>
+        </div>
+        <div class="col-md-9 text-left form-input">
+          <%= f.text_field :name, class: 'form-control', placeholder: "enter your album name here" %>
+        </div>
       </div>
-      <div class="col-md-10 text-left">
-        <%= f.text_field :name, class: 'form-control', placeholder: "enter your album name here" %>
+    
+      <div class="row">
+        <div class="col-md-2">
+          <%= f.label :style, "Album Style:" %>
+        </div>
+        <div class="col-md-9 text-left form-input">
+          <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout,
+            'data-description'=>a.description, 'data-features'=>a.format_features, 'data-specifications'=>a.format_specifications}]}) %>
+        </div>
       </div>
-    </div>
-  </div>
-    <div class="row">
-      <div class="col-md-2">
-        <%= f.label :style, "Album_Style:" %>
-      </div>
-      <div class="col-md-10 text-left">
-        <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout,
-          'data-description'=>a.description, 'data-features'=>a.formatFeatures, 'data-specifications'=>a.format_specifications}]}) %>
-
-      <!--  <%= f.select :style, options_for_select([['Style1', 1], ['Style2', 2], ['Style3', 3], ['Style4', 4]], params[:style]),
-          {}, {:class => 'span3 controls controls-row'} %> -->
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-2">
-        <%= f.label :style, "Cover Preview:" %>
-      </div>
-      <div class="col-md-6">
-        <%= image_tag(@default_sample_album.avatar.url, class: "img-responsive", id: "album_cover") %>
+      <div class="row cover-preview">
+        <div class="col-md-2">
+          <%= f.label :style, "Cover Preview:" %>
+        </div>
+        <div class="col-md-6">
+          <%= image_tag(@default_sample_album.avatar.url, class: "img-responsive", id: "album_cover") %>
        <!--  <img id="album_cover" class="img-responsive" src="/assets/PhotoAlbums1.jpg"> -->
-      </div>
-
-      <div class="col-md-4" id="album_cover_descption">
-        <h4 class="text-left"> Description </h4>
-        <div>
-          <p id='album_description' class="text-left"> <%= @default_sample_album.description %></p>
         </div>
-        <h4 class="text-left"> Features </h4>
-        <div id="album_features">
-          <ul id='album_attrs'>
-            <% @default_sample_album.features.split(';').each do |feature| %>
-            <li id='album_attr'> <%= feature %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-      </div>
 
-    <div class="row">
+        <div class="col-md-4" id="album_cover_descption">
+          <h2 class="text-left album-summary-title">Description: </h2>
+          <div>
+            <p id='album_description' class="text-left"> <%= @default_sample_album.description %></p>
+          </div>
+          <h2 class="text-left album-summary-title">Features: </h2>
+          <div id="album_features">
+            <%= @default_sample_album.format_features.html_safe %>
+          </div>
+        </div>
+        </div>
+
+    <div class="row page-preview">
       <div class="col-md-2">
         <%= f.label :style, "Page Preview:" %>
       </div>
@@ -57,29 +52,17 @@
       </div>
 
       <div class="col-md-4 album_page_attrs">
-        <h4> Specifications </h4>
+        <h2 class="album-summary-title">Specifications: </h2>
         <div id="album_specifications">
-          <table>
-            <% @default_sample_album.specifications.each_with_index do |(key, value), index| %>
-              <% if index%2 == 0 %>
-                <tr class="even-row">
-                  <td class="cell"> <%= key %>: </td>
-                  <td class="cell"> <%= value %></td>
-                </tr>
-              <% else %>
-                <tr class="odd-row"> 
-                  <td class="cell"> <%= key %>: </td>
-                  <td class="cell"> <%= value %></td>
-                </tr>
-              <% end %>
-            <% end %>
-          </table>
+          <%= @default_sample_album.format_specifications.html_safe %>
         </div>
       </div>
     </div>
-    <div class="text-center">
-      <%= f.submit "Save", class: 'btn btn-success' %>
+    <div class="new-album-btn text-center">
+      <%= f.submit "Create", class: 'btn btn-success' %>
       <%= link_to "Cancel", albums_path, class: 'btn btn-danger' %>
     </div>
   <% end %>
-
+    </div>
+  </div>
+</div>

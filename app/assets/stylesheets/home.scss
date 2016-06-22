@@ -6,7 +6,7 @@
   height: 100vh;
 }
 
-.container {
+.narrow {
   max-width: 800px;
 }
 
@@ -119,15 +119,4 @@
 
 .step-description {
   font-family: 'Open Sans', sans-serif;
-}
-
-.footer {
-  width: 100%;
-  height: 50px;
-  background: #333333;
-}
-
-.footer-text {
-  color: white;
-  padding: 15px;
 }

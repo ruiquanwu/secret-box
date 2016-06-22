@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :sample_albums
   
   resources :albums do
+    get 'test'
     resources :freephotos
     resources :photos do
       member do
