@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   def index
     @album = Album.find(params[:album_id])
     @photos = @album.photos.album_photos.paginate(page: params[:page], per_page: @album.photo_per_page)
-    @available_photos = @album.photos.freephotos#.limit(10)
+    @pictures = @album.pictures.where(:photo => nil).all#.limit(10)
   end
 
   def show
@@ -18,30 +18,31 @@ class PhotosController < ApplicationController
 
   def create
     @album = Album.find(params[:album_id])
-    if @album.photos.album_photos.find_by_picture(nil)
-      @render_page = @album.photos.album_photos.find_by_picture(nil).photo_number
-    else
-      @render_page = @album.photos.album_photos.count + 1
-    end
+    #if @album.photos.find_by_picture(nil)
+    #  @render_page = @album.photos.find_by_picture(nil).photo_number
+    #else
+    #  @render_page = @album.photos.album_photos.count + 1
+    #end
 
-    # assign every uploaded picture file to freephotos
+    # Create new Picture for every uploaded file
     params[:photo][:picture].each do |picture|
-      @photo_in_panel = Photo.new(:picture => picture)
-      @photo_in_panel.album = @album
-      # photos in album should have the same number as (freephotos + back-up freephotos)
-      if @photo_in_panel.save
-        if  @album.photos.freephotos.count + @album.photos.replace_photos.count > @album.photos.album_photos.count
+      #@photo_in_panel = Photo.new(:picture => picture)
+      @picture = Picture.new(:context => picture)
+      @picture.album = @album
+      # create new photo in album if there are more pictures
+      if @picture.save
+        if  @album.photos.count <= @album.pictures.count
 
-          @photo_in_album = Photo.new
-          @photo_in_album.album = @album
-          @photo_in_album.photo_number = @album.photos.album_photos.count + 1
-          @photo_in_album.save
+          @photo = Photo.new
+          @photo.album = @album
+          @photo.photo_number = @album.photos.count + 1
+          @photo.save
         end
       else
         render :new
       end
     end
-    redirect_to album_photos_path+"?page="+(@render_page.to_f/@album.photo_per_page).ceil.to_s
+    redirect_to album_photos_path+"?page="+ "1" #(@render_page.to_f/@album.photo_per_page).ceil.to_s
 
   end
 
@@ -56,67 +57,24 @@ class PhotosController < ApplicationController
     end
   end
 
-  def update
-    @album = Album.find(params[:album_id])
-    @photo = Photo.find(params[:id])
-
-    # Move freephotos from Pannel to Album
-    if params[:type] == "Freephotos"
-      @photo_to_album = Photo.find(params[:replace_photo_id])
-
-      if @photo.photo_number != params[:photo_number].to_i
-        @current_photo = Photo.find_by_photo_number(params[:photo_number])
-      else
-        @current_photo = @photo
-      end
-      #if @photo.picture
-        #switch freephoto and photo
-        @photo_to_album.photo_number = @current_photo.photo_number
-        @photo_to_album.memo = @current_photo.memo
-        @photo_to_album.save
-
-        @current_photo.photo_number = nil
-        @current_photo.save
-    # Swap different photos in Album
-    elsif params[:type] == "Photos"
-      @photo_to_photo = Photo.find(params[:replace_photo_id])
-      if @photo_to_photo.photo_number != params[:photo_number].to_i
-        @photo.photo_number = @photo_to_photo.photo_number
-        @photo.memo = @photo_to_photo.memo
-        @photo.save
-        @photo_to_photo.photo_number = params[:photo_number].to_i
-        @photo_to_photo.save
-      end
-    else
-      # Move photo from album to Panel
-      if @photo.picture
-        #byebug
-        if @photo.photo_number != params[:photo_number].to_i
-          @current_photo = Photo.find_by_photo_number(params[:photo_number])
-        else
-          @current_photo = @photo
+  def update_photos
+    params[:updates_params].each do |(key,update_params)|
+      @album = Album.find(update_params[:album_id])
+      @photo = Photo.find(update_params[:photo_id])
+      if update_params[:picture_id] == "0"
+        if @photo.picture
+          @photo.picture = nil
+          @photo.memo = update_params[:memo]
         end
-
-        @photo_to_freephoto = @album.photos.replace_photos.first
-        @photo_to_freephoto.photo_number = @current_photo.photo_number
-        @photo_to_freephoto.save
-
-        @current_photo.photo_number = nil
-        @current_photo.save
+      else
+        @photo.picture = Picture.find(update_params[:picture_id])
+        #@photo.memo = params[:memo]
       end
+      @photo.save
     end
-
     respond_to do |format|
       format.js
     end
-
-   # if @photo.update(photo_params)
-    #  flash[:notice] = "Photo was updated"
-    #  redirect_to album_photos_path+"?page="+(@photo.photo_number.to_f/@album.photo_per_page).ceil.to_s
-   # else
-    #  flash[:notice] = "Error on updating photo"
-    #  redirect_to edit_album_photo_path
-   # end
   end
 
   def update_memo

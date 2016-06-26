@@ -2,6 +2,7 @@ class Album < ActiveRecord::Base
   belongs_to :user
   has_many :photos, dependent: :destroy
   has_many :freephotos, dependent: :destroy
+  has_many :pictures, dependent: :destroy
   mount_uploader :avatar, AlbumAvatarUploader
   mount_uploader :album_layout, AlbumLayoutUploader
 

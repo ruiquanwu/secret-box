@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160615222011) do
+ActiveRecord::Schema.define(version: 20160625073600) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -58,15 +58,26 @@ ActiveRecord::Schema.define(version: 20160615222011) do
 
   create_table "photos", force: :cascade do |t|
     t.string   "memo"
-    t.string   "picture"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "album_id"
     t.integer  "photo_number"
+    t.integer  "picture_id"
   end
 
   add_index "photos", ["album_id"], name: "index_photos_on_album_id"
   add_index "photos", ["photo_number"], name: "index_photos_on_photo_number"
+
+  create_table "pictures", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "context"
+    t.integer  "album_id"
+    t.integer  "photo_id"
+  end
+
+  add_index "pictures", ["album_id"], name: "index_pictures_on_album_id"
+  add_index "pictures", ["photo_id"], name: "index_pictures_on_photo_id"
 
   create_table "sample_albums", force: :cascade do |t|
     t.string   "name"

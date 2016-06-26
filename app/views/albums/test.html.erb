@@ -1,10 +1,16 @@
-<div class="container" ng-app>
+<div class="container" ng-app="SecretAlbum">
   <h1> Testing AngularJs </h1>
   
-  <div>
+  <div ng-controller="PhotoController as PhotoCtrl">
     <label> Name: </label>
     <input type="text" ng-model="yourName" placeholder="Enter Your Name Here">
     <hr>
     <h2> Hello {{yourName}} </h2>
+    
+    <ul>
+      <li ng-repeat="photo in photos"> 
+        {{photo.picture.url}} 
+      </li>
+    </ul>
   </div>
 </div>

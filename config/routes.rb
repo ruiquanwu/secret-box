@@ -6,14 +6,17 @@ Rails.application.routes.draw do
   resources :sample_albums
   
   resources :albums do
-    get 'test'
+   get 'show_json', defaults: { format: 'json' }
+    get 'test' => 'test#index'
     resources :freephotos
-    resources :photos do
+    resources :photos do # :defaults => {:format => 'json'}
+      collection do
+        patch 'update_photos'
+      end
       member do
         get 'crop'
         post 'insert'
         post 'append'
-        patch 'update_memo'
       end
     end 
   end

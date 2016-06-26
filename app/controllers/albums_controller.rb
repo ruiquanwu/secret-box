@@ -1,7 +1,6 @@
 class AlbumsController < ApplicationController
+  respond_to :html, :json
   def test
-    @sample_albums  = SampleAlbum.all
-    respond_with @sample_albums
   end
   
   def index
@@ -13,6 +12,11 @@ class AlbumsController < ApplicationController
     @album = Album.find(params[:id])
   end
 
+  def show_json
+    @album = Album.find(params[:album_id])
+    respond_with @album
+  end
+  
   def show
     @album = Album.find(params[:id])
   end

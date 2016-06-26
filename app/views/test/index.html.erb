@@ -1,0 +1,36 @@
+<div class="container" ng-app="SecretAlbum">  
+  <div ng-controller="PhotoController as PhotoCtrl" ng-init="getAlbumID('<%= params[:album_id]%>')">
+    <h1>{{album.name}}</h1>
+    <div class="row">
+        <div ng-repeat="photo in photos">
+          <div class="row album-page-body">
+  <div class="row text-left" style="height: 40px">
+
+    <div class="col-md-4 text-right">
+      <p> Photo_Number:
+        {{photo.photo_number}}
+      </p>
+    </div>
+  </div>
+
+  <div class="row portrait-photo-page" >
+    <div class="col-md-10 portrait-picture">
+     <img class="img-responsive" ng-src="{{photo.picture.url}}">
+    </div>
+
+    <div class="col-md-2 memo">
+      <h3> Memo: </h3>
+      {{photo.memo}}
+    </div>
+  </div>
+</div>
+          
+        </div>
+    </div>
+    <ul>
+      <li ng-repeat="photo in photos"> 
+        {{photo.picture.url}} 
+      </li>
+    </ul>
+  </div>
+</div>
