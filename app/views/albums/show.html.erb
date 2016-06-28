@@ -3,13 +3,15 @@
     <%= @album.name %>
   </h1>
   
-  <div class="col-md-12">
-    <div class="col-md-2">
+  <div class="row">
+    <div class="col-md-2 text-right">
       <span>Complete Percentage:</span>
     </div>
-    <div class="col-md-10">
+    <div class="col-md-8">
       <div class="album-show-progress-container">
-        <div class="album-show-progress-bar"><div class="text-center progress-text">55%</div></div>
+        <div class="album-show-progress-bar" style="width: <%= @album.progress_percentage %>; background: <%= @album.progress_background %>">
+          <div class="text-center progress-text"><%= @album.progress_percentage %></div>
+        </div>
       </div>
     </div>
   </div>
@@ -23,27 +25,37 @@
 
   <div class="col-md-3">
     <div class="album-show-layout">
-      <h4>Album Page:</h4>
+      <h4>Album Layout:</h4>
       <%= image_tag(@album.album_layout.url, class:"img-responsive") %>
     </div>
     <div class="album-status">
-      <h4> Album Status: </h4>
-      
-      <table>
+      <h4> Album Status: </h4>      
+      <table class="table">
         <tr>
-          <td>Total Page:</td>
+          <td>Maximum Page:</td>
           <td><%= @album.max_page %></td>
         </tr>
         <tr>
-          <td>Total Photos Uploaded:</td>
-          <td><%= @album.photos.count %></td>
+          <td>Maximum Photos:</td>
+          <td><%= @album.max_photos %></td>
         </tr>
         <tr>
-          <td>Number of Photos remains:</td>
-          <td><%= @album.photos.count %></td>
+          <td>Total Photos Uploaded:</td>
+          <td><%= @album.pictures.count %></td>
+        </tr>
+        <tr>
+          <td>Total Photos Inserted:</td>
+          <td><%= @album.photos_inserted.count %></td>
+        </tr>
+        <tr>
+          <td>Total Photos Remains:</td>
+          <td><%= @album.remains_photos %></td>
         </tr>
       </table>
     </div>
+    
+    <%= link_to "Order this Album", '#', class: "btn btn-success" %>
   </div>
   </div>
+  
 </div>

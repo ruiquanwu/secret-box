@@ -14,6 +14,7 @@ class SampleAlbum < ActiveRecord::Base
   
   def specifications
     specifications = {}
+    specifications[:orientation] = self.orientation
     specifications[:color] = self.color
     specifications[:max_page] = self.max_page
     specifications[:photo_per_page] = self.photo_per_page
@@ -24,7 +25,7 @@ class SampleAlbum < ActiveRecord::Base
   end
   
   def format_specifications
-    result = "<table>"
+    result = "<table class='table'>"
     self.specifications.each_with_index do |(key, value), index|
       if index%2 == 0
         result += "<tr class='even-row'>"

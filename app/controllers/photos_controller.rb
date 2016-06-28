@@ -2,8 +2,13 @@ class PhotosController < ApplicationController
 
   def index
     @album = Album.find(params[:album_id])
-    @photos = @album.photos.album_photos.paginate(page: params[:page], per_page: @album.photo_per_page)
+    @photos = @album.photos.paginate(page: params[:page], per_page: @album.photo_per_page)
     @pictures = @album.pictures.where(:photo => nil).all#.limit(10)
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -18,11 +23,11 @@ class PhotosController < ApplicationController
 
   def create
     @album = Album.find(params[:album_id])
-    #if @album.photos.find_by_picture(nil)
-    #  @render_page = @album.photos.find_by_picture(nil).photo_number
-    #else
-    #  @render_page = @album.photos.album_photos.count + 1
-    #end
+    if @album.photos.where(:picture_id => nil).first
+      @render_page = @album.photos.where(:picture_id => nil).first.photo_number
+    else
+      @render_page = @album.photos.album_photos.count + 1
+    end
 
     # Create new Picture for every uploaded file
     params[:photo][:picture].each do |picture|
@@ -31,7 +36,7 @@ class PhotosController < ApplicationController
       @picture.album = @album
       # create new photo in album if there are more pictures
       if @picture.save
-        if  @album.photos.count <= @album.pictures.count
+        if  @album.photos.count < @album.pictures.count
 
           @photo = Photo.new
           @photo.album = @album
@@ -42,7 +47,7 @@ class PhotosController < ApplicationController
         render :new
       end
     end
-    redirect_to album_photos_path+"?page="+ "1" #(@render_page.to_f/@album.photo_per_page).ceil.to_s
+    redirect_to album_photos_path+"?page="+ (@render_page.to_f/@album.photo_per_page).ceil.to_s
 
   end
 
@@ -68,7 +73,7 @@ class PhotosController < ApplicationController
         end
       else
         @photo.picture = Picture.find(update_params[:picture_id])
-        #@photo.memo = params[:memo]
+        @photo.memo = update_params[:memo]
       end
       @photo.save
     end
@@ -77,21 +82,7 @@ class PhotosController < ApplicationController
     end
   end
 
-  def update_memo
-    @album = Album.find(params[:album_id])
-    @photo = Photo.find(params[:id])
-
-    @photo.memo = params[:memo_body]
-    @photo.save
-
-    respond_to do |format|
-      format.js
-    end
-  end
-
   def edit
-    @album = Album.find(params[:album_id])
-    @photo = Photo.find(params[:id])
   end
 
   def insert
@@ -99,8 +90,6 @@ class PhotosController < ApplicationController
     @current_photo = Photo.find(params[:id])
     @photo = @album.photos.new
     @photo_number = @current_photo.photo_number
-    #@current_photo.photo_number = @current_photo.photo_number + 1
-    #@current_photo.save
 
     # update photo_number
     Photo.update_photo_number(@album, @photo_number)
@@ -124,7 +113,6 @@ class PhotosController < ApplicationController
     @current_photo = Photo.find(params[:id])
     @photo = @album.photos.new
     @photo_number = @current_photo.photo_number + 1
-    #@current_photo.save
 
     # update photo_number
     Photo.update_photo_number(@album, @photo_number)

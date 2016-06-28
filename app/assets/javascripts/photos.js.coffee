@@ -2,6 +2,7 @@ $(document).on "page:change", ->
   $('.photo-box-btn').click ->
     $('.right-panel').slideToggle("slow")
 
+    
   $('#update_photos').click ->
     photos = $('div[data-photo]')
 

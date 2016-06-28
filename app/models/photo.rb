@@ -5,12 +5,9 @@ class Photo < ActiveRecord::Base
   #mount_uploader :picture, PhotoUploader
   #crop_uploaded :picture
 
-  # scope to show every photo in album
-  scope :album_photos, -> { Photo.where('photo_number is not NULL').order('photo_number ASC') }
-  # scope to show every photo in freephotos pannel
-  scope :freephotos, -> { Photo.where('photo_number is NULL AND  picture is NOT NULL') }
-  # scope to show every replace spot for freephoto, these photos are not visible in the page
-  scope :replace_photos, -> { Photo.where('photo_number is NULL AND  picture is NULL') }
+  def self.default_scope
+    Photo.all.order('photo_number ASC')
+  end
 
   def self.update_photo_number(album, photo_number)
     album.photos.each do |photo|

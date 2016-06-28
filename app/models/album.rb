@@ -24,4 +24,29 @@ class Album < ActiveRecord::Base
     self.color = sample_album.color
   end
   
+  def max_photos
+    self.max_page * self.photo_per_page
+  end
+  
+  def photos_inserted
+    self.pictures.where.not("photo_id" => nil)
+  end
+  
+  def remains_photos
+    self.max_photos - self.photos_inserted.count
+  end
+  
+  def progress_percentage
+    (self.photos_inserted.count/self.max_photos.to_f * 100).round(2).to_s + "%"
+  end
+  
+  def progress_background
+    if self.photos_inserted.count/self.max_photos.to_f.round(2) > 0.5
+      color = "green"
+    else
+      color = "red"
+    end
+    color
+  end
+  
 end
