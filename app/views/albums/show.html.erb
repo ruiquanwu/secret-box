@@ -40,6 +40,10 @@
           <td><%= @album.max_photos %></td>
         </tr>
         <tr>
+          <td>Photo Size:</td>
+          <td><%= @album.photo_size %></td>
+        </tr>
+        <tr>
           <td>Total Photos Uploaded:</td>
           <td><%= @album.pictures.count %></td>
         </tr>
@@ -54,7 +58,7 @@
       </table>
     </div>
     
-    <%= link_to "Order this Album", '#', class: "btn btn-success" %>
+    <%= link_to "Order this Album", new_album_order_path(@album), class: "btn btn-success" %>
   </div>
   </div>
   

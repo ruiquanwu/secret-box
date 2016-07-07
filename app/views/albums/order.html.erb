@@ -1,0 +1,71 @@
+<div class="container">
+  <h1> Order Summary </h1>
+  <div class="col-md-12 order-detail">
+    <div class="col-md-7">
+      <%= image_tag(@album.avatar.url) %>
+    </div>
+    
+    <div class="col-md-5">
+      <table class="table">
+        <tr> <h2>Order Details: </h2> </tr>
+        <th>Name</th>
+        <th>Qty.</th>
+        <th>Price</th>
+        <th>Total</th>
+        <tr class="album_detail">
+          <td><%= @sample_album.name %></td>
+          <td> 1 </td>
+          <td> $<%= @album.price %> </td>
+          <td> $<%= @album.price %> </td>
+        </tr>
+        <tr class="pictures_detail">
+          <td><%= @album.photo_size %> photos</td>
+          <td><%= @album.photos_inserted.count %> </td>
+          <td> $<%= @sample_picture.price %> </td>
+          <td> $<%= @picture_total %> </td>
+        </tr>
+        <tr id="order-urgent">
+          <td>urgent request</td>
+          <td>1</td>
+          <td> $5 </td>
+          <td> $5 </td>
+        </tr>        
+        <tr class="order-shipping">
+          <td>Shipping</td>
+          <td></td>
+          <td></td>
+          <td>$5.0</td>
+        </tr>
+        <tr class="net-total">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>$<%= @album_total + 5 %></td>
+        </tr>
+      </table>
+      
+      <div class="order-options">
+        <ul>
+          <div class="checkbox" id="option-hand-writing-memo"><input type="checkbox" value="">Hand-writing Memo</div>
+          <div class="checkbox" id="option-gift"><input type="checkbox" value="">This is Gift</div>
+          <div class="checkbox" id="option-urgent"><input type="checkbox" value="">Urgent Order</div>
+        </ul>
+      </div>
+      
+      <div class="order-shipping">
+        <h4>Select shipping method:</h4>
+        <ul>
+        <div class="radio"><input type="radio" name="optradio">Option 1</div>
+        <div class="radio"><input type="radio" name="optradio">Option 2</div>
+        <div class="radio"><input type="radio" name="optradio">Option 3</div>
+        </ul>
+      </div>
+      
+      <div class="order-btns text-right">
+        <%= link_to "Checkout", "#", class:"btn btn-success" %>
+        <%= link_to "Cancel", @album, class:"btn btn-danger" %>
+      </div>
+    </div>
+  </div>
+  
+</div>

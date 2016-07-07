@@ -42,7 +42,6 @@ class AlbumsController < ApplicationController
       flash.now[:error] = "There is error on saving album"
       render :new
     end
-
   end
 
   def destroy

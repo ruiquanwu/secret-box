@@ -56,6 +56,9 @@ gem 'mini_magick'
 # images crop
 gem 'carrierwave-crop'
 
+#payment
+gem 'stripe'
+
 gem 'fog'
 
 gem 'angularjs-rails'

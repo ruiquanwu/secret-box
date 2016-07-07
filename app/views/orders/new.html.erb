@@ -1,0 +1,82 @@
+<div class="container">
+  <h1> Order Summary </h1>
+  <div class="col-md-12 order-detail">
+    <div class="col-md-7">
+      <%= image_tag(@album.avatar.url) %>
+    </div>
+    
+    <div class="col-md-5">
+      <table class="table">
+        <tr> <h2>Order Details: </h2> </tr>
+        <th>Item</th>
+        <th>Qty.</th>
+        <th>Price</th>
+        <th>Total</th>
+        <tr class="album_detail">
+          <td><%= @sample_album.name %></td>
+          <td> 1 </td>
+          <td> $<%= @sample_album.price %> </td>
+          <td>$<span class="item-total"><%= @sample_album.price %></span></td>
+        </tr>
+        <tr class="pictures_detail">
+          <td><%= @album.photo_size %> photos</td>
+          <td><%= @album.photos_inserted.count %> </td>
+          <td> $<%= @sample_picture.price %> </td>
+          <td>$<span class="item-total"><%= @picture_total %></span></td>
+        </tr>
+        <tr id="order-urgent">
+          <td><%= @urgent_option.name %></td>
+          <td>1</td>
+          <td>$<%= @urgent_option.price %></td>
+          <td>$<span id="display-urgent-total" class="item-total">0</span></td>
+        </tr>        
+        <tr class="order-shipping">
+          <td><span id="display-shipment-name"><%= @standard_shipment.name %></span></td>
+          <td></td>
+          <td>$<span id="display-shipment-price"><%= @standard_shipment.price %></span></td>
+          <td>$<span id="display-shipment-total" class="item-total"><%= @standard_shipment.price %></span></td>
+        </tr>
+        <tr class="net-total">
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>$<span id="net-total"></span></td>
+        </tr>
+      </table>
+      
+      <%= form_for [@album, @order] do |f| %>
+      <div class="order-options">
+        <h4> Select Order Options: </h4>
+        <ul>
+          <div class="checkbox">
+            <%= check_box("order", "options", {:multiple => true, id: "option-hand-writing-memo"}, "hand-writing-memo", nil) %>Hand-writing Memo
+          </div>
+          <div class="checkbox">
+            <%= check_box("order", "options", {:multiple => true, id: "option-gift"}, "gift", nil) %>This is Gift
+          </div>
+          <div class="checkbox">
+            <%= check_box("order", "options", {:multiple => true, id: "option-urgent", data:{price: @urgent_option.price}}, "urgent-order-option", nil) %>Urgent Order
+          </div>
+        </ul>
+      </div>
+      
+      <div class="order-shippment">
+        <h4>Select Order Shipment:</h4>
+        <ul>
+          <div class="radio"><%= radio_button("order", "shippment", @standard_shipment.name, {checked: "checked", id: "standard-shipment-radio", data: {name: @standard_shipment.name, price: @standard_shipment.price}}) %>Standard -- $<%= @standard_shipment.price %></div>
+          <div class="radio"><%= radio_button("order", "shippment", @express_shipment.name, {id: "express-shipment-radio", data: {name: @express_shipment.name, price: @express_shipment.price}}) %>Express -- $<%= @express_shipment.price %></div>
+          <div class="radio"><%= radio_button("order", "shippment", @nextday_shipment.name, {id: "nextday-shipment-radio", data: {name: @nextday_shipment.name, price: @nextday_shipment.price}}) %>Nextday -- $<%= @nextday_shipment.price %></div>
+        </ul>
+      </div>
+      
+      
+      <div class="order-btns text-right">
+        <%= f.submit "Checkout", class:"btn btn-success" %>
+        <%= link_to "Cancel", @album, class:"btn btn-danger" %>
+      </div>
+      
+      <% end %>
+    </div>
+  </div>
+
+</div>

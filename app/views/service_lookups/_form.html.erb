@@ -1,0 +1,39 @@
+<%= form_for @service do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.label :name, "Service Name:" %>
+      </div>
+      <div class="col-md-10 text-left">
+          <%= f.text_field :name, class: 'form-control', placeholder: "enter service name" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.label :description, "Service Description:" %>
+      </div>
+      <div class="col-md-10 text-left">
+          <%= f.text_field :description, class: 'form-control', placeholder: "enter service description" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.label :price, "Service Price:" %>
+      </div>
+      <div class="col-md-10 text-left">
+          <%= f.text_field :price, class: 'form-control', placeholder: "enter service price" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-left">
+    <%= f.submit "Save", class: "btn btn-success" %>
+    <%= link_to "Cancel", service_lookups_path, class: "btn btn-danger" %>
+  </div>
+<% end %>

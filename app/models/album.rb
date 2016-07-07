@@ -1,8 +1,10 @@
 class Album < ActiveRecord::Base
   belongs_to :user
+  belongs_to :sample_album
   has_many :photos, dependent: :destroy
   has_many :freephotos, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  has_many :order
   mount_uploader :avatar, AlbumAvatarUploader
   mount_uploader :album_layout, AlbumLayoutUploader
 
@@ -22,6 +24,7 @@ class Album < ActiveRecord::Base
     self.number_in_stock = sample_album.number_in_stock
     self.price = sample_album.price
     self.color = sample_album.color
+    self.photo_size = sample_album.photo_size
   end
   
   def max_photos

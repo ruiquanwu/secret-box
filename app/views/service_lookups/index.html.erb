@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Service Price Lookups 
+    <%= link_to "New Service", new_service_lookup_path, class: "btn btn-success" %>
+  </h1>
+  <table class="table">
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    <th>Action</th>
+    <% @services.each do |service| %>
+    <tr>
+      <td><%= service.name %></td>
+      <td><%= service.description %></td>
+      <td><%= service.price %></td>
+      <td><%= link_to "Edit", edit_service_lookup_path(service), class: "btn btn-success" %>
+          <%= link_to "Delete", service, data: {confirm:"are you sure?"}, class: "btn btn-danger", method: :delete %></td>
+    </tr>
+    <% end %>
+  </table>
+</div>

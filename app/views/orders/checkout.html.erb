@@ -1,0 +1,38 @@
+<div class="container checkout-order-summary">
+  <h2> Checkout </h2>
+  
+  <div class="col-md-12">
+    <div class="col-md-4 checkout-order-avatar">
+      <%= image_tag(@album.avatar, class:"img-responsive order-avatar") %>
+    </div>
+      
+    <div class="col-md-8">
+      Order Details
+    </div>
+  </div>
+  
+  <div class="checkout-checkout">
+    <%= form_tag pay_album_order_path do %>
+    <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <span>Total Amount: $<%= @order.total_price%></span>
+    </label>
+  </article>
+
+  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+          data-description="order album"
+          data-amount="<%= @order.total_price * 100%>"
+          data-zip-code = true
+          data-shipping-address = true
+          data-email = "<%= current_user.email%>"
+          data-locale="auto"></script>
+<% end %>
+  </div>
+       
+</div>

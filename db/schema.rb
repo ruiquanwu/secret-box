@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160625073600) do
+ActiveRecord::Schema.define(version: 20160707164347) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -31,10 +31,13 @@ ActiveRecord::Schema.define(version: 20160625073600) do
     t.float    "price"
     t.string   "features"
     t.string   "color"
+    t.string   "photo_size"
+    t.integer  "sample_album_id"
   end
 
   add_index "albums", ["orientation"], name: "index_albums_on_orientation"
   add_index "albums", ["photo_per_page"], name: "index_albums_on_photo_per_page"
+  add_index "albums", ["sample_album_id"], name: "index_albums_on_sample_album_id"
   add_index "albums", ["user_id"], name: "index_albums_on_user_id"
 
   create_table "diaries", force: :cascade do |t|
@@ -55,6 +58,21 @@ ActiveRecord::Schema.define(version: 20160625073600) do
   end
 
   add_index "freephotos", ["album_id"], name: "index_freephotos_on_album_id"
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "options"
+    t.string   "shippment"
+    t.string   "carrier"
+    t.string   "track_number"
+    t.integer  "album_id"
+    t.float    "total_price"
+    t.string   "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "photos", force: :cascade do |t|
     t.string   "memo"
@@ -94,6 +112,22 @@ ActiveRecord::Schema.define(version: 20160625073600) do
     t.datetime "updated_at",      null: false
     t.string   "features"
     t.string   "color"
+    t.string   "photo_size"
+  end
+
+  create_table "sample_pictures", force: :cascade do |t|
+    t.string   "size"
+    t.float    "price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "service_lookups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.float    "price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -27,7 +27,7 @@ class SampleAlbumsController < ApplicationController
       redirect_to sample_albums_path
     else
       flash.now[:error] = "There is error on saving sample album"
-      render :new
+      render :edit
     end
   end
 
@@ -45,7 +45,7 @@ class SampleAlbumsController < ApplicationController
   private
   
   def sample_album_params
-    params.require(:sample_album).permit(:name, :max_page, :photo_per_page, :color,
+    params.require(:sample_album).permit(:name, :max_page, :photo_per_page, :color, :photo_size,
       :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo, :features)
   end
 end

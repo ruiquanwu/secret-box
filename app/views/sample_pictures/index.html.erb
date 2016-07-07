@@ -1,0 +1,21 @@
+<div class="container">
+<h1>Sample Picture Lookup
+  <%= link_to "New Sample Picture", new_sample_picture_path, class: 'btn btn-success' %>
+</h1>
+  <table class="table">
+    <tr>
+      <th> Picture Size </th>
+      <th> Picture Price </th>
+      <th> Action </th>
+    </tr>
+  <% @sample_pictures.each do |sample_picture| %>
+    <tr>
+      <td><%= sample_picture.size %></td>
+      <td><%= sample_picture.price %></td>
+      <td> <%= link_to "Edit", edit_sample_picture_path(sample_picture), class: "btn btn-success" %>
+           <%= link_to "Delete", sample_picture, method: :delete, data:{confirm: "are you sure?"}, class: "btn btn-danger" %> 
+      </td>
+    </tr>
+  <% end %>
+  </table>
+</div>

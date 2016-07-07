@@ -4,11 +4,22 @@ Rails.application.routes.draw do
   resources :diaries
   
   resources :sample_albums
+  resources :sample_pictures
+  resources :service_lookups
   
   resources :albums do
    get 'show_json', defaults: { format: 'json' }
     get 'test' => 'test#index'
-    resources :freephotos
+    member do
+      get 'order'
+    end
+    resources :orders do
+      member do
+        get 'checkout'
+        post 'pay'
+      end
+    end
+    
     resources :photos do # :defaults => {:format => 'json'}
       collection do
         patch 'update_photos'
