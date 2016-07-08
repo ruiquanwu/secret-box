@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707164347) do
+ActiveRecord::Schema.define(version: 20160707210130) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -139,6 +139,17 @@ ActiveRecord::Schema.define(version: 20160707164347) do
 
   add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true
   add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at"
+
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address_line1"
+    t.string   "state"
+    t.string   "city"
+    t.string   "zipcode"
+    t.integer  "order_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

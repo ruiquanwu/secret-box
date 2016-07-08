@@ -16,7 +16,7 @@
   
   
 @initialized_order_total = () ->
-  if $(".orders.new").length > 0
+  if $(".orders.new").length > 0 || $(".orders.edit").length > 0
     if $('#option-urgent')[0].checked == true
       $('#display-urgent-total').text($('#option-urgent')[0].getAttribute('data-price'))
       $('#order-urgent').show()

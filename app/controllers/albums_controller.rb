@@ -34,6 +34,7 @@ class AlbumsController < ApplicationController
     @album = Album.new(album_params)
     @album.user = current_user
     @sample_album = SampleAlbum.find(@album.style)
+    @album.sample_album = @sample_album
     @album.setAttributes(@sample_album)
     if @album.save
       flash[:notice] = "Album was saved."

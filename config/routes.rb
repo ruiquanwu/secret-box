@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'order_management/index'
+
+  get 'order_management/show'
+
   devise_for :users
   resources :diaries
   
@@ -16,7 +20,7 @@ Rails.application.routes.draw do
     resources :orders do
       member do
         get 'checkout'
-        post 'pay'
+        post 'confirm'
       end
     end
     

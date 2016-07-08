@@ -1,9 +1,11 @@
 class Order < ActiveRecord::Base
+  before_save :calculate_total
   validates :shippment, presence: true
   
   serialize :options, Array
   belongs_to :user
   belongs_to :album
+  has_one :shipping_address
   
   def calculate_total
     total = 0
@@ -41,4 +43,5 @@ class Order < ActiveRecord::Base
   def picture_total_price
     self.picture_price * self.picture_number
   end
+
 end
