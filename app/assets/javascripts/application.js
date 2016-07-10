@@ -12,6 +12,7 @@
 //
 //= require angular
 //= require angular-resource
+//= require local_time
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks

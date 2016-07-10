@@ -46,7 +46,7 @@
       
       <ul class="nav navbar-nav navbar-right">
         <% if current_user %>
-        <li><%= link_to "My Order", "#" %></li>
+        <li><%= link_to "My Orders", order_management_index_path %></li>
         <li><a>Hello <%= current_user.name || current_user.email %>!</a></li> 
         <li><%= link_to destroy_user_session_path, method: :delete do%>
             <span class="glyphicon glyphicon-log-out"></span> Logout

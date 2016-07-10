@@ -43,5 +43,12 @@ class Order < ActiveRecord::Base
   def picture_total_price
     self.picture_price * self.picture_number
   end
-
+  
+  def trackable?
+    if self.status == "shipped"
+      true
+    else
+      false
+    end
+  end
 end

@@ -48,6 +48,9 @@ class OrdersController < ApplicationController
     @album = Album.find(params[:album_id])
     @order = Order.find(params[:id])
     
+    params[:order][:options] = [] if params[:order][:options].blank?
+    
+    
     if @order.update_attributes(order_params)
       flash[:notice] = "Order was updated"
       redirect_to checkout_album_order_path(@album, @order)

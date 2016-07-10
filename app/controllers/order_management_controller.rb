@@ -5,4 +5,13 @@ class OrderManagementController < ApplicationController
 
   def show
   end
+  
+  def admin_index
+    @orders = Order.all.paginate(page: params[:page], per_page: 5)
+  end
+  
+  def edit
+    @order = Order.find(params[:id])
+  end
+  
 end

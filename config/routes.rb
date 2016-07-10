@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
   get 'order_management/index'
-
-  get 'order_management/show'
+  
+  get 'order_management/admin_index'
+  
+  get 'order_management/edit/:id', to: 'order_management#edit', as: :order_management_edit
 
   devise_for :users
   resources :diaries

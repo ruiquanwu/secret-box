@@ -1,51 +1,15 @@
 <div class="container">
-  <h1>OrderManagement#index</h1>
-  <p>Find me in app/views/order_management/index.html.erb</p>
-  <% @orders.each do |order| %>
-    <div class="row order-list">
-      <div class="order-list-info col-md-12">
-        <div class="col-md-3">
-          <p>ORDER PLACED<p>
-          <p><%= order.created_at %></p>
-        </div>
-        
-        <div class="col-md-3">
-          <p>TOTAL<p>
-          <p>$<%= order.total_price %></p>
-        </div>
-        
-        <div class="col-md-3">
-          <p>Order Status<p>
-          <p><%= order.status %></p>
-        </div>
-        
-        <div class="col-md-3">
-          <% if order.shipping_address %>
-          <p>SHIP TO: <%= order.shipping_address.name %><p>
-          <p><%= order.shipping_address.address_line1%></p>
-          <p><%= order.shipping_address.city%>, <%= order.shipping_address.state%> <%= order.shipping_address.zipcode%></p>
-          <% end %>
-        </div>        
-      </div>
-      
-      <div class="order-list-details col-md-12">
-        <div class="order-album-icon col-md-4">
-          <%= image_tag(order.album.avatar, class: "img-responsive")%>
-        </div>
-        
-        <div class="order-album-details col-md-6">
-          <p><%= order.album.sample_album.name %></p>
-        </div>
-        
-        <div class="order-shipping-info col-md-2">
-          <p><%= link_to "Track package", "#", class: "btn btn-success"%></p>
-          <p><%= link_to "Track package", "#", class: "btn btn-success"%></p>
-        </div>
-      </div>
-    </div>
+  <h1>My Orders</h1>
+  <% if @orders.count > 0 %>
+  <p>Notes: Order Status indicate how order is processed. </p>
+  <ul>
+    <li>Submmited: your order was created, but you have not paid yet.</li>
+    <li>In Progress: order payment received, we are creating your album.</li>
+    <li>Shipped: your order was ready and shipped.</li>
+  </ul>
+  <p>any changes on your album after order is "In Progress" status may not change the actual order</p>
+  <%= render partial: "list" %>
+  <% else %>
+  <p> Sorry, your don't have any order </p>
   <% end %>
-  
-  <div class="col-md-12 text-center">
-    <%= will_paginate @orders %>
-  </div>
 </div>

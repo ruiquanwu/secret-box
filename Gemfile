@@ -59,6 +59,9 @@ gem 'carrierwave-crop'
 #payment
 gem 'stripe'
 
+# timezone
+gem 'local_time'
+
 gem 'fog'
 
 gem 'angularjs-rails'

@@ -3,13 +3,13 @@
         <h4> Select Order Options: </h4>
         <ul>
           <div class="checkbox">
-            <%= check_box("order", "options", {:multiple => true, id: "option-hand-writing-memo"}, "hand-writing-memo", "") %>Hand-writing Memo
+            <%= check_box("order", "options", {:multiple => true, id: "option-hand-writing-memo"}, "hand-writing-memo", nil) %>Hand-writing Memo
           </div>
           <div class="checkbox">
-            <%= check_box("order", "options", {:multiple => true, id: "option-gift"}, "gift", "") %>This is Gift
+            <%= check_box("order", "options", {:multiple => true, id: "option-gift"}, "gift", nil) %>This is Gift
           </div>
           <div class="checkbox">
-            <%= check_box("order", "options", {:multiple => true, id: "option-urgent", data:{price: @urgent_option.price}}, "urgent-order-option", "") %>Urgent Order
+            <%= check_box("order", "options", {:multiple => true, id: "option-urgent", data:{price: @urgent_option.price}}, "urgent-order-option", nil) %>Urgent Order
           </div>
         </ul>
       </div>
