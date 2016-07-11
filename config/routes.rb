@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'order_management/index'
-  
+  get 'order_management/index'  
   get 'order_management/admin_index'
-  
   get 'order_management/edit/:id', to: 'order_management#edit', as: :order_management_edit
+  get 'order_management/download/:id', to: 'order_management#download', as: :order_management_download
+  patch 'order_management/edit/:id', to: 'order_management#update'
 
   devise_for :users
   resources :diaries

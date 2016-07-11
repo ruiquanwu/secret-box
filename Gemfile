@@ -62,6 +62,9 @@ gem 'stripe'
 # timezone
 gem 'local_time'
 
+#rubyzip
+gem 'rubyzip'
+
 gem 'fog'
 
 gem 'angularjs-rails'

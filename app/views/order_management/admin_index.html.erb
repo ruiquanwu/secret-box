@@ -4,6 +4,7 @@
   <table class="table">
     <th> Order Album Sample </th>
     <th> Order Place </th>
+    <th> Order Status </th>
     <th> Order Price </th>
     <th> User Name </th>
     <th> User Email </th>
@@ -12,10 +13,12 @@
     <tr>
       <td><%= order.album.sample_album.name %></td>
       <td><%= local_time(order.created_at) %></td>
+      <td><%= order.status %></td>
       <td>$<%= order.total_price %></td>
       <td><%= order.user.name %></td>
       <td><%= order.user.email %></td>
-      <td><%= link_to "Edit", order_management_edit_path(order), class: "btn btn-success"%></td>
+      <td><%= link_to "Edit", order_management_edit_path(order), class: "btn btn-success"%>
+      <%= link_to "ViewAlbum", album_path(order.album), class: "btn btn-success"%></td>
     </tr>
   <% end %>
   </table>

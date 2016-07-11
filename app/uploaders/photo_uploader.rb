@@ -38,12 +38,14 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   process :resize_to_fit => [50, 50]
   # end
 
-  process resize_to_fill(900, 600, gravity='Center')
+  process resize_to_fill(1800, 1200, gravity='Center')
 
-  version :portrait do
-    process :auto_orient
-    process resize_to_fill(600, 900, gravity='Center')
-  end
+#  portrait
+#  version :portrait do
+#    process :auto_orient
+#    process resize_to_fill(600, 900, gravity='Center')
+#  end
+  
 =begin
   version :thumb do
     process crop: :picture
