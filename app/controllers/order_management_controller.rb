@@ -11,11 +11,11 @@ class OrderManagementController < ApplicationController
   end
   
   def edit
-    @order = Order.find(params[:id])
+    @order = Order.friendly.find(params[:id])
   end
   
   def update
-    @order = Order.find(params[:id])
+    @order = Order.friendly.find(params[:id])
     
     if @order.update_attributes(order_params)
       flash[:notice] = "Order was updated"
@@ -30,7 +30,7 @@ class OrderManagementController < ApplicationController
   def download
     require 'rubygems'
     require 'zip'
-    @order = Order.find(params[:id])
+    @order = Order.friendly.find(params[:id])
     filename = @order.user.name + "_" + @order.album.name + "_" + @order.created_at.to_formatted_s(:number) + ".zip"
     temp_file = Tempfile.new(filename)
     

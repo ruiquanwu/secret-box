@@ -1,7 +1,7 @@
 class PhotosController < ApplicationController
 
   def index
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     @photos = @album.photos.paginate(page: params[:page], per_page: @album.photo_per_page)
     @pictures = @album.pictures.where(:photo => nil).all#.limit(10)
     
@@ -12,17 +12,17 @@ class PhotosController < ApplicationController
   end
 
   def show
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     @photo = Photo.find(params[:id])
   end
 
   def new
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     @photo = @album.photos.new
   end
 
   def create
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     if @album.photos.where(:picture_id => nil).first
       @render_page = @album.photos.where(:picture_id => nil).first.photo_number
     else
@@ -64,7 +64,7 @@ class PhotosController < ApplicationController
 
   def update_photos
     params[:updates_params].each do |(key,update_params)|
-      @album = Album.find(update_params[:album_id])
+      @album = Album.friendly.find(update_params[:album_id])
       @photo = Photo.find(update_params[:photo_id])
       if update_params[:picture_id] == "0"
         if @photo.picture
@@ -86,7 +86,7 @@ class PhotosController < ApplicationController
   end
 
   def insert
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     @current_photo = Photo.find(params[:id])
     @photo = @album.photos.new
     @photo_number = @current_photo.photo_number
@@ -109,7 +109,7 @@ class PhotosController < ApplicationController
   end
 
   def append
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     @current_photo = Photo.find(params[:id])
     @photo = @album.photos.new
     @photo_number = @current_photo.photo_number + 1
@@ -131,7 +131,7 @@ class PhotosController < ApplicationController
   end
 
   def destroy
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
     @photo = Photo.find(params[:id])
     @photo_number = @photo.photo_number
     

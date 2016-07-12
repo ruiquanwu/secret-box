@@ -9,16 +9,11 @@ class AlbumsController < ApplicationController
   end
 
   def front_cover
-    @album = Album.find(params[:id])
-  end
-
-  def show_json
-    @album = Album.find(params[:album_id])
-    respond_with @album
+    @album = Album.friendly.find(params[:id])
   end
   
   def show
-    @album = Album.find(params[:id])
+    @album = Album.friendly.find(params[:id])
   end
 
   def edit
@@ -46,7 +41,7 @@ class AlbumsController < ApplicationController
   end
 
   def destroy
-    @album = Album.find(params[:id])
+    @album = Album.friendly.find(params[:id])
     @album.destroy
 
     respond_to do |format|

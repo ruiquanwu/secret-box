@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160707210130) do
+ActiveRecord::Schema.define(version: 20160712165309) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -33,11 +33,13 @@ ActiveRecord::Schema.define(version: 20160707210130) do
     t.string   "color"
     t.string   "photo_size"
     t.integer  "sample_album_id"
+    t.string   "slug"
   end
 
   add_index "albums", ["orientation"], name: "index_albums_on_orientation"
   add_index "albums", ["photo_per_page"], name: "index_albums_on_photo_per_page"
   add_index "albums", ["sample_album_id"], name: "index_albums_on_sample_album_id"
+  add_index "albums", ["slug"], name: "index_albums_on_slug"
   add_index "albums", ["user_id"], name: "index_albums_on_user_id"
 
   create_table "diaries", force: :cascade do |t|
@@ -70,8 +72,10 @@ ActiveRecord::Schema.define(version: 20160707210130) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
+    t.string   "slug"
   end
 
+  add_index "orders", ["slug"], name: "index_orders_on_slug"
   add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "photos", force: :cascade do |t|
@@ -169,6 +173,7 @@ ActiveRecord::Schema.define(version: 20160707210130) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.integer  "role"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -65,6 +65,9 @@ gem 'local_time'
 #rubyzip
 gem 'rubyzip'
 
+# friendlyID
+gem 'friendly_id'
+
 gem 'fog'
 
 gem 'angularjs-rails'

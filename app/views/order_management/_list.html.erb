@@ -60,7 +60,7 @@
             <% end %>
           </p>
           <% if order.trackable? %>
-          <p><%= link_to "Track package", "#", class: "btn btn-success"%></p>
+          <p><%= link_to "Track package", order.tracking_link, class: "btn btn-success", target: "_blank"%></p>
           <% end %>
           <p><%= link_to "View this Album", album_path(order.album), class: "btn btn-success"%></p>
         </div>

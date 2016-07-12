@@ -1,4 +1,6 @@
 class Order < ActiveRecord::Base
+  extend FriendlyId
+  friendly_id :user_name_and_album_name, use: :slugged
   before_save :calculate_total
   validates :shippment, presence: true
   
@@ -6,6 +8,10 @@ class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :album
   has_one :shipping_address
+  
+  def user_name_and_album_name
+    "#{self.user.name} Album #{self.album.name}"
+  end
   
   def calculate_total
     total = 0
@@ -45,10 +51,21 @@ class Order < ActiveRecord::Base
   end
   
   def trackable?
-    if self.status == "shipped"
+    if self.status == "Shipped"
       true
     else
       false
     end
+  end
+  
+  def tracking_link
+    if self.carrier.downcase == "ups"
+      link = "https://www.ups.com/WebTracking/track?track=yes&trackNums=" + self.track_number
+    elsif self.carrier.downcase == "upsp"
+      link = "https://tools.usps.com/go/TrackConfirmAction?tLabels=" + self.track_number
+    else
+      link = "#"
+    end
+    link
   end
 end
