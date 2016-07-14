@@ -68,6 +68,9 @@ gem 'rubyzip'
 # friendlyID
 gem 'friendly_id'
 
+# google auth
+gem "omniauth-google-oauth2"
+
 gem 'fog'
 
 gem 'angularjs-rails'

@@ -6,12 +6,14 @@ Rails.application.routes.draw do
   get 'order_management/download/:id', to: 'order_management#download', as: :order_management_download
   patch 'order_management/edit/:id', to: 'order_management#update'
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   resources :diaries
   
   resources :sample_albums
   resources :sample_pictures
   resources :service_lookups
+  
+#  resources :user, only: :show
   
   resources :albums do
    get 'show_json', defaults: { format: 'json' }
