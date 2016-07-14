@@ -2,6 +2,7 @@ class PhotosController < ApplicationController
 
   def index
     @album = Album.friendly.find(params[:album_id])
+    authorize @album
     @photos = @album.photos.paginate(page: params[:page], per_page: @album.photo_per_page)
     @pictures = @album.pictures.where(:photo => nil).all#.limit(10)
     
@@ -19,6 +20,7 @@ class PhotosController < ApplicationController
   def new
     @album = Album.friendly.find(params[:album_id])
     @photo = @album.photos.new
+    authorize @photo
   end
 
   def create
@@ -26,7 +28,7 @@ class PhotosController < ApplicationController
     if @album.photos.where(:picture_id => nil).first
       @render_page = @album.photos.where(:picture_id => nil).first.photo_number
     else
-      @render_page = @album.photos.album_photos.count + 1
+      @render_page = @album.photos.count + 1
     end
 
     # Create new Picture for every uploaded file
@@ -40,6 +42,7 @@ class PhotosController < ApplicationController
 
           @photo = Photo.new
           @photo.album = @album
+          authorize @photo
           @photo.photo_number = @album.photos.count + 1
           @photo.save
         end
@@ -52,7 +55,8 @@ class PhotosController < ApplicationController
   end
 
   def crop
-    @album = Album.find(params[:album_id])
+    @album = Album.friendly.find(params[:album_id])
+    authorize @album
     @photo = Photo.find(params[:id])
 
 
@@ -66,6 +70,7 @@ class PhotosController < ApplicationController
     params[:updates_params].each do |(key,update_params)|
       @album = Album.friendly.find(update_params[:album_id])
       @photo = Photo.find(update_params[:photo_id])
+      authorize @photo
       if update_params[:picture_id] == "0"
         if @photo.picture
           @photo.picture = nil
@@ -88,6 +93,7 @@ class PhotosController < ApplicationController
   def insert
     @album = Album.friendly.find(params[:album_id])
     @current_photo = Photo.find(params[:id])
+    authorize @current_photo
     @photo = @album.photos.new
     @photo_number = @current_photo.photo_number
 
@@ -111,6 +117,7 @@ class PhotosController < ApplicationController
   def append
     @album = Album.friendly.find(params[:album_id])
     @current_photo = Photo.find(params[:id])
+    authorize @current_photo
     @photo = @album.photos.new
     @photo_number = @current_photo.photo_number + 1
 
@@ -132,6 +139,7 @@ class PhotosController < ApplicationController
 
   def destroy
     @album = Album.friendly.find(params[:album_id])
+    authorize @album
     @photo = Photo.find(params[:id])
     @photo_number = @photo.photo_number
     

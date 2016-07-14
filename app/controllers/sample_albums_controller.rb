@@ -1,11 +1,13 @@
 class SampleAlbumsController < ApplicationController
   def new
     @sample_album = SampleAlbum.new
+    authorize @sample_album
   end
   
   def create
     @sample_album = SampleAlbum.new(sample_album_params)
-
+    authorize @sample_album
+    
     if @sample_album.save
       flash[:notice] = "Sample Album was saved."
       redirect_to sample_albums_path
@@ -17,10 +19,12 @@ class SampleAlbumsController < ApplicationController
   
   def edit
     @sample_album = SampleAlbum.find(params[:id])
+    authorize @sample_album
   end
   
   def update
     @sample_album = SampleAlbum.find(params[:id])
+    authorize @sample_album
 
     if @sample_album.update_attributes(sample_album_params)
       flash[:notice] = "Sample Album was saved."
@@ -33,10 +37,12 @@ class SampleAlbumsController < ApplicationController
 
   def index
     @sample_albums = SampleAlbum.all.paginate(page: params[:page], per_page: 6)
+    authorize @sample_albums
   end
   
   def destroy
     @sample_album = SampleAlbum.find(params[:id])
+    authorize @sample_album
     @sample_album.destroy
     
     redirect_to sample_albums_path

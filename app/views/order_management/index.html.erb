@@ -4,12 +4,15 @@
   <p>Notes: Order Status indicate how order is processed. </p>
   <ul>
     <li>Submmited: your order was created, but you have not paid yet.</li>
-    <li>In Progress: order payment received, we are creating your album.</li>
+    <li>Checkout: payment received, album will be in progress shortly</li>
+    <li>In Progress: actual album in progress, any changes may not apply.</li>
     <li>Shipped: your order was ready and shipped.</li>
+    <li>Delivered: your order was delivered, thank you for using Secrect Album.</li>
   </ul>
   <p>any changes on your album after order is "In Progress" status may not change the actual order</p>
   <%= render partial: "list" %>
   <% else %>
-  <p> Sorry, your don't have any order </p>
+  <p> Sorry, your don't have any order.</p>
+  <p> Try to Create one? <%= link_to "Create Album", albums_path, class: "btn btn-success" %></p>
   <% end %>
 </div>

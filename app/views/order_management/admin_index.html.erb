@@ -2,7 +2,8 @@
   <h1> Admin Orders Management </h1>
   
   <table class="table">
-    <th> Order Album Sample </th>
+    <th> Album Name </th>
+    <th> Album Sample </th>
     <th> Order Place </th>
     <th> Order Status </th>
     <th> Order Price </th>
@@ -11,6 +12,7 @@
     <th> Action </th>
   <% @orders.each do |order| %>
     <tr>
+      <td><%= order.album.name %></td>
       <td><%= order.album.sample_album.name %></td>
       <td><%= local_time(order.created_at) %></td>
       <td><%= order.status %></td>

@@ -21,6 +21,9 @@
           <div class="order-list-label">SHIP TO: <%= order.shipping_address.name %></div>
           <div class="order-list-content"><%= order.shipping_address.address_line1%></div>
           <div class="order-list-content"><%= order.shipping_address.city%>, <%= order.shipping_address.state%> <%= order.shipping_address.zipcode%></div>
+          <% else %>
+          <%= link_to "Checkout", checkout_album_order_path(order.album, order), class: "btn btn-success" %>
+          <%= link_to "Delete", album_order_path(order.album, order), data:{confirm: "are you sure?"}, method: :delete,class: "btn btn-danger" %>
           <% end %>
         </div>        
       </div>

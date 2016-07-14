@@ -1,11 +1,15 @@
 class AlbumsController < ApplicationController
   respond_to :html, :json
-  def test
-  end
   
   def index
-    #@albums = current_user.albums
-    @albums = current_user.albums.paginate(page: params[:page], per_page: 6)
+    if current_user
+      @albums = current_user.albums.paginate(page: params[:page], per_page: 6)
+      #authorize @albums
+    else
+      flash[:error] = "You must be logged in"
+      redirect_to new_user_session_path
+    end
+
   end
 
   def front_cover
@@ -14,6 +18,7 @@ class AlbumsController < ApplicationController
   
   def show
     @album = Album.friendly.find(params[:id])
+    authorize @album
   end
 
   def edit
@@ -23,6 +28,7 @@ class AlbumsController < ApplicationController
     @album = Album.new
     @sample_albums  = SampleAlbum.all
     @default_sample_album = @sample_albums.first
+    authorize @album
   end
 
   def create
@@ -31,6 +37,7 @@ class AlbumsController < ApplicationController
     @sample_album = SampleAlbum.find(@album.style)
     @album.sample_album = @sample_album
     @album.setAttributes(@sample_album)
+    authorize @album
     if @album.save
       flash[:notice] = "Album was saved."
       redirect_to @album
@@ -42,6 +49,7 @@ class AlbumsController < ApplicationController
 
   def destroy
     @album = Album.friendly.find(params[:id])
+    authorize @album
     @album.destroy
 
     respond_to do |format|

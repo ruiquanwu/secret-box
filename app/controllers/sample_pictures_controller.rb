@@ -1,14 +1,17 @@
 class SamplePicturesController < ApplicationController
   def index
     @sample_pictures = SamplePicture.all
+    authorize @sample_pictures
   end
 
   def new
     @sample_picture = SamplePicture.new
+    authorize @sample_picture
   end
   
   def create
     @sample_picture = SamplePicture.new(sample_picture_params)
+    authorize @sample_picture
     
     if @sample_picture.save
       flash[:notice] = "Sample Picture was saved"
@@ -21,10 +24,12 @@ class SamplePicturesController < ApplicationController
 
   def edit
     @sample_picture = SamplePicture.find(params[:id])
+    authorize @sample_picture
   end
   
   def update
     @sample_picture = SamplePicture.find(params[:id])
+    authorize @sample_picture
     
     if @sample_picture.update_attributes(sample_picture_params)
       flash[:notice] = "Sample Picture was updated"
@@ -37,6 +42,7 @@ class SamplePicturesController < ApplicationController
   
   def destroy
     @sample_picture = SamplePicture.find(params[:id])
+    authorize @sample_picture
     @sample_picture.destroy
     
     redirect_to sample_pictures_path

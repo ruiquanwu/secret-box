@@ -33,7 +33,7 @@
         <%= f.text_field :track_number %>
 
         <%= f.label :status %>
-        <%= f.select(:status, [["Submitted", "Submitted"], ["In Progress"], ["Shipped", "Shipped"], ["Delivered", "Delivered"]]) %>
+        <%= f.select(:status, [["Submitted", "Submitted"], ["Checkout", "Checkout"], ["In Progress"], ["Shipped", "Shipped"], ["Delivered", "Delivered"]]) %>
       
       <p>Download Album Photos: 
         <%= link_to "Download Photos", order_management_download_path(@order), class: "btn btn-success" %>

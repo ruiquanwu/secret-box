@@ -35,13 +35,27 @@
       <div class="navbar-header">
         <div class="navbar-brand">
           <%= link_to "SecretAlbum", root_url %>
+          <% if current_user && current_user.admin?%>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Admin <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li><%= link_to "SampleAlbum", sample_albums_path%></li>
+              <li><%= link_to "SamplePicture", sample_pictures_path%></li>
+              <li><%= link_to "ServicesLookup", service_lookups_path%></li>
+              <li role="separator" class="divider"></li>
+              <li><%= link_to "OrderManagement", order_management_admin_index_path%></li>
+            </ul>
+          </div>
+          <% end %>
         </div>
       </div>
       <ul class="nav navbar-nav navbar-left">
         <% if current_user %>
         <li><%= link_to "Diaries", diaries_path %></li>
         <li><%= link_to "Albums", albums_path %></li>
-        <% end %>
+        <% end %>        
        </ul>
       
       <ul class="nav navbar-nav navbar-right">

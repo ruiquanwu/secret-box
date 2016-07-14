@@ -1,10 +1,12 @@
 class ServiceLookupsController < ApplicationController
   def new
     @service = ServiceLookup.new
+    authorize @service
   end
   
   def create
     @service = ServiceLookup.new(service_params)
+    authorize @service
     
     if @service.save
       flash[:notice] = "New Service was saved"
@@ -17,13 +19,14 @@ class ServiceLookupsController < ApplicationController
 
   def edit
     @service = ServiceLookup.find(params[:id])
+    authorize @service
   end
 
   def update
     @service = ServiceLookup.find(params[:id])
-    @service.update_attributes(service_params)
+    authorize @service
     
-    if @service.save
+    if @service.update_attributes(service_params)
       flash[:notice] = "Service was updated"
       redirect_to service_lookups_path
     else
@@ -34,10 +37,12 @@ class ServiceLookupsController < ApplicationController
   
   def index
     @services = ServiceLookup.all
+    authorize @services
   end
   
   def destroy
     @service = ServiceLookup.find(params[:id])
+    authorize @service
     @service.destroy
     redirect_to service_lookups_path
   end

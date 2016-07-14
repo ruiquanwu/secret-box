@@ -2,6 +2,7 @@ class ApplicationPolicy
   attr_reader :user, :record
 
   def initialize(user, record)
+    raise Pundit::NotAuthorizedError, "must be logged in" unless user
     @user = user
     @record = record
   end
@@ -15,7 +16,7 @@ class ApplicationPolicy
   end
 
   def create?
-    user.present?
+    @user.present?
   end
 
   def new?
@@ -23,7 +24,7 @@ class ApplicationPolicy
   end
 
   def update?
-    user.present? && (record.user == user)
+    @user.present? && (@record.user == @user)
   end
 
   def edit?

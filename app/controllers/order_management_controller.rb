@@ -1,5 +1,6 @@
 class OrderManagementController < ApplicationController
   def index
+    authorize :order_management, :index?
     @orders =  Order.where(user_id: current_user.id).all.paginate(page: params[:page], per_page: 5)
   end
 
@@ -7,14 +8,17 @@ class OrderManagementController < ApplicationController
   end
   
   def admin_index
+    authorize :order_management, :admin_index?
     @orders = Order.all.paginate(page: params[:page], per_page: 5)
   end
   
   def edit
+    authorize :order_management, :edit?
     @order = Order.friendly.find(params[:id])
   end
   
   def update
+    authorize :order_management, :update?
     @order = Order.friendly.find(params[:id])
     
     if @order.update_attributes(order_params)
@@ -28,9 +32,11 @@ class OrderManagementController < ApplicationController
   end
   
   def download
+    authorize :order_management, :download?
     require 'rubygems'
     require 'zip'
     @order = Order.friendly.find(params[:id])
+    authorize @order
     filename = @order.user.name + "_" + @order.album.name + "_" + @order.created_at.to_formatted_s(:number) + ".zip"
     temp_file = Tempfile.new(filename)
     

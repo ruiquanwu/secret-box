@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   def new
-    @order = Order.new
     @album = Album.friendly.find(params[:album_id])
+    @order = @album.order.new
+    authorize @order
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
@@ -17,12 +18,13 @@ class OrdersController < ApplicationController
     @sample_album = SampleAlbum.find(@album.style)
     @order = Order.new(order_params)
     @order.album = @album
+    authorize @order
     @order.user = current_user
     
     # calculate total price
     # @order.calculate_total
     # set order status to "submitted"
-    @order.status = "submitted"
+    @order.status = "Submitted"
     
     if @order.save
       redirect_to checkout_album_order_path(@album, @order)
@@ -33,6 +35,7 @@ class OrdersController < ApplicationController
   
   def edit    
     @order = Order.friendly.find(params[:id])
+    authorize @order
     @album = Album.friendly.find(params[:album_id])
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
@@ -47,6 +50,7 @@ class OrdersController < ApplicationController
   def update
     @album = Album.friendly.find(params[:album_id])
     @order = Order.friendly.find(params[:id])
+    authorize @order
     
     params[:order][:options] = [] if params[:order][:options].blank?
     
@@ -62,7 +66,8 @@ class OrdersController < ApplicationController
   
   def destroy
     @album = Album.friendly.find(params[:album_id])
-    @order = Order.find(params[:id])
+    @order = Order.friendly.find(params[:id])
+    authorize @order
     @order.destroy
     
     redirect_to @album
@@ -72,6 +77,7 @@ class OrdersController < ApplicationController
     #@shipping_address = 
     @album = Album.friendly.find(params[:album_id])
     @order = Order.friendly.find(params[:id])
+    authorize @order
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
@@ -82,6 +88,7 @@ class OrdersController < ApplicationController
   
   def confirm
     @order = Order.friendly.find(params[:id])
+    authorize @order
     @amount = (@order.total_price * 100).round
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
@@ -91,7 +98,7 @@ class OrdersController < ApplicationController
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => @amount,
-      :description => 'Album for user'+current_user.name,
+      :description => 'Secrect Album Order',
       :currency    => 'usd'
       )
     
@@ -101,7 +108,7 @@ class OrdersController < ApplicationController
     @shipping_address.save
     
     
-    @order.status = "In Progress"
+    @order.status = "Checkout"
     @order.save
     
     rescue Stripe::CardError => e

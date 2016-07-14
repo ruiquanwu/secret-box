@@ -1,0 +1,2 @@
+class SamplePicturePolicy < AdminPolicy
+end

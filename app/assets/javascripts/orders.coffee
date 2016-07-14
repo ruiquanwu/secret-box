@@ -11,8 +11,8 @@
   for item in item_totals
     do (item) ->
       total += parseFloat(item.innerText, 100)
-  $('#net-total').text(total)
-  $('#total_price').val(total)
+  $('#net-total').text(total.toFixed(2))
+  $('#total_price').val(total.toFixed(2))
   
   
 @initialized_order_total = () ->

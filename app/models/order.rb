@@ -31,7 +31,7 @@ class Order < ActiveRecord::Base
     shipment = ServiceLookup.find_by_name(self.shippment)
     total += shipment.price
     
-    self.total_price = total
+    self.total_price = total.round(2)
   end
   
   def picture_size
