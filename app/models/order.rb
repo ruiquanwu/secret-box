@@ -50,12 +50,20 @@ class Order < ActiveRecord::Base
     self.picture_price * self.picture_number
   end
   
-  def trackable?
-    if self.status == "Shipped"
-      true
-    else
-      false
+  def update_number_in_stock
+    sample_album = self.album.sample_album
+    if sample_album.number_in_stock > 0
+      sample_album.number_in_stock -= 1
     end
+    sample_album.save
+  end
+  
+  def paid?
+    self.status.downcase != "submitted"
+  end
+  
+  def trackable?
+    self.status == "Shipped"
   end
   
   def tracking_link

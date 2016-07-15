@@ -55,10 +55,17 @@
           <td>Total Photos Remains:</td>
           <td><%= @album.remains_photos %></td>
         </tr>
+        <tr>
+          <td>Number of Album In Stock:</td>
+          <td><%= @album.sample_album.number_in_stock %></td>
+        </tr>
       </table>
     </div>
     
     <%= link_to "Order this Album", new_album_order_path(@album), class: "btn btn-success" %>
+    <% if @album.orders.count > 0 %>
+    <%= link_to "View Order", order_management_index_path, class: "btn btn-success" %>
+    <% end %>
   </div>
   </div>
   

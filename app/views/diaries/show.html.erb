@@ -1,8 +1,0 @@
-<h1>
-  <%= markdown_to_html @diary.title %>
-</h1>
-  <%= @diary.created_at.to_formatted_s(:long_ordinal)%>
-  <%= link_to "Edit", edit_diary_path(@diary), class: 'btn btn-success' %>
-<div class="diary_body">
-  <p><%= markdown_to_html @diary.body %></p>
-</div>

@@ -7,21 +7,15 @@ Rails.application.routes.draw do
   patch 'order_management/edit/:id', to: 'order_management#update'
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
-  resources :diaries
   
-  resources :sample_albums
-  resources :sample_pictures
-  resources :service_lookups
+  scope '/admin' do
+    resources :sample_albums, :sample_pictures, :service_lookups
+  end
   
 #  resources :user, only: :show
   
   resources :albums do
-   get 'show_json', defaults: { format: 'json' }
-    get 'test' => 'test#index'
-    member do
-      get 'order'
-    end
-    resources :orders do
+    resources :orders, shallow: true do 
       member do
         get 'checkout'
         post 'confirm'
@@ -33,7 +27,7 @@ Rails.application.routes.draw do
         patch 'update_photos'
       end
       member do
-        get 'crop'
+       # get 'crop'
         post 'insert'
         post 'append'
       end

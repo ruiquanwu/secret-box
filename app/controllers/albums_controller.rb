@@ -50,7 +50,11 @@ class AlbumsController < ApplicationController
   def destroy
     @album = Album.friendly.find(params[:id])
     authorize @album
-    @album.destroy
+    if @album.orders.count > 0
+      flash[:error] = "Cannot delete this album because There is at least one order associate with it."
+    else
+      @album.destroy
+    end
 
     respond_to do |format|
       format.html { redirect_to albums_path}

@@ -1,4 +1,4 @@
-      <%= form_for [@album, @order] do |f| %>
+     
       <div class="order-options">
         <h4> Select Order Options: </h4>
         <ul>
@@ -24,9 +24,4 @@
       </div>
       
       
-      <div class="order-btns text-right">
-        <%= f.submit "Checkout", class:"btn btn-success" %>
-        <%= link_to "Cancel", @album, class:"btn btn-danger" %>
-      </div>
       
-      <% end %>

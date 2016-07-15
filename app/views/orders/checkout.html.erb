@@ -8,15 +8,15 @@
     
     <div class="col-md-5">
               <div class="checkout-modify-links">
-          <%= link_to "Edit Order", edit_album_order_path(@album, @order), class: "btn btn-success" %>
-          <%= link_to "Cancel Order", album_order_path(@album, @order), class: "btn btn-danger", data: {confirm: "Are you sure?"}, method: :delete %>
+          <%= link_to "Edit Order", edit_order_path(@order), class: "btn btn-success" %>
+          <%= link_to "Cancel Order", @order, class: "btn btn-danger", data: {confirm: "Are you sure to cancel this order?"}, method: :delete %>
         </div>
       <%= render partial: "checkout_detail" %>
       
       <div class="checkout-checkout">
         
         <div class="row text-right">
-        <%= form_tag confirm_album_order_path do %>        
+        <%= form_tag confirm_order_path(@order) do %>        
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
           data-description="order album"

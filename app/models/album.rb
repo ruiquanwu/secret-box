@@ -6,7 +6,7 @@ class Album < ActiveRecord::Base
   has_many :photos, dependent: :destroy
   has_many :freephotos, dependent: :destroy
   has_many :pictures, dependent: :destroy
-  has_many :order
+  has_many :orders
   mount_uploader :avatar, AlbumAvatarUploader
   mount_uploader :album_layout, AlbumLayoutUploader
 
