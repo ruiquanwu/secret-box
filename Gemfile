@@ -71,6 +71,9 @@ gem 'friendly_id'
 # google auth
 gem "omniauth-google-oauth2"
 
+# facebook auth
+gem 'omniauth-facebook'
+
 gem 'fog'
 
 gem 'angularjs-rails'
