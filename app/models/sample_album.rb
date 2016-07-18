@@ -5,12 +5,21 @@ class SampleAlbum < ActiveRecord::Base
   
   
   def format_features
-    result = "<ul id='album_attrs'>"
+    result = "<ul id='album_attrs' class='list-group'>"
     features = self.features.split(';')
     features.each do |feature|
-      result += "<li id='album_attr'>" + feature + "</li>"
+      result += "<li id='album_attr' class='list-group-item'>" + feature + "</li>"
     end
     result += "</ul>"
+  end
+  
+  def self.format_features_array
+    ary = []
+    sample_albums = SampleAlbum.all
+    sample_albums.each do |sample_album|
+      ary << sample_album.format_features
+    end
+    ary
   end
   
   def specifications
@@ -26,19 +35,5 @@ class SampleAlbum < ActiveRecord::Base
     specifications
   end
   
-  def format_specifications
-    result = "<table class='table'>"
-    self.specifications.each_with_index do |(key, value), index|
-      if index%2 == 0
-        result += "<tr class='even-row'>"
-      else
-        result += "<tr class='odd-row'>"
-      end
-        result += "<td class='cell'>" + key.to_s + ":</td>"
-        result += "<td class='cell'>" + value.to_s + "</td>"
-        result += "</tr>"
-    end    
-    result += "</table>"
-  end
   
 end

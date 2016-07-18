@@ -69,10 +69,13 @@ gem 'rubyzip'
 gem 'friendly_id'
 
 # google auth
-gem "omniauth-google-oauth2"
+gem 'omniauth-google-oauth2'
 
 # facebook auth
 gem 'omniauth-facebook'
+
+# pass rails data to js
+gem 'gon'
 
 gem 'fog'
 

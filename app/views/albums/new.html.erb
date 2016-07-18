@@ -17,8 +17,7 @@
           <%= f.label :style, "Album Style:" %>
         </div>
         <div class="col-md-9 text-left form-input">
-          <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id, {'data-avatar'=>a.avatar, 'data-layout' => a.album_layout,
-            'data-description'=>a.description, 'data-features'=>a.format_features, 'data-specifications'=>a.format_specifications}]}) %>
+          <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name]}) %>
         </div>
       </div>
       <div class="row cover-preview">
@@ -31,7 +30,7 @@
         </div>
 
         <div class="col-md-4" id="album_cover_descption">
-          <h2 class="text-left album-summary-title">Description: </h2>
+          <h2 class="text-left album-summary-title">About this Album: </h2>
           <div>
             <p id='album_description' class="text-left"> <%= @default_sample_album.description %></p>
           </div>
@@ -54,7 +53,8 @@
       <div class="col-md-4 album_page_attrs">
         <h2 class="album-summary-title">Specifications: </h2>
         <div id="album_specifications">
-          <%= @default_sample_album.format_specifications.html_safe %>
+          <%= render partial: "specifications" %>
+
         </div>
       </div>
     </div>

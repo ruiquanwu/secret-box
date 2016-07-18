@@ -8,7 +8,7 @@ class CreateSampleAlbums < ActiveRecord::Migration
       t.integer :photo_per_page
       t.string :album_layout
       t.string :description
-      t.boolean :has_memo
+      t.string :has_memo
       t.integer :number_in_stock
       t.float :price
 

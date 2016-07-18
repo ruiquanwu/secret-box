@@ -42,15 +42,6 @@ ActiveRecord::Schema.define(version: 20160715155409) do
   add_index "albums", ["slug"], name: "index_albums_on_slug"
   add_index "albums", ["user_id"], name: "index_albums_on_user_id"
 
-  create_table "freephotos", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "picture"
-    t.integer  "album_id"
-  end
-
-  add_index "freephotos", ["album_id"], name: "index_freephotos_on_album_id"
-
   create_table "orders", force: :cascade do |t|
     t.string   "options"
     t.string   "shippment"
@@ -99,7 +90,7 @@ ActiveRecord::Schema.define(version: 20160715155409) do
     t.integer  "photo_per_page"
     t.string   "album_layout"
     t.string   "description"
-    t.boolean  "has_memo"
+    t.string   "has_memo"
     t.integer  "number_in_stock"
     t.float    "price"
     t.datetime "created_at",      null: false

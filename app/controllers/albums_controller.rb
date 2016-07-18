@@ -27,6 +27,8 @@ class AlbumsController < ApplicationController
   def new
     @album = Album.new
     @sample_albums  = SampleAlbum.all
+    gon.sample_albums = @sample_albums
+    gon.format_features_array = SampleAlbum.format_features_array
     @default_sample_album = @sample_albums.first
     authorize @album
   end
