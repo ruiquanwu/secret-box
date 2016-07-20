@@ -7,16 +7,15 @@
     
     <div class="col-md-5">
       <%= render partial: "order_detail" %>
-      
+            
       <%= form_for [@album, @order] do |f| %>
-      
-      <%= render partial: "order_option" %>
+        <%= render partial: "order_option", locals:{f: f} %>
       
       <div class="order-btns text-right">
         <%= f.submit "Checkout", class:"btn btn-success" %>
         <%= link_to "Cancel", @album, class:"btn btn-danger" %>
       </div>
-      <% end %>
+      <% end %>        
     </div>
   </div>
 

@@ -36,7 +36,7 @@ class ServiceLookupsController < ApplicationController
   end  
   
   def index
-    @services = ServiceLookup.all
+    @services = ServiceLookup.all.order(:categories)
     authorize @services
   end
   
@@ -50,6 +50,6 @@ class ServiceLookupsController < ApplicationController
   private
   
   def service_params
-    params.require(:service_lookup).permit(:name, :description, :price)
+    params.require(:service_lookup).permit(:name, :description, :price, :categories)
   end
 end

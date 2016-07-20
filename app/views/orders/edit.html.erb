@@ -9,7 +9,7 @@
       <%= render partial: "order_detail" %>
       
       <%= form_for @order do |f| %>
-      <%= render partial: "order_option" %>
+      <%= render partial: "order_option", locals:{f: f} %>
       
       <div class="order-btns text-right">
         <%= f.submit "Checkout", class:"btn btn-success" %>

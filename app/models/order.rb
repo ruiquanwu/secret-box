@@ -13,6 +13,15 @@ class Order < ActiveRecord::Base
     "#{self.user.name} Album #{self.album.name}"
   end
   
+  def display_options
+    options_hash = {}
+    options = ServiceLookup.where(categories: "option")
+    options.each do |option|
+      options_hash[option.name] = option.price
+    end
+    options_hash
+  end
+  
   def calculate_total
     total = 0
     # Album price
@@ -22,9 +31,10 @@ class Order < ActiveRecord::Base
     total += self.picture_total_price
     
     # Option price
-    if self.options.index("urgent-order-option")
-      urgent_order = ServiceLookup.find_by_name("urgent-order-option")
-      total += urgent_order.price
+    if self.options
+      self.options.each do |option|
+        total += ServiceLookup.find_by_name(option).price
+      end
     end
     
     # Shipment price

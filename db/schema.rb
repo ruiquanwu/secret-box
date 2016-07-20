@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715155409) do
+ActiveRecord::Schema.define(version: 20160718153939) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -113,7 +113,10 @@ ActiveRecord::Schema.define(version: 20160715155409) do
     t.float    "price"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "categories"
   end
+
+  add_index "service_lookups", ["categories"], name: "index_service_lookups_on_categories"
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false

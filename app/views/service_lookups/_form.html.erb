@@ -32,6 +32,17 @@
     </div>
   </div>
 
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.label :categories, "Service Type:" %>
+      </div>
+      <div class="col-md-10 text-left">
+        <%= f.select(:categories, ServiceLookup.Categories) %>
+      </div>
+    </div>
+  </div>
+
   <div class="text-left">
     <%= f.submit "Save", class: "btn btn-success" %>
     <%= link_to "Cancel", service_lookups_path, class: "btn btn-danger" %>

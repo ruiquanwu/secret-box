@@ -7,15 +7,28 @@ class OrdersController < ApplicationController
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
     
-    @urgent_option = ServiceLookup.find_by_name("urgent-order-option")
-    @standard_shipment = ServiceLookup.find_by_name("standard-shipment")
-    @express_shipment = ServiceLookup.find_by_name("express-shipment")
-    @nextday_shipment = ServiceLookup.find_by_name("nextday-shipment")
+    @options = ServiceLookup.where(categories: "option")
+    @shipments = ServiceLookup.where(categories: "shipment")
+    
+    # information to set option checkbox behavior in coffeescript
+    gon.options = @order.display_options
+    gon.option_id_prefix = [controller_name.classify.downcase, :options.to_s, ""].join("_")
+    
+    # information to set shipment radio in coffeescript
+    gon.shipments = @shipments
+    gon.shipment_id_prefix = [controller_name.classify.downcase, :shippment.to_s, ""].join("_")
+    #gon.controller = model_name
+    
+    @urgent_option = ServiceLookup.find_by_name("urgent-order")
+    @standard_shipment = ServiceLookup.find_by_name("standard")
+    @express_shipment = ServiceLookup.find_by_name("express")
+    @nextday_shipment = ServiceLookup.find_by_name("nextday")
   end
   
   def create
     @album = Album.friendly.find(params[:album_id])
     @sample_album = SampleAlbum.find(@album.style)
+    @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @order = Order.new(order_params)
     @order.album = @album
     authorize @order
@@ -39,10 +52,13 @@ class OrdersController < ApplicationController
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
     
-    @urgent_option = ServiceLookup.find_by_name("urgent-order-option")
-    @standard_shipment = ServiceLookup.find_by_name("standard-shipment")
-    @express_shipment = ServiceLookup.find_by_name("express-shipment")
-    @nextday_shipment = ServiceLookup.find_by_name("nextday-shipment")
+    @options = ServiceLookup.where(categories: "option")
+    @shipments = ServiceLookup.where(categories: "shipment")
+    
+    @urgent_option = ServiceLookup.find_by_name("urgent-order")
+    @standard_shipment = ServiceLookup.find_by_name("standard")
+    @express_shipment = ServiceLookup.find_by_name("express")
+    @nextday_shipment = ServiceLookup.find_by_name("nextday")
   end
   
   def update

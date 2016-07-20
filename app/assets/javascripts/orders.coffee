@@ -1,3 +1,29 @@
+@add_option_detail = (element) ->
+  option_id = element.id
+  option_name = element.value
+  table = $('#display-order-detail')[0]
+  total_row = table.rows.length
+  inserted_row = total_row - 2
+  option_row = table.insertRow(inserted_row)
+  option_row.setAttribute("id", "display_"+option_id)
+
+  option_name_cell = option_row.insertCell()
+  option_name_cell.innerText = option_name
+
+  option_qty_cell = option_row.insertCell()
+  option_qty_cell.innerText = 1
+  
+  option_price_cell = option_row.insertCell()
+  option_price_cell.innerText = "$" + gon.options[option_name].toFixed(2)
+
+  option_total_cell = option_row.insertCell()
+  option_total_cell.innerText = "$" + gon.options[option_name].toFixed(2) 
+  option_total_cell.setAttribute("class", "item-total")
+  
+@remove_option_detail = (element) ->
+  remove_id = "#display_" + element.id
+  $(remove_id).remove()
+
 @changeShipment = (element) ->
   name = element.getAttribute('data-name')
   price = element.getAttribute('data-price')
@@ -10,46 +36,26 @@
   total = 0
   for item in item_totals
     do (item) ->
-      total += parseFloat(item.innerText, 100)
+      total += parseFloat(item.innerText.replace('$',''), 100)
   $('#net-total').text(total.toFixed(2))
   $('#total_price').val(total.toFixed(2))
-  
-  
-@initialized_order_total = () ->
-  if $(".orders.new").length > 0 || $(".orders.edit").length > 0
-    if $('#option-urgent')[0].checked == true
-      $('#display-urgent-total').text($('#option-urgent')[0].getAttribute('data-price'))
-      $('#order-urgent').show()
-    if $('#express-shipment-radio')[0].checked == true
-      changeShipment($('#express-shipment-radio')[0])
-    if $('#standard-shipment-radio')[0].checked == true
-      changeShipment($('#standard-shipment-radio')[0])
-    if $('#nextday-shipment-radio')[0].checked == true
-      changeShipment($('#nextday-shipment-radio')[0])    
-    calculateTotal()
 
 $(document).on "page:change", ->
-  initialized_order_total()
-  
-  $('#express-shipment-radio').click ->
-    changeShipment(this)
-    calculateTotal()
-  
-  $('#standard-shipment-radio').click ->
-    changeShipment(this)
-    calculateTotal()
-
-  $('#nextday-shipment-radio').click ->
-    changeShipment(this)    
-    calculateTotal()
-    
-  $('#option-urgent').click ->
-    if this.checked == true
-      $('#display-urgent-total').text(this.getAttribute('data-price'))
-      $('#order-urgent').show()
+#$(".orders").ready -> 
+  #initialized_order_total()
+  for name of gon.options
+    option_id = '#'+gon.option_id_prefix+name
+    $(option_id).click ->
+      if this.checked
+        add_option_detail this
+      else
+        remove_option_detail this
       calculateTotal()
-    else
-      $('#display-urgent-total').text(0)
-      $('#order-urgent').hide()
+      
+  for shipment in gon.shipments
+    shipment_id = "#" + gon.shipment_id_prefix + shipment.name
+    #console.log(shipment_id)
+    $(shipment_id).click ->
+      changeShipment(this)
       calculateTotal()
-    
+  
