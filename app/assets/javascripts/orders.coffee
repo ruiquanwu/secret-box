@@ -39,23 +39,39 @@
       total += parseFloat(item.innerText.replace('$',''), 100)
   $('#net-total').text(total.toFixed(2))
   $('#total_price').val(total.toFixed(2))
-
-$(document).on "page:change", ->
-#$(".orders").ready -> 
-  #initialized_order_total()
+  
+@initialize = () ->
   for name of gon.options
     option_id = '#'+gon.option_id_prefix+name
-    $(option_id).click ->
-      if this.checked
-        add_option_detail this
-      else
-        remove_option_detail this
-      calculateTotal()
+    if $(option_id).is(":checked")
+      add_option_detail $(option_id)[0]
       
   for shipment in gon.shipments
     shipment_id = "#" + gon.shipment_id_prefix + shipment.name
-    #console.log(shipment_id)
-    $(shipment_id).click ->
-      changeShipment(this)
-      calculateTotal()
+      #console.log(shipment_id)
+    if $(shipment_id).is(":checked")
+      changeShipment $(shipment_id)[0] 
+  calculateTotal()      
+      
+$(document).on "page:change", ->
+#$(".orders").ready -> 
+  #initialized_order_total()
+  if $(".orders").length > 0
+    initialize()
+    for name of gon.options
+      option_id = '#'+gon.option_id_prefix+name
+      $(option_id).click ->
+        if this.checked
+          console.log this
+          add_option_detail this
+        else
+          remove_option_detail this
+        calculateTotal()
+      
+    for shipment in gon.shipments
+      shipment_id = "#" + gon.shipment_id_prefix + shipment.name
+      #console.log(shipment_id)
+      $(shipment_id).click ->
+        changeShipment(this)
+        calculateTotal()
   

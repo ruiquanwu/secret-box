@@ -1,23 +1,25 @@
       <div class="order-options">
         <h4> Select Options: </h4>
         <ul>
+          <% @options.each do |option|%>
           <div class="checkbox">
-            <% @options.each do |option|%>
-            <div class="checkbox">
             <%= f.check_box :options, {:multiple => true}, option.name, nil %>
             <%= option.name %>
-            </div>
-            <% end %>            
           </div>
+            <% end %>            
         </ul>
       </div>
       
       <div class="order-shippment">
         <h4>Select A Shipment Method:</h4>
         <ul>
-          <% @shipments.each do |shipment| %>
+          <% @shipments.each_with_index do |shipment, index| %>
           <div class="radio">
+            <% if index == 0 %>
+            <%= f.radio_button :shippment, shipment.name, data: {name: shipment.name, price: shipment.price}, checked: true %>
+            <% else %>
             <%= f.radio_button :shippment, shipment.name, data: {name: shipment.name, price: shipment.price} %>
+            <% end %>
             <%= shipment.name %> -- <%= shipment.price %>
           </div>
           

@@ -1,17 +1,17 @@
 <div class="container">
   <h2> Checkout </h2>
-  
   <div class="col-md-12 order-detail">
     <div class="col-md-7">
       <%= image_tag(@album.avatar.url) %>
     </div>
     
     <div class="col-md-5">
-              <div class="checkout-modify-links">
+      <%= render partial: "checkout_detail" %>
+      
+      <div class="checkout-modify-links">
           <%= link_to "Edit Order", edit_order_path(@order), class: "btn btn-success" %>
           <%= link_to "Cancel Order", @order, class: "btn btn-danger", data: {confirm: "Are you sure to cancel this order?"}, method: :delete %>
-        </div>
-      <%= render partial: "checkout_detail" %>
+      </div>
       
       <div class="checkout-checkout">
         

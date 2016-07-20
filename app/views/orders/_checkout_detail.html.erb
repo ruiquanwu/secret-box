@@ -16,12 +16,12 @@
           <td> $<%= @sample_picture.price %> </td>
           <td>$<span class="item-total"><%= @picture_total %></span></td>
         </tr>
-        <% if @order.options.index("urgent-order-option") %>
-        <tr id="order-urgent-option">
-          <td><%= @urgent_option.name %></td>
-          <td>1</td>
-          <td>$<%= @urgent_option.price %></td>
-          <td>$<span id="display-urgent-total" class="item-total"><%= @urgent_option.price %></span></td>
+        <% @order.options.each do |option|%>
+        <tr class="order-option">
+          <td><%= option %> </td>
+          <td> 1 </td>
+          <td>$ <%= ServiceLookup.PriceLookup(option) %> </td>
+          <td>$ <%= ServiceLookup.PriceLookup(option) %> </td>
         </tr>
         <% end %>
         <tr class="order-shipping">
@@ -30,10 +30,10 @@
           <td>$<span id="display-shipment-price"><%= @shipment.price %></span></td>
           <td>$<span id="display-shipment-total" class="item-total"><%= @shipment.price %></span></td>
         </tr>
-        <tr class="net-total">
+        <tr class="checkout-total">
           <td>Total Amount</td>
           <td></td>
           <td></td>
-          <td>$<span id="net-total"></span><%= @order.total_price %></td>
+          <td>$<span><%= @order.total_price %></span></td>
         </tr>
       </table>

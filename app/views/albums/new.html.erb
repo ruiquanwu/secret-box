@@ -18,7 +18,7 @@
           <%= f.label :style, "Album Style:" %>
         </div>
         <div class="col-md-9 text-left form-input">
-          <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name]}) %>
+          <%= f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id]}) %>
         </div>
       </div>
       <div class="row cover-preview">

@@ -9,7 +9,7 @@ class OrderManagementController < ApplicationController
   
   def admin_index
     authorize :order_management, :admin_index?
-    @orders = Order.all.paginate(page: params[:page], per_page: 5)
+    @orders = Order.all.paginate(page: params[:page], per_page: 10)
   end
   
   def edit

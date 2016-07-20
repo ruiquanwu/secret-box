@@ -19,29 +19,33 @@
   <div class="col-md-12 album-show">
   <div class="col-md-9 cover-page" >
     <%= link_to album_photos_path(@album), {title: "click to open album"} do %>
-      <%= image_tag(@album.avatar.url, class:"img-responsive") %>
+      <%= image_tag(@album.sample_album.avatar.url, class:"img-responsive") %>
     <% end %>
   </div>
 
   <div class="col-md-3">
     <div class="album-show-layout">
       <h4>Album Layout:</h4>
-      <%= image_tag(@album.album_layout.url, class:"img-responsive") %>
+      <%= image_tag(@album.sample_album.album_layout.url, class:"img-responsive") %>
     </div>
     <div class="album-status">
       <h4> Album Status: </h4>      
       <table class="table">
         <tr>
           <td>Maximum Page:</td>
-          <td><%= @album.max_page %></td>
+          <td><%= @album.sample_album.max_page %></td>
         </tr>
         <tr>
           <td>Maximum Photos:</td>
           <td><%= @album.max_photos %></td>
         </tr>
         <tr>
+          <td> Photos Orientation: </td>
+          <td> <%= @album.sample_album.orientation %> </td>
+        </tr>
+        <tr>
           <td>Photo Size:</td>
-          <td><%= @album.photo_size %></td>
+          <td><%= @album.sample_album.photo_size %></td>
         </tr>
         <tr>
           <td>Total Photos Uploaded:</td>

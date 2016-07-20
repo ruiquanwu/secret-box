@@ -30,7 +30,7 @@ class Album < ActiveRecord::Base
   end
   
   def max_photos
-    self.max_page * self.photo_per_page
+    self.sample_album.max_page * self.sample_album.photo_per_page
   end
   
   def photos_inserted

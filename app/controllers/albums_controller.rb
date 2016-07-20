@@ -11,10 +11,6 @@ class AlbumsController < ApplicationController
     end
 
   end
-
-  def front_cover
-    @album = Album.friendly.find(params[:id])
-  end
   
   def show
     @album = Album.friendly.find(params[:id])

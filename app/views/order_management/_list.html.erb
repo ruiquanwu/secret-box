@@ -17,7 +17,7 @@
         </div>
         
         <div class="col-md-3">
-          <% if order.paid? %>
+          <% if order.has_shpping_address? %>
           <div class="order-list-label">SHIP TO: <%= order.shipping_address.name %></div>
           <div class="order-list-content"><%= order.shipping_address.address_line1%></div>
           <div class="order-list-content"><%= order.shipping_address.city%>, <%= order.shipping_address.state%> <%= order.shipping_address.zipcode%></div>
@@ -70,7 +70,3 @@
       </div>
     </div>
   <% end %>
-  
-  <div class="col-md-12 text-center">
-    <%= will_paginate @orders %>
-  </div>

@@ -1,4 +1,5 @@
-class OrdersController < ApplicationController  
+class OrdersController < ApplicationController
+  before_action :setup_gon_variables
   def new
     @album = Album.friendly.find(params[:album_id])
     @order = @album.orders.new
@@ -6,23 +7,9 @@ class OrdersController < ApplicationController
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
-    
-    @options = ServiceLookup.where(categories: "option")
-    @shipments = ServiceLookup.where(categories: "shipment")
-    
-    # information to set option checkbox behavior in coffeescript
-    gon.options = @order.display_options
-    gon.option_id_prefix = [controller_name.classify.downcase, :options.to_s, ""].join("_")
-    
-    # information to set shipment radio in coffeescript
-    gon.shipments = @shipments
-    gon.shipment_id_prefix = [controller_name.classify.downcase, :shippment.to_s, ""].join("_")
+
     #gon.controller = model_name
-    
-    @urgent_option = ServiceLookup.find_by_name("urgent-order")
-    @standard_shipment = ServiceLookup.find_by_name("standard")
-    @express_shipment = ServiceLookup.find_by_name("express")
-    @nextday_shipment = ServiceLookup.find_by_name("nextday")
+
   end
   
   def create
@@ -33,9 +20,9 @@ class OrdersController < ApplicationController
     @order.album = @album
     authorize @order
     @order.user = current_user
-    
+
     # set order status to "submitted"
-    @order.status = "Submitted"
+    @order.status = "Pending"
     
     if @order.save
       redirect_to checkout_order_path(@order)
@@ -52,13 +39,6 @@ class OrdersController < ApplicationController
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
     
-    @options = ServiceLookup.where(categories: "option")
-    @shipments = ServiceLookup.where(categories: "shipment")
-    
-    @urgent_option = ServiceLookup.find_by_name("urgent-order")
-    @standard_shipment = ServiceLookup.find_by_name("standard")
-    @express_shipment = ServiceLookup.find_by_name("express")
-    @nextday_shipment = ServiceLookup.find_by_name("nextday")
   end
   
   def update
@@ -97,8 +77,6 @@ class OrdersController < ApplicationController
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
     @picture_total = @album.photos_inserted.count * @sample_picture.price
-    
-    @urgent_option = ServiceLookup.find_by_name("urgent-order-option")
     @shipment = ServiceLookup.find_by_name(@order.shippment)
   end
   
@@ -122,7 +100,7 @@ class OrdersController < ApplicationController
       state: params[:stripeShippingAddressState], city: params[:stripeShippingAddressCity], zipcode: params[:stripeShippingAddressZip])
     @shipping_address.order = @order    
     
-    @order.status = "Checkout"
+    @order.status = "Submitted"
     # update number of sample album in store
     @order.update_number_in_stock
     @order.save
@@ -145,5 +123,17 @@ class OrdersController < ApplicationController
   def shipping_address_params
     params.permit(:stripeShippingName, :stripeShippingAddressLine1, :stripeShippingAddressState, 
       :stripeShippingAddressCity, :stripeShippingAddressZip)
+  end
+  
+  def setup_gon_variables
+    @options = ServiceLookup.where(categories: "option")
+    @shipments = ServiceLookup.where(categories: "shipment")
+    # information to set option checkbox behavior in coffeescript
+    gon.options = Order.display_options
+    gon.option_id_prefix = [controller_name.classify.downcase, :options.to_s, ""].join("_")
+    
+    # information to set shipment radio in coffeescript
+    gon.shipments = @shipments
+    gon.shipment_id_prefix = [controller_name.classify.downcase, :shippment.to_s, ""].join("_")
   end
 end

@@ -17,10 +17,10 @@
           <td>$<span class="item-total"><%= @picture_total %></span></td>
         </tr>
         <tr class="order-shipping">
-          <td><span id="display-shipment-name"><%= @standard_shipment.name %></span></td>
+          <td><span id="display-shipment-name"><%= @shipments.first.name %></span></td>
           <td></td>
-          <td>$<span id="display-shipment-price"><%= @standard_shipment.price.round(2) %></span></td>
-          <td>$<span id="display-shipment-total" class="item-total"><%= @standard_shipment.price.round(2) %></span></td>
+          <td>$<span id="display-shipment-price"><%= @shipments.first.price.round(2) %></span></td>
+          <td>$<span id="display-shipment-total" class="item-total"><%= @shipments.first.price.round(2) %></span></td>
         </tr>
         <tr class="net-total">
           <td></td>

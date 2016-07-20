@@ -13,7 +13,7 @@ class Order < ActiveRecord::Base
     "#{self.user.name} Album #{self.album.name}"
   end
   
-  def display_options
+  def self.display_options
     options_hash = {}
     options = ServiceLookup.where(categories: "option")
     options.each do |option|
@@ -68,8 +68,8 @@ class Order < ActiveRecord::Base
     sample_album.save
   end
   
-  def paid?
-    self.status.downcase != "submitted"
+  def has_shpping_address?
+    self.shipping_address
   end
   
   def trackable?
@@ -79,7 +79,7 @@ class Order < ActiveRecord::Base
   def tracking_link
     if self.carrier.downcase == "ups"
       link = "https://www.ups.com/WebTracking/track?track=yes&trackNums=" + self.track_number
-    elsif self.carrier.downcase == "upsp"
+    elsif self.carrier.downcase == "usps"
       link = "https://tools.usps.com/go/TrackConfirmAction?tLabels=" + self.track_number
     else
       link = "#"
