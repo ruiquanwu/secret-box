@@ -1,0 +1,16 @@
+%h1
+  = @album.name
+%p Edit Photo
+= form_for [@album, @photo] do |f|
+  .row.photo-page
+    .col-md-2.memo
+      = f.label :memo, "Memo:"
+      = f.text_area :memo, size: "15x22"
+    .col-md-10.picture
+      = image_tag(@photo.picture.url, class: "img-responsive")
+  .form-group
+    = f.label :picture
+    = f.file_field :picture
+    = f.hidden_field :picture_cache
+  .form-group
+    = f.submit "Update", class: 'btn btn-success'

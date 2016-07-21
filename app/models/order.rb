@@ -57,7 +57,7 @@ class Order < ActiveRecord::Base
   end
   
   def picture_total_price
-    self.picture_price * self.picture_number
+    (self.picture_price * self.picture_number).round(2)
   end
   
   def update_number_in_stock

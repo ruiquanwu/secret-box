@@ -1,0 +1,52 @@
+%table.table
+  %tr
+    %h2 Order Details:
+  %th Item
+  %th Qty.
+  %th Price
+  %th Total
+  %tr.album_detail
+    %td= @sample_album.name
+    %td 1
+    %td
+      $#{@sample_album.price}
+    %td
+      $
+      %span.item-total= @sample_album.price
+  %tr.pictures_detail
+    %td
+      = @album.photo_size
+      photos
+    %td
+      = @album.photos_inserted.count
+    %td
+      $#{@sample_picture.price}
+    %td
+      $
+      %span.item-total= @order.picture_total_price 
+  - @order.options.each do |option|
+    %tr.order-option
+      %td
+        = option
+      %td 1
+      %td
+        $ #{ServiceLookup.PriceLookup(option)}
+      %td
+        $ #{ServiceLookup.PriceLookup(option)}
+  %tr.order-shipping
+    %td
+      %span#display-shipment-name= @shipment.name
+    %td 1
+    %td
+      $
+      %span#display-shipment-price= @shipment.price
+    %td
+      $
+      %span#display-shipment-total.item-total= @shipment.price
+  %tr.checkout-total
+    %td Total Amount
+    %td
+    %td
+    %td
+      $
+      %span= @order.total_price

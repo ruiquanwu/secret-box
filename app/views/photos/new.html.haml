@@ -1,0 +1,9 @@
+.container
+  %h1 Upload Photos
+  %p upload photos to the Photo-Box, and drag them to the album
+  = form_for [@album, @photo] do |f|
+    .form-group
+      = f.file_field :picture, multiple: true
+    .form-group.text-left
+      = f.submit "Upload", class: 'btn btn-success'
+      = link_to "Cancel", album_photos_path(@album), class: 'btn btn-danger'

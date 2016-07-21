@@ -1,0 +1,14 @@
+.container
+  %h2 Checkout
+  .col-md-12.order-detail
+    .col-md-7
+      = image_tag(@album.avatar.url)
+    .col-md-5
+      = render partial: "checkout_detail"
+      .checkout-modify-links
+        = link_to "Edit Order", edit_order_path(@order), class: "btn btn-success"
+        = link_to "Cancel Order", @order, class: "btn btn-danger", data: {confirm: "Are you sure to cancel this order?"}, method: :delete
+      .checkout-checkout
+        .row.text-right
+          = form_tag confirm_order_path(@order) do
+            %script.stripe-button{"data-amount" => "#{@order.total_price * 100}", "data-description" => "order album", "data-email" => "#{current_user.email}", "data-key" => "#{Rails.configuration.stripe[:publishable_key]}", "data-locale" => "auto", "data-shipping-address" => "true", "data-zip-code" => "true", :src => "https://checkout.stripe.com/checkout.js"}

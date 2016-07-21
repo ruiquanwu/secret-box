@@ -1,0 +1,38 @@
+.container
+  %h1 Manager Order Edit
+  .col-md-12
+    .col-md-4
+      = image_tag(@order.album.avatar, class: "img-responsive")
+    .col-md-4
+      %h3 Order Details:
+      %p
+        Album Total: $#{@order.total_price}
+      %p
+        Album Sample: #{@order.album.sample_album.name}
+      %p
+        Photos Size:"#{@order.album.photo_size}"
+      %p
+        Photos Count: #{@order.album.photos_inserted.count}
+      %div
+        Order Options:
+        %ul
+          - if @order.options
+            - @order.options.each do |option|
+              %li= option
+      %p
+        Shipment: #{@order.shippment}
+    .col-md-4
+      %h3 Updatable Features
+      = form_for(@order, url: order_management_edit_path(@order)) do |f|
+        = f.label :carrier
+        = f.text_field :carrier
+        = f.label :track_number
+        = f.text_field :track_number
+        = f.label :status
+        = f.select(:status, [["Pending", "Pending"], ["Submitted", "Submitted"], ["In Progress", "In Progress"], ["Shipped", "Shipped"], ["Delivered", "Delivered"]])
+        %p
+          Download Album Photos:
+          \#{link_to "Download Photos", order_management_download_path(@order), class: "btn btn-success"}
+        %p
+          = f.submit "Update", class: "btn btn-success"
+          = link_to "Cancel", order_management_admin_index_path, class: "btn btn-danger"

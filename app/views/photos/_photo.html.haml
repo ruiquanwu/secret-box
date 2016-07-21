@@ -1,0 +1,4 @@
+.col-md-9.landscape-picture{"data-album" => album.id, "data-photo"=>photo.id, "data-photo"=>photo.id, :ondrop =>"drop(event)", "ondragover" =>"allowDrop(event)" }
+  - if photo.picture
+    = image_tag(photo.picture.context.url, class: "img-responsive", id: "picture_id_" + photo.picture.id.to_s, "data-picture": photo.picture.id, |
+      draggable: "true", ondragstart: "drag(event)")                                                                                             

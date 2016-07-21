@@ -1,0 +1,18 @@
+.order-options
+  %h4 Select Options:
+  %ul
+    - @options.each do |option|
+      .checkbox
+        = f.check_box :options, {:multiple => true}, option.name, nil
+        = option.name
+.order-shippment
+  %h4 Select A Shipment Method:
+  %ul
+    - @shipments.each_with_index do |shipment, index|
+      .radio
+        - if index == 0
+          = f.radio_button :shippment, shipment.name, data: {name: shipment.name, price: shipment.price}, checked: true
+        - else
+          = f.radio_button :shippment, shipment.name, data: {name: shipment.name, price: shipment.price}
+        = shipment.name
+        \-- #{shipment.price}

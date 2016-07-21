@@ -1,0 +1,15 @@
+.row.album-page-body
+  .row.text-left{:style => "height: 40px"}
+    .col-md-8
+      = link_to "Edit", edit_album_photo_path(@album, photo), class: 'btn btn-success'
+      = link_to "Insert", insert_album_photo_path(@album, photo), class: 'btn btn-success'
+    .col-md-4.text-right
+      %p
+        Photo_Number:
+        \#{photo.photo_number}
+  .row.portrait-photo-page
+    .col-md-10.portrait-picture
+      = image_tag(photo.picture.portrait.url, class: "img-responsive")
+    .col-md-2.memo
+      %h3 Memo:
+      = photo.memo

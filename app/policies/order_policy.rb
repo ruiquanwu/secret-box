@@ -12,7 +12,7 @@ class OrderPolicy < ApplicationPolicy
   end
   
   def update?
-    @user == @record.album.user && @record.status.downcase == "submitted"
+    @user == @record.album.user && @record.status.downcase == "pending"
   end
   
   def destroy?

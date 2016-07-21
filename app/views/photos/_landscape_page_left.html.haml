@@ -1,0 +1,5 @@
+.row.album-page-body 
+  = render partial: 'photo_header', locals: {album: @album, photo: photo}
+  .row.landscape-photo-page
+    = render partial: 'photo', locals: {album: @album, photo: photo}
+    = render partial: 'memo', locals: {album: @album, photo: photo}

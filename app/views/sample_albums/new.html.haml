@@ -1,0 +1,8 @@
+.container
+  - if @sample_album.errors.any?
+    - @sample_album.errors.full_messages.each do |msg|
+      %ul
+        %li
+          = msg
+  %h1 Create New Sample Album
+  = render partial: 'form'

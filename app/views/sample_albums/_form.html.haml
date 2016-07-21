@@ -1,0 +1,82 @@
+= form_for @sample_album do |f|
+  .form-group
+    .row
+      .col-md-2
+        = f.label :name, "Album Name:"
+      .col-md-10.text-left
+        = f.text_field :name, class: 'form-control', placeholder: "enter album name"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :description, "Album Description:"
+      .col-md-10.text-left
+        = f.text_field :description, class: 'form-control', placeholder: "enter description"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :color, "Album Color:"
+      .col-md-10.text-left
+        = f.text_field :color, class: 'form-control', placeholder: "enter color"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :features, "Album Description:"
+      .col-md-10.text-left
+        = f.text_field :features, class: 'form-control', placeholder: "enter features, separated by ,"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :has_memo, "Has_memo:"
+      .col-md-10.text-left
+        = f.text_field :has_memo, class: 'form-control', placeholder: "enter yes or no"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :number_in_stock, "Number_in_stock:"
+      .col-md-10.text-left
+        = f.text_field :number_in_stock, class: 'form-control', placeholder: "enter number in stock"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :price, "Album Price:"
+      .col-md-10.text-left
+        = f.text_field :price, class: 'form-control', placeholder: "enter Album Price"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :max_page, "Max Page:"
+      .col-md-10.text-left
+        = f.text_field :max_page, class: 'form-control', placeholder: "enter max page"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :photo_per_page, "Photos Per Page:"
+      .col-md-10.text-left
+        = f.text_field :photo_per_page, class: 'form-control', placeholder: "enter photos per page"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :photo_size, "Photo Size:"
+      .col-md-10.text-left
+        = f.text_field :photo_size, class: 'form-control', placeholder: "enter photo size here"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :orientation, "Album Photo Orientation:"
+      .col-md-10.text-left
+        = f.text_field :orientation, class: 'form-control', placeholder: "enter photos orientation"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :avatar, "Album Avatar:"
+      .col-md-10.text-left
+        = f.file_field :avatar
+  .form-group
+    .row
+      .col-md-2
+        = f.label :album_layout, "Album Layout:"
+      .col-md-10.text-left
+        = f.file_field :album_layout
+  .text-left
+    = f.submit "Save", class: 'btn btn-success'
+    = link_to "Cancel", sample_albums_path, class: 'btn btn-danger'

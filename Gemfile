@@ -79,6 +79,9 @@ gem 'gon'
 
 gem 'fog'
 
+# haml
+gem 'haml-rails'
+
 gem 'angularjs-rails'
 
 group :production do

@@ -1,0 +1,16 @@
+.container
+  %h1
+    Sample Picture Lookup
+    \#{link_to "New Sample Picture", new_sample_picture_path, class: 'btn btn-success'}
+  %table.table
+    %tr
+      %th Picture Size
+      %th Picture Price
+      %th Action
+    - @sample_pictures.each do |sample_picture|
+      %tr
+        %td= sample_picture.size
+        %td= sample_picture.price
+        %td
+          = link_to "Edit", edit_sample_picture_path(sample_picture), class: "btn btn-success"
+          = link_to "Delete", sample_picture, method: :delete, data:{confirm: "are you sure?"}, class: "btn btn-danger"

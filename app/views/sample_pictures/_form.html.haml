@@ -1,0 +1,16 @@
+= form_for @sample_picture do |f|
+  .form-group
+    .row
+      .col-md-2
+        = f.label :size, "Picture Size:"
+      .col-md-10.text-left
+        = f.select :size, SamplePicture.Sizes
+  .form-group
+    .row
+      .col-md-2
+        = f.label :price, "Picture Price:"
+      .col-md-10.text-left
+        = f.text_field :price, class: 'form-control', placeholder: "enter picture price"
+  .text-left
+    = f.submit "Save", class: "btn btn-success"
+    = link_to "Cancel", sample_pictures_path, class: "btn btn-danger"

@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     authorize @order
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
-    @picture_total = @album.photos_inserted.count * @sample_picture.price
+    @picture_total = (@album.photos_inserted.count * @sample_picture.price).round(2)
 
     #gon.controller = model_name
 
@@ -37,7 +37,7 @@ class OrdersController < ApplicationController
     @album = @order.album
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
-    @picture_total = @album.photos_inserted.count * @sample_picture.price
+   # @picture_total = @album.photos_inserted.count * @sample_picture.price
     
   end
   
@@ -76,7 +76,6 @@ class OrdersController < ApplicationController
     @album = @order.album
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.photo_size)
-    @picture_total = @album.photos_inserted.count * @sample_picture.price
     @shipment = ServiceLookup.find_by_name(@order.shippment)
   end
   

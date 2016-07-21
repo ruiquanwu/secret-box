@@ -1,0 +1,12 @@
+.container
+  %h1 Edit Order
+  .col-md-12.order-detail
+    .col-md-7
+      = image_tag(@album.avatar.url)
+    .col-md-5
+      = render partial: "order_detail"
+      = form_for @order do |f|
+        = render partial: "order_option", locals:{f: f}
+        .order-btns.text-right
+          = f.submit "Checkout", class:"btn btn-success"
+          = link_to "Cancel", checkout_order_path(@order), class:"btn btn-danger"

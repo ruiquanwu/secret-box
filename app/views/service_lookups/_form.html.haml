@@ -1,0 +1,28 @@
+= form_for @service do |f|
+  .form-group
+    .row
+      .col-md-2
+        = f.label :name, "Service Name:"
+      .col-md-10.text-left
+        = f.text_field :name, class: 'form-control', placeholder: "enter service name"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :description, "Service Description:"
+      .col-md-10.text-left
+        = f.text_field :description, class: 'form-control', placeholder: "enter service description"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :price, "Service Price:"
+      .col-md-10.text-left
+        = f.text_field :price, class: 'form-control', placeholder: "enter service price"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :categories, "Service Type:"
+      .col-md-10.text-left
+        = f.select(:categories, ServiceLookup.Categories)
+  .text-left
+    = f.submit "Save", class: "btn btn-success"
+    = link_to "Cancel", service_lookups_path, class: "btn btn-danger"

@@ -1,0 +1,94 @@
+.album-background
+  .text-center
+    .headline
+      %h1.headline-title Tired of Instant Sharing?
+      %p.headline-subtitle Spend some time, make an album for the one you care.
+      %a.btn.btn-lg.btn-success{:href => "#"} Learn More
+.container.narrow
+  .about-header
+    %h2.about-title What's this All About？
+    %h4.about-description
+      Basically,This is the website we hope you to spend some time,
+      value the one you care about, putting effort on making them a physical photo album. This
+      is all about:
+  .row.text-center.about.section
+    .col-md-4
+      .about-icon
+        = image_tag(image_url("album-photo-icon"))
+      %h2.about-feature Old-Fashion photo album
+      %p.about-feature-description No instant sharing, no showing off, no fancy stuff.
+    .col-md-4
+      .about-icon
+        = image_tag(image_url("gift-icon"), class: "img-responsive")
+      %h2.about-feature Best Gift to give away
+      %p.about-feature-description Best Gift for Special day (Birthday, Valentine's Day, Anniversary)
+    .col-md-4
+      .about-icon
+        = image_tag(image_url("love-letter-icon"), class: "img-responsive")
+      %h2.about-feature Full of love and memories
+      %p.about-feature-description Feel the love and memories along the way
+.what-you-need
+  .container.narrow
+    .what-you-need-header
+      %h2.what-you-need-title What do you need?
+    .row.section
+      .what-you-need-list
+        .col-md-12
+          .col-md-2.list-icon
+            = image_tag(image_url("home-icon"))
+          .col-md-10
+            %h3.list-title Quiet Room
+            %p.list-description You will need quiet room so that you can focus on choosing your photos
+      .what-you-need-list
+        .col-md-12
+          .col-md-2.list-icon
+            = image_tag(image_url("time-icon"))
+          .col-md-10
+            %h3.list-title Some Time
+            %p.list-description Always plan some time for the best you can make
+      .what-you-need-list
+        .col-md-12
+          .col-md-2.list-icon
+            = image_tag(image_url("images-icon"))
+          .col-md-10
+            %h3.list-title Photos
+            %p.list-description Of course you need Photos, or what else can you put in to your album?
+.container.narrow
+  .how-it-works-header
+    %h2.how-it-works-title How it Works?
+    %p.how-it-works-description Simple, just follow the below four steps:
+  .row.how-it-works.section
+    .col-md-12
+      .how-it-works-step
+        .col-md-3.step-icon
+          = image_tag(image_url("user-group-icon"))
+          %h2.step-text Step1
+        .col-md-9
+          %h3.step-title Register or Login
+          %p.step-description you will need an account to begin and save your work.
+    .col-md-12
+      .how-it-works-step
+        .col-md-3.step-icon
+          = image_tag(image_url("album-step-icon"))
+          %h2.step-text Step2
+        .col-md-9
+          %h3.step-title Choose an Album to Start
+          %p.step-description you can choose different albums based on your need, all the albums are available online.
+    .col-md-12
+      .how-it-works-step
+        .col-md-3.step-icon
+          = image_tag(image_url("upload-icon"))
+          %h2.step-text Step3
+        .col-md-9
+          %h3.step-title Upload and place photos to album
+          %p.step-description Upload photos and drag them to the album, just like the way real photo album wroks.
+    .col-md-12
+      .how-it-works-step
+        .col-md-3.step-icon
+          = image_tag(image_url("order-form"))
+          %h2.step-text Step4
+        .col-md-9
+          %h3.step-title Submit your order or Keep it as reference
+          %p.step-description
+            After completing your album, you can either keep it as refrence and build the actual album yourself
+            or you can submit your order to us, and we will help you build the exact same album you have created.

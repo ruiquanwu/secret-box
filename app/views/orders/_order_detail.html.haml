@@ -1,0 +1,43 @@
+%table#display-order-detail.table
+  %tr
+    %h2 Order Details:
+  %th Item
+  %th Qty.
+  %th Price
+  %th Total
+  %tr.album_detail
+    %td= @sample_album.name
+    %td 1
+    %td
+      $#{@sample_album.price}
+    %td
+      $
+      %span.item-total= @sample_album.price.round(2)
+  %tr.pictures_detail
+    %td
+      = @album.photo_size
+      photos
+    %td
+      = @album.photos_inserted.count
+    %td
+      $#{@sample_picture.price}
+    %td
+      $
+      %span.item-total= @order.picture_total_price
+  %tr.order-shipping
+    %td
+      %span#display-shipment-name= @shipments.first.name
+    %td
+    %td
+      $
+      %span#display-shipment-price= @shipments.first.price.round(2)
+    %td
+      $
+      %span#display-shipment-total.item-total= @shipments.first.price.round(2)
+  %tr.net-total
+    %td
+    %td
+    %td
+    %td
+      $
+      %span#net-total

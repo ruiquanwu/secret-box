@@ -3,7 +3,7 @@ class AlbumsController < ApplicationController
   
   def index
     if current_user
-      @albums = current_user.albums.paginate(page: params[:page], per_page: 6)
+      @albums = current_user.albums.paginate(page: params[:page], per_page: 3)
       #authorize @albums
     else
       flash[:error] = "You must be logged in"

@@ -1,0 +1,68 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %title SecretAlbum
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Oswald", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Slabo+27px", :rel => "stylesheet", :type => "text/css"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Lora:700", :rel => "stylesheet", :type => "text/css"}/
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body{:class => "#{controller_name} #{action_name}"}
+    - if flash[:notice]
+      .alert.alert-success.text-center
+        %button.close{"data-dismiss" => "alert", :type => "button"} ×
+        = flash[:notice]
+    - elsif flash[:error]
+      .alert.alert-danger.text-center
+        %button.close{"data-dismiss" => "alert", :type => "button"} ×
+        = flash[:error]
+    - elsif flash[:alert]
+      .alert.alert-warning.text-center
+        %button.close{"data-dismiss" => "alert", :type => "button"} ×
+        = flash[:alert]
+    .navigation
+      .navbar-header
+        .navbar-brand
+          = link_to "SecretAlbum", root_url
+          - if current_user && current_user.admin?
+            .btn-group
+              %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :type => "button"}
+                Admin
+                %span.caret
+              %ul.dropdown-menu
+                %li= link_to "SampleAlbum", sample_albums_path
+                %li= link_to "SamplePicture", sample_pictures_path
+                %li= link_to "ServicesLookup", service_lookups_path
+                %li.divider{:role => "separator"}
+                %li= link_to "OrderManagement", order_management_admin_index_path
+      %ul.nav.navbar-nav.navbar-left
+        - if current_user
+          %li= link_to "Albums", albums_path
+      %ul.nav.navbar-nav.navbar-right
+        - if current_user
+          %li= link_to "My Orders", order_management_index_path
+          %li
+            %a
+              Hello #{current_user.name || current_user.email}!
+          %li
+            = link_to destroy_user_session_path, method: :delete do
+              %span.glyphicon.glyphicon-log-out
+              Logout
+        - else
+          %li
+            = link_to new_user_registration_path do
+              %span.glyphicon.glyphicon-user
+              Sign Up
+          %li
+            = link_to new_user_session_path do
+              %span.glyphicon.glyphicon-log-in
+              Login
+    = yield
+    .footer
+      %p.text-center.footer-text Copyright SecrectAlbum, Contact me at: ruiquanwu@gmail.com
+    = include_gon
