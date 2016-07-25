@@ -1,2 +1,4 @@
-%h1 Albums#edit
-%p Find me in app/views/albums/edit.html.erb
+.container
+  %h1 Edit Album
+  = render 'search_sample', url: edit_album_path(@album)
+  = render 'form', action: "Update", back_url: @album

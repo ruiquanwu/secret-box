@@ -8,12 +8,12 @@
       .col-md-4
         %p.album-index-album-name
           = album.name
-          
-        - if album.avatar.url
+
           = link_to album do
             .thumbnail
-              = image_tag(album.avatar.url, class: "img-responsive")
-        - else
-          = image_tag("http://placehold.it/270x270", class: "img-responsive")
+              = image_tag(album.sample_album.avatar.url, class: "img-responsive")
+
+        .well.well-sm.album-index-album-description
+          = album.description
     .col-md-12.text-center
       = will_paginate @albums

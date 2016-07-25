@@ -21,6 +21,16 @@
               %li= option
       %p
         Shipment: #{@order.shippment}
+      %p
+        - if @order.has_shpping_address?
+          .order-list-label
+            SHIP TO: #{@order.shipping_address.name}
+          .order-list-content= @order.shipping_address.address_line1
+          .order-list-content
+            = @order.shipping_address.city
+            , #{@order.shipping_address.state} #{@order.shipping_address.zipcode}
+        - else
+          no shipping address yet
     .col-md-4
       %h3 Updatable Features
       = form_for(@order, url: order_management_edit_path(@order)) do |f|

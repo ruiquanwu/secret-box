@@ -4,7 +4,6 @@ class Album < ActiveRecord::Base
   belongs_to :user
   belongs_to :sample_album
   has_many :photos, dependent: :destroy
-  has_many :freephotos, dependent: :destroy
   has_many :pictures, dependent: :destroy
   has_many :orders
   mount_uploader :avatar, AlbumAvatarUploader

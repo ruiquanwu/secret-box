@@ -1,0 +1,50 @@
+= form_for @album do |f|
+  - if @sample_albums.count > 0
+    .row.jumbotron#album-style-section
+      .col-md-12
+        = f.label :style, "Select an Album Style:"
+      .col-md-9.text-left.form-input
+        = f.select :style, options_for_select(@sample_albums.collect{ |a| [a.name, a.id]}), {}, {:class=>'selectpicker'}
+      .col-md-12
+        = f.label :style, "Cover Preview:"
+      .col-md-1
+      .col-md-6
+        = image_tag(@default_sample_album.avatar.url, class: "img-responsive thumbnail", id: "album_cover")
+      #album_cover_descption.col-md-4
+        %h2.text-left.album-summary-title About this Album:
+        %div
+          %p#album_description.text-left
+            = @default_sample_album.description
+        %h2.text-left.album-summary-title Features:
+        #album_features
+          = @default_sample_album.format_features.html_safe
+      .col-md-12
+        = f.label :style, "Layout Preview:"
+      .col-md-1
+      .col-md-6
+        = image_tag(@default_sample_album.album_layout.url, class: "img-responsive album_layout", id: "album_layout")
+      .col-md-4.album_page_attrs
+        %h2.album-summary-title Specifications:
+        #album_specifications
+          = render partial: "specifications"
+      .col-md-12
+        .pull-right
+          = link_to "Next", "#", class: 'btn btn-primary', id: "create-album-next"
+  - else
+    .well.well-sm
+      There is no Album sample match your search criteria.
+  .form-group.row.jumbotron#album-info-section
+    .col-md-12
+      = f.label :name, "Album Name:"
+    .col-md-9.text-left.form-input
+      = f.text_field :name, class: 'form-control', placeholder: "enter your album name here"
+    .col-md-12
+      = f.label :description, "Album Description:"
+    .col-md-9.text-left.form-input
+      = f.text_area :description, rows: '5', class: 'form-control', placeholder: "enter your album description here"
+    .col-md-12
+      .pull-right
+        = link_to "Previous", "#", class: 'btn btn-primary', id: "create-album-previous"
+  .row.new-album-btn.text-right#album-btn-section
+    = f.submit action, class: 'btn btn-success'
+    = link_to "Cancel", back_url, class: 'btn btn-danger'

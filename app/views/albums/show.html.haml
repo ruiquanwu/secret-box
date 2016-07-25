@@ -1,7 +1,7 @@
 .container
   %h1.text-center
     = @album.name
-    = link_to "Edit", "#", class: 'btn btn-success'
+    = link_to "Edit", edit_album_path, class: 'btn btn-success'
     = link_to "Delete", album_path(@album), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, |
     :method => :delete
   .row

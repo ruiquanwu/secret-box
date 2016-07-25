@@ -16,6 +16,10 @@ class SampleAlbumSearch < Lupa::Search
     def photo_per_page
       scope.where(photo_per_page: search_attributes[:photo_per_page])
     end
-    
   end
+  
+  def initialize(scope = SampleAlbum.all)
+    @scope = scope
+  end
+  
 end

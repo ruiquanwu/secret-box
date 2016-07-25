@@ -18,11 +18,32 @@ class AlbumsController < ApplicationController
   end
 
   def edit
+    @album = Album.friendly.find(params[:id])
+    @sample_albums = SampleAlbumSearch.search(sample_album_search_params).results
+    
+    gon.sample_albums = @sample_albums
+    gon.format_features_array = SampleAlbum.format_features_array
+    @default_sample_album = @sample_albums.first
+    authorize @album
+  end
+  
+  def update
+    @album = Album.friendly.find(params[:id])
+    @album.update_attributes(album_params)
+    @album.sample_album = SampleAlbum.find(@album.style)
+    if @album.save
+      flash[:notice] = "Album was updated."
+      redirect_to @album
+    else
+      flash[:error] = "Error updating Album."
+      render :edit
+    end
+      
   end
 
   def new
     @album = Album.new
-    @sample_albums = SampleAlbumSearch.new(SampleAlbum.all).search(sample_album_search_params).results
+    @sample_albums = SampleAlbumSearch.search(sample_album_search_params).results
     #@sample_albums  = SampleAlbum.all
     gon.sample_albums = @sample_albums
     gon.format_features_array = SampleAlbum.format_features_array
@@ -35,7 +56,7 @@ class AlbumsController < ApplicationController
     @album.user = current_user
     @sample_album = SampleAlbum.find(@album.style)
     @album.sample_album = @sample_album
-    @album.setAttributes(@sample_album)
+#    @album.setAttributes(@sample_album)
     authorize @album
     if @album.save
       flash[:notice] = "Album was saved."
@@ -63,7 +84,7 @@ class AlbumsController < ApplicationController
   private
 
   def album_params
-    params.require(:album).permit(:name, :style)
+    params.require(:album).permit(:name, :style, :description)
   end
 
   def album_manager_params

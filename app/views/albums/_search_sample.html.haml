@@ -1,5 +1,5 @@
 #album-search-section
-  = form_tag new_album_path, method: :get, class: "row jumbotron" do
+  = form_tag url, method: :get, class: "row jumbotron" do
     %h3  Search an Album Style
     %table.table.search
       %tr
@@ -26,4 +26,4 @@
           .center-block.pull-right
             = submit_tag :search, class: "btn btn-primary"
   .row.well.well-sm
-    = "Displaying Album Samples of #{@sample_albums.count} in total"
+    = "Displaying #{@sample_albums.count} Album Samples in total"
