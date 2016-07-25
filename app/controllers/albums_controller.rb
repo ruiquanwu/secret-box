@@ -22,7 +22,8 @@ class AlbumsController < ApplicationController
 
   def new
     @album = Album.new
-    @sample_albums  = SampleAlbum.all
+    @sample_albums = SampleAlbumSearch.new(SampleAlbum.all).search(sample_album_search_params).results
+    #@sample_albums  = SampleAlbum.all
     gon.sample_albums = @sample_albums
     gon.format_features_array = SampleAlbum.format_features_array
     @default_sample_album = @sample_albums.first
@@ -68,5 +69,9 @@ class AlbumsController < ApplicationController
   def album_manager_params
     params.require(:album).permit(:name, :style, :max_page, :photo_per_page, :color,
       :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo)
+  end
+  
+  def sample_album_search_params
+    params.permit(:max_page, :orientation, :photo_per_page, :has_memo, :number_in_stock, :price)
   end
 end

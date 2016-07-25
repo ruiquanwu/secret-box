@@ -1,0 +1,29 @@
+#album-search-section
+  = form_tag new_album_path, method: :get, class: "row jumbotron" do
+    %h3  Search an Album Style
+    %table.table.search
+      %tr
+        %td
+          .center-block Orientation:
+          = select_tag :orientation, options_for_select([["Landscape", "landscape"], ["Portrait", "portrait"]]), class: 'selectpicker', include_blank: ""
+        %td
+          .center-block
+            Memo Field:
+          = select_tag :has_memo, options_for_select([["Yes", "Yes"], ["No", "No"]]), class: 'selectpicker', include_blank: ""
+        %td
+          .center-block
+            Total Pages:
+          = select_tag :max_page, options_for_select([["50", 50], ["80", 80], ["200", 200]]), class: 'selectpicker', include_blank: ""
+        %td
+          .center-block
+            Photo Per Page:
+          = select_tag :photo_per_page, options_for_select([["2", 2], ["3", 3], ["4", 4]]), class: 'selectpicker', include_blank: ""
+      %tr
+        %td
+        %td
+        %td
+        %td
+          .center-block.pull-right
+            = submit_tag :search, class: "btn btn-primary"
+  .row.well.well-sm
+    = "Displaying Album Samples of #{@sample_albums.count} in total"

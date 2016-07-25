@@ -1,4 +1,5 @@
 class SampleAlbumsController < ApplicationController
+  
   def new
     @sample_album = SampleAlbum.new
     authorize @sample_album

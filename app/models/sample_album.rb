@@ -18,6 +18,8 @@ class SampleAlbum < ActiveRecord::Base
     sample_albums = SampleAlbum.all
     sample_albums.each do |sample_album|
       ary << sample_album.format_features
+      
+      
     end
     ary
   end

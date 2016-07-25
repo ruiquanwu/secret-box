@@ -82,6 +82,11 @@ gem 'fog'
 # haml
 gem 'haml-rails'
 
+# fliter and search
+gem 'lupa'
+
+gem 'bootstrap-select-rails'
+
 gem 'angularjs-rails'
 
 group :production do
