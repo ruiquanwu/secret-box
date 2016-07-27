@@ -36,7 +36,7 @@ class ServiceLookupsController < ApplicationController
   end  
   
   def index
-    @services = ServiceLookup.all.order(:categories)
+    @services = ServiceLookup.all.order(:categories).paginate(page: params[:page], per_page: 8)
     authorize @services
   end
   

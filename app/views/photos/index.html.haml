@@ -15,14 +15,14 @@
     %p You can drag and drop photo to Photo-Box
   
   - if @photos.current_page%2 == 1
-    .row.jumbotron.photo-page-right
+    .row.well.photo-page-right
       - @photos.each do |photo|
         - if @album.orientation == "landscape"
           = render 'landscape_page_right', :album => @album, :photo => photo
         - else
           = render 'portrait_page_right', :album => @album, :photo => photo
   - else
-    .row.jumbotron.photo-page-left
+    .row.well.photo-page-left
       - @photos.each do |photo|
         - if @album.orientation == "landscape"
           = render 'landscape_page_left', :album => @album, :photo => photo
@@ -30,6 +30,6 @@
           = render 'portrait_page_left', :album => @album, :photo => photo
 
   #page_links.text-center
-    = will_paginate @photos
+    = will_paginate @photos, renderer: BootstrapPagination::Rails
 .photo-box
   %button.btn.btn-info.photo-box-btn{:type => "button"} Photo-Box

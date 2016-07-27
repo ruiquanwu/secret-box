@@ -11,7 +11,7 @@
     %p any changes on your album after order is "In Progress" status may not change the actual order
     = render partial: "list"
     .col-md-12.text-center
-      = will_paginate @orders
+      = will_paginate @orders, renderer: BootstrapPagination::Rails
   - else
     %p Sorry, your don't have any order.
     %p

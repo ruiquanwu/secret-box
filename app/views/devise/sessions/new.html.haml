@@ -1,23 +1,28 @@
-%h2 Log in
-.row
-  .col-md-8
-    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      = devise_error_messages!
-      .form-group
-        = f.label :email
-        = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Enter email"
-      .form-group
-        = f.label :password
-        = f.password_field :password, class: 'form-control', placeholder: "Enter password"
-      .form-group
-        - if devise_mapping.rememberable?
-          = f.label :remember_me, class: 'checkbox' do
-            = f.check_box :remember_me
-            Remember me
-        = f.submit "Log in", class: 'btn btn-success'
-      .form-group
-        = render "devise/shared/links"
-.fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
+.container.sign-in
+  %h2 Log in
+  = render "devise/shared/social_network", action: "Log in"
+  .row
+    %h4 or do it in old-fashion way...
+    .col-md-8
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = devise_error_messages!
+        .form-group
+          = f.label :email
+          = f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Enter email"
+        .form-group
+          = f.label :password
+          = f.password_field :password, class: 'form-control', placeholder: "Enter password"
+        .form-group
+          - if devise_mapping.rememberable?
+            .checkbox
+              = f.label :remember_me, class: 'checkbox' do
+                = f.check_box :remember_me
+                Remember me
+          = f.submit "Log in", class: 'btn btn-success'
+        .form-group
+          = render "devise/shared/links"
+  
+  .fb-like{"data-share" => "true", "data-show-faces" => "true", "data-width" => "450"}
 :javascript
   window.fbAsyncInit = function() {
     FB.init({

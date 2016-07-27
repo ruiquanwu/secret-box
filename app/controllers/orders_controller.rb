@@ -5,7 +5,7 @@ class OrdersController < ApplicationController
     @order = @album.orders.new
     authorize @order
     @sample_album = SampleAlbum.find(@album.style)
-    @sample_picture = SamplePicture.find_by_size(@album.photo_size)
+    @sample_picture = SamplePicture.find_by_size(@album.sample_album.photo_size)
     @picture_total = (@album.photos_inserted.count * @sample_picture.price).round(2)
 
     #gon.controller = model_name
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   def create
     @album = Album.friendly.find(params[:album_id])
     @sample_album = SampleAlbum.find(@album.style)
-    @sample_picture = SamplePicture.find_by_size(@album.photo_size)
+    @sample_picture = SamplePicture.find_by_size(@album.sample_album.photo_size)
     @order = Order.new(order_params)
     @order.album = @album
     authorize @order
@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
     authorize @order
     @album = @order.album
     @sample_album = SampleAlbum.find(@album.style)
-    @sample_picture = SamplePicture.find_by_size(@album.photo_size)
+    @sample_picture = SamplePicture.find_by_size(@album.sample_album.photo_size)
    # @picture_total = @album.photos_inserted.count * @sample_picture.price
     
   end
@@ -75,7 +75,7 @@ class OrdersController < ApplicationController
     authorize @order
     @album = @order.album
     @sample_album = SampleAlbum.find(@album.style)
-    @sample_picture = SamplePicture.find_by_size(@album.photo_size)
+    @sample_picture = SamplePicture.find_by_size(@album.sample_album.photo_size)
     @shipment = ServiceLookup.find_by_name(@order.shippment)
   end
   

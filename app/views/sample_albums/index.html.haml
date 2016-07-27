@@ -37,4 +37,4 @@
             Price: #{album.price}
           %p
             Number in stock: #{album.number_in_stock}
-  = will_paginate @sample_albums
+  = will_paginate @sample_albums, renderer: BootstrapPagination::Rails

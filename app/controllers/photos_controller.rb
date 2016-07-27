@@ -3,7 +3,7 @@ class PhotosController < ApplicationController
   def index
     @album = Album.friendly.find(params[:album_id])
     authorize @album
-    @photos = @album.photos.paginate(page: params[:page], per_page: @album.photo_per_page)
+    @photos = @album.photos.paginate(page: params[:page], per_page: @album.sample_album.photo_per_page)
     @pictures = @album.pictures.where(:photo => nil).all#.limit(10)
     
     respond_to do |format|

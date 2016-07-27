@@ -1,27 +1,28 @@
 .container
   %h1 Admin Orders Management
-  %table.table
-    %th Album Name
-    %th Album Sample
-    %th Order Place
-    %th Order Status
-    %th Order Price
-    %th User Name
-    %th User Email
-    %th Action
+  .table-responsive
+    %table.table
+      %th Album Name
+      %th Album Sample
+      %th Order Place
+      %th Order Status
+      %th Order Price
+      %th User Name
+      %th User Email
+      %th Action
       
-    - @orders.each do |order|
-      %tr
-        %td= order.album.name
-        %td= order.album.sample_album.name
-        %td= local_time(order.created_at)
-        %td= order.status
-        %td
-          $#{order.total_price}
-        %td= order.user.name
-        %td= order.user.email
-        %td
-          = link_to "Edit", order_management_edit_path(order), class: "btn btn-success"
-          = link_to "ViewAlbum", album_path(order.album), class: "btn btn-success"
+      - @orders.each do |order|
+        %tr
+          %td= order.album.name
+          %td= order.album.sample_album.name
+          %td= local_time(order.created_at)
+          %td= order.status
+          %td
+            $#{order.total_price}
+          %td= order.user.name
+          %td= order.user.email
+          %td
+            = link_to "Edit", order_management_edit_path(order), class: "btn btn-success"
+            = link_to "ViewAlbum", album_path(order.album), class: "btn btn-success"
   .col-md-12.text-center
-    = will_paginate @orders
+    = will_paginate @orders, renderer: BootstrapPagination::Rails

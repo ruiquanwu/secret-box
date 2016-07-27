@@ -1,29 +1,25 @@
 #album-search-section
-  = form_tag url, method: :get, class: "row jumbotron" do
+  = form_tag url, method: :get, class: "row well" do
     %h3  Search an Album Style
-    %table.table.search
-      %tr
-        %td
-          .center-block Orientation:
+    .row.search
+      .col-md-3
+        .center-block 
+          Orientation:
           = select_tag :orientation, options_for_select([["Landscape", "landscape"], ["Portrait", "portrait"]]), class: 'selectpicker', include_blank: ""
-        %td
-          .center-block
-            Memo Field:
-          = select_tag :has_memo, options_for_select([["Yes", "Yes"], ["No", "No"]]), class: 'selectpicker', include_blank: ""
-        %td
-          .center-block
-            Total Pages:
-          = select_tag :max_page, options_for_select([["50", 50], ["80", 80], ["200", 200]]), class: 'selectpicker', include_blank: ""
-        %td
-          .center-block
-            Photo Per Page:
+      .col-md-3
+        .center-block
+          Memo Field:
+        = select_tag :has_memo, options_for_select([["Yes", "Yes"], ["No", "No"]]), class: 'selectpicker', include_blank: ""
+      .col-md-3
+        .center-block
+          Total Pages:
+        = select_tag :max_page, options_for_select([["50", 50], ["80", 80], ["200", 200]]), class: 'selectpicker', include_blank: ""
+      .col-md-3
+        .center-block
+          Photo Per Page:
           = select_tag :photo_per_page, options_for_select([["2", 2], ["3", 3], ["4", 4]]), class: 'selectpicker', include_blank: ""
-      %tr
-        %td
-        %td
-        %td
-        %td
-          .center-block.pull-right
-            = submit_tag :search, class: "btn btn-primary"
+      .col-md-11
+        .center-block.pull-right
+          = submit_tag :search, class: "btn btn-primary search-btn"
   .row.well.well-sm
     = "Displaying #{@sample_albums.count} Album Samples in total"

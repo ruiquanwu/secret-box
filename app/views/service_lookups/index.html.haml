@@ -2,18 +2,21 @@
   %h1
     Service Price Lookups
     \#{link_to "New Service", new_service_lookup_path, class: "btn btn-success"}
-  %table.table
-    %th Name
-    %th Description
-    %th Price
-    %th Categories
-    %th Action
-    - @services.each do |service|
-      %tr
-        %td= service.name
-        %td= service.description
-        %td= service.price
-        %td= service.categories
-        %td
-          = link_to "Edit", edit_service_lookup_path(service), class: "btn btn-success"
-          = link_to "Delete", service, data: {confirm:"are you sure?"}, class: "btn btn-danger", method: :delete
+  .table-responsive
+    %table.table
+      %th Name
+      %th Description
+      %th Price
+      %th Categories
+      %th Action
+      - @services.each do |service|
+        %tr
+          %td= service.name
+          %td= service.description
+          %td= service.price
+          %td= service.categories
+          %td
+            = link_to "Edit", edit_service_lookup_path(service), class: "btn btn-success"
+            = link_to "Delete", service, data: {confirm:"are you sure?"}, class: "btn btn-danger", method: :delete
+  .text-center          
+    = will_paginate @services, renderer: BootstrapPagination::Rails

@@ -52,6 +52,11 @@
   margin-right: 20px;
 }
 
+.navbar {
+  border-radius: 0px;
+  margin-bottom: 0px;
+}
+
 .navbar-header {
   margin-left: 20px;
 }
@@ -65,4 +70,22 @@
 .footer-text {
   color: white;
   padding: 15px;
+}
+
+.sign-in {
+  max-width: 600px;
+}
+
+.connect-with-socials {
+  padding: 50px 0 30px;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.social-icon {
+  width: 40px;
+}
+
+.social-text {
+  margin-left: 20px;
 }

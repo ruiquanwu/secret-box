@@ -1,6 +1,6 @@
 = form_for @album do |f|
   - if @sample_albums.count > 0
-    .row.jumbotron#album-style-section
+    .row.well#album-style-section
       .col-md-12
         = f.label :style, "Select an Album Style:"
       .col-md-9.text-left.form-input
@@ -33,7 +33,7 @@
   - else
     .well.well-sm
       There is no Album sample match your search criteria.
-  .form-group.row.jumbotron#album-info-section
+  .form-group.row.well#album-info-section
     .col-md-12
       = f.label :name, "Album Name:"
     .col-md-9.text-left.form-input
@@ -43,8 +43,9 @@
     .col-md-9.text-left.form-input
       = f.text_area :description, rows: '5', class: 'form-control', placeholder: "enter your album description here"
     .col-md-12
-      .pull-right
+      .pull-left
         = link_to "Previous", "#", class: 'btn btn-primary', id: "create-album-previous"
+       
   .row.new-album-btn.text-right#album-btn-section
     = f.submit action, class: 'btn btn-success'
     = link_to "Cancel", back_url, class: 'btn btn-danger'

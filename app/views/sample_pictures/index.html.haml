@@ -14,3 +14,6 @@
         %td
           = link_to "Edit", edit_sample_picture_path(sample_picture), class: "btn btn-success"
           = link_to "Delete", sample_picture, method: :delete, data:{confirm: "are you sure?"}, class: "btn btn-danger"
+          
+  .text-center
+    = will_paginate @sample_pictures, renderer: BootstrapPagination::Rails

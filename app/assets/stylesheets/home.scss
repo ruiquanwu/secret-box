@@ -1,9 +1,14 @@
+@media screen and (min-width: 750px) {
+  .album-background {
+    height: 100vh;
+  }
+}
+
 .album-background {
   border: 1px solid black;
   background: image-url("layout.jpg");
   background-size: cover;
   width: 100%;
-  height: 100vh;
 }
 
 .narrow {

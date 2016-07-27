@@ -6,11 +6,12 @@
     :method => :delete
   .row
     .col-md-2.text-right
-      %span Complete Percentage:
+      %span Album Progress:
     .col-md-8
-      .album-show-progress-container
-        .album-show-progress-bar{:style => "width: #{@album.progress_percentage}; background: #{@album.progress_background}"}
-          .text-center.progress-text= @album.progress_percentage
+      - if @album.progress_percentage.to_f < 50     
+        = render "progress_bar", type: "danger"
+      - else
+        = render "progress_bar", type: "success"
   .col-md-12.album-show
     .col-md-9.cover-page
       = link_to album_photos_path(@album), {title: "click to open album"} do

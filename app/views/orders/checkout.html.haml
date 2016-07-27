@@ -2,7 +2,7 @@
   %h2 Checkout
   .col-md-12.order-detail
     .col-md-7
-      = image_tag(@album.avatar.url)
+      = image_tag(@album.sample_album.avatar.url, class: "img-responsive")
     .col-md-5
       = render partial: "checkout_detail"
       .checkout-modify-links

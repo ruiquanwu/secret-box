@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
   end
   
   def picture_size
-    self.album.photo_size
+    self.album.sample_album.photo_size
   end
   
   def picture_price

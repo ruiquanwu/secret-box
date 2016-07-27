@@ -1,0 +1,4 @@
+.progress
+  .progress-bar.progress-bar-striped{"class" => "progress-bar-#{type}" ,"role" => "progressbar", "aria-valuenow" => "#{@album.progress_percentage}", |
+  "aria-valuemin" => "0", "aria-valuemax" => "100", "style" => "width: #{@album.progress_percentage}"}
+    = @album.progress_percentage
