@@ -1,5 +1,5 @@
 .album-page-body
-  = render 'photo_header', :album => @album, :photo => photo
-  .landscape-photo-page
+  /= render 'photo_header', :album => @album, :photo => photo
+  .row.row-eq-height.landscape-photo-page
     = render 'memo', :album => @album, :photo => photo
     = render 'photo', :album => @album, :photo => photo

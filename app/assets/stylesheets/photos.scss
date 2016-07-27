@@ -1,16 +1,23 @@
+.album-page-body {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .album-photos-index {
   max-width: 900px;
 }
 
-.equal-height{
-    display: table-row; 
-    table-layout: fixed;
+.row-eq-height{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .memo {
   word-wrap: break-word;
   border: 1px solid black;
-  width: 100%;
+  height: 100%;
 }
 
 #edit_memo {
@@ -21,8 +28,6 @@
 .memo_body {
   background: #eeeeee;
   width: 100%;
-  height: 70%;
-  overflow:hidden;
 }
 
 .landscape-picture {
@@ -82,7 +87,7 @@ span.glyphicon {
 
 .right-panel {
   position: fixed;
-  right: 50px;
+  right: 15px;
   bottom: 20px;
   width: 20%;
   height: 80%;

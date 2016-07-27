@@ -18,6 +18,20 @@
 @import "bootstrap";
 @Import 'bootstrap-select';
 
+
+@media (max-width: $screen-xs) {
+  .memo_body {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: $screen-md) {
+  .memo_body {
+    font-size: 40px;
+  }
+}
+
+
 .center {
     width: 100%;
     margin: 0 auto;

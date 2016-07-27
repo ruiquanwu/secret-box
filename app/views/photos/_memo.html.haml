@@ -1,5 +1,4 @@
-.col-md-2.col-xs-2.equal-height
+.col-md-3.col-xs-3
   .memo{"data-album-id" => album.id, "data-photo-id" => photo.id}
     %h5 Memo:
-    %textarea.memo_body{:id => "photo_memo_" + photo.id.to_s,  :col =>"16", :row =>"8"}
-      #{photo.memo}
+    %textarea.memo_body{:id => "photo_memo_" + photo.id.to_s, :rows => "6"} #{photo.memo}
