@@ -7,11 +7,11 @@
       = link_to "Save Album", album_photos_path+"?page="+"#{@photos.current_page}", class: 'btn btn-success', id: 'update_photos', remote: true
     %p
       current page: #{@photos.current_page}
-  .row.right-panel{:ondragover => "allowDrop(event)", :ondrop => "drop(event)"}
+  .row.right-panel
     %button.btn.btn-info.photo-box-btn{:type => "button"} Photo-Box
-    .photo-box-content
+    .photo-box-content.droppable-photo
       - @pictures.each do |picture|
-        = image_tag(picture.context.url, class: "img-responsive", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id, draggable: "true", ondragstart: "drag(event)")
+        = image_tag(picture.context.url, class: "img-responsive draggable-photo", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
     %p You can drag and drop photo to Photo-Box
   
   - if @photos.current_page%2 == 1

@@ -1,3 +1,18 @@
 %h1
   Welcome back #{current_user.name || current_user.email}!
   %h1
+
+.container
+  %p#test-drag Drag me around
+  
+  .drag class drop1
+  
+  .drag class drop2
+
+  #drop-zone
+    .well#test-drop1
+      %p drop here 1
+    .well#test-drop2
+      %p drop here 2
+    
+    
