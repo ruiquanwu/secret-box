@@ -23,12 +23,38 @@
   .memo_body {
     font-size: 14px;
   }
+  
+  .photo-box-content {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: auto;
+  }
+  
+  .right-panel img {
+    width: 50%;
+  }
+  
 }
 
 @media (min-width: $screen-md) {
   .memo_body {
     font-size: 40px;
   }
+  .right-panel {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 20%;
+    height: 80%;
+  }
+  
+  .right-panel img {
+    width: 80%;
+  }
+}
+
+.md-scroll-mask {
+  position: initial;
 }
 
 

@@ -68,7 +68,7 @@ class PhotosController < ApplicationController
 
   def update_photos
     params[:updates_params].each do |(key,update_params)|
-      @album = Album.friendly.find(update_params[:album_id])
+      @album = Album.find(update_params[:album_id])
       @photo = Photo.find(update_params[:photo_id])
       authorize @photo
       if update_params[:picture_id] == "0"

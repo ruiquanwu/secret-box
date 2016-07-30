@@ -86,19 +86,13 @@ span.glyphicon {
 }
 
 .right-panel {
-  position: fixed;
-  right: 15px;
-  bottom: 20px;
-  width: 20%;
-  height: 80%;
   border: 1px solid black;
-  display: none;
   background: #eeeeee;
 }
 
 .photo-box-content {
   height: 85%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .photo-box-footer {
@@ -107,10 +101,8 @@ span.glyphicon {
 }
 
 .right-panel img {
-  width: 50%;
-  padding: 10px;
   display: inline;
-  float: left;
+  padding: 10px;
 }
 
 .photo-box {
@@ -118,11 +110,15 @@ span.glyphicon {
   height: 30px;
   margin-bottom: 0;
   bottom: 0;
-  right: 50px;
+  right: 30px;
   position: fixed;
 }
 
 .photo-box-btn {
   width: 100%;
-  color: white;
+  display: none;
+}
+
+.photo-box-top-btn {
+  width: 100%;
 }
