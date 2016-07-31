@@ -3,15 +3,14 @@
 $(document).on "page:change", ->
   # all the img including album photos and photo-box-photos are draggable
   $('.draggable-photo').draggable
-    containment: "body"
     revert: true
     helper: 'clone'
     zIndex: 200
     start: (event, ui) ->
       # set the image size when dragging base on the screen size
       if $(window).width() > 992
-        width = 264
-        height =  176
+        width = 240
+        height =  160
       else
         width = 150
         height = 100
@@ -37,12 +36,16 @@ $(document).on "page:change", ->
       
       drag.style["width"] = ""
       drag.style["height"] = ""
+
       # append image to div if not image exist
       if childNode == 0
+          # update photo-box number drag targer is from photo box
+        if this.className != ui.draggable[0].parentElement.className
+          $('#badge-top').html(parseInt($('#badge-top').html()) - 1)
+          $('#badge-bottom').html($('#badge-top').html())
         this.appendChild ui.draggable[0]
         # update photo box photos number count
-        $('#badge-top').html(parseInt($('#badge-top').html()) - 1)
-        $('#badge-bottom').html(parseInt($('#badge-bottom').html()) - 1)
+
         
       # swap images
       else
@@ -59,11 +62,12 @@ $(document).on "page:change", ->
       ui.draggable[0].style["width"] = ""
       ui.draggable[0].style["height"] = ""
       
-      #console.log event.target
-      #console.log ui.draggable[0].parentElement#.parentNode.parentElement
+      if this.className != ui.draggable[0].parentElement.className
+        $('#badge-top').html(parseInt($('#badge-top').html()) + 1)
+        $('#badge-bottom').html($('#badge-top').html())
+        # prevent self container append
+        this.appendChild ui.draggable[0]
 
-      # prevent self container append
-      this.appendChild ui.draggable[0]
     #  $('#badge-top').html(parseInt($('#badge-top').html()) + 1)
    #   $('#badge-bottom').html(parseInt($('#badge-bottom').html()) + 1)
   
