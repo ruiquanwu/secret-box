@@ -21,6 +21,8 @@ Rails.application.routes.draw do
         post 'confirm'
       end
     end
+
+    resources :pictures
     
     resources :photos do # :defaults => {:format => 'json'}
       collection do

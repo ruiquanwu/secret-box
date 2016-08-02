@@ -96,6 +96,9 @@ gem 'angularjs-rails'
 # enable drag and drop in mobile
 gem 'touchpunch-rails'
 
+# file upload and progress bar
+gem "jquery-fileupload-rails"
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

@@ -10,14 +10,14 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require jquery.jcrop
+ *= require jquery.fileupload
+ *= require jquery.fileupload-ui
  *= require_self
  *= require_tree .
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @Import 'bootstrap-select';
-
 
 @media (max-width: $screen-xs) {
   .memo_body {
@@ -34,6 +34,7 @@
   
   .right-panel img {
     width: 50%;
+    display: inline;
   }
   
 }

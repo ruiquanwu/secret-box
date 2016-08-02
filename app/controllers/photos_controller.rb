@@ -20,6 +20,7 @@ class PhotosController < ApplicationController
   def new
     @album = Album.friendly.find(params[:album_id])
     @photo = @album.photos.new
+    @picture = Picture.new
     authorize @photo
   end
 
@@ -32,23 +33,22 @@ class PhotosController < ApplicationController
     end
 
     # Create new Picture for every uploaded file
-    params[:photo][:picture].each do |picture|
+#params[:photo][:picture].each do |picture|
       #@photo_in_panel = Photo.new(:picture => picture)
-      @picture = Picture.new(:context => picture)
-      @picture.album = @album
+    #raise params
+    @picture = Picture.new(:context => params[:picture][:context])
+    @picture.album = @album
       # create new photo in album if there are more pictures
-      if @picture.save
-        if  @album.photos.count < @album.pictures.count
-
-          @photo = Photo.new
-          @photo.album = @album
-          authorize @photo
-          @photo.photo_number = @album.photos.count + 1
-          @photo.save
-        end
-      else
-        render :new
+    if @picture.save
+      if  @album.photos.count < @album.pictures.count
+        @photo = Photo.new
+        @photo.album = @album
+        authorize @photo
+        @photo.photo_number = @album.photos.count + 1
+        @photo.save
       end
+    else
+      render :new
     end
     redirect_to album_photos_path+"?page="+ (@render_page.to_f/@album.photo_per_page).ceil.to_s
 
@@ -161,4 +161,5 @@ class PhotosController < ApplicationController
     params.require(:photo).permit(:memo, :picture, 
       :picture_crop_x, :picture_crop_y, :picture_crop_w, :picture_crop_h)
   end
+ 
 end

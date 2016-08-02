@@ -15,6 +15,8 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery.ui.touch-punch
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require jquery_ujs
 //= require angular
 //= require angular-resource

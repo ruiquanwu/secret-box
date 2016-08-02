@@ -3,7 +3,7 @@
     %h1
       = @album.name
       = link_to "Album Summary", @album, class: 'btn btn-success'
-      = link_to "Upload Photos", new_album_photo_path, class: 'btn btn-success'
+      = link_to "Upload Photos", new_album_picture_path, class: 'btn btn-success'
       = link_to "Save Album", album_photos_path+"?page="+"#{@photos.current_page}", class: 'btn btn-success', id: 'update_photos', remote: true
     %p
       current page: #{@photos.current_page}
