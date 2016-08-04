@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
          :omniauthable, :omniauth_providers => [:google_oauth2, :facebook]
   has_many :diaries
   has_many :albums
+  has_many :pictures
   has_many :orders
   
   

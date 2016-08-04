@@ -51,11 +51,15 @@
                     %li= link_to "ServicesLookup", service_lookups_path
                     %li.divider{:role => "separator"}
                     %li= link_to "OrderManagement", order_management_admin_index_path
-            %li
-              - if current_user
+            - if current_user        
+              %li
                 = link_to albums_path do
                   %span.glyphicon.glyphicon-book
                   %span Albums
+              %li
+                = link_to pictures_path do
+                  %span.glyphicon.glyphicon-picture
+                  %span Pictures
           %ul.nav.navbar-nav.navbar-right
             - if current_user
               %li

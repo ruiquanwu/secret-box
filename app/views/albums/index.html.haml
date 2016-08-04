@@ -16,4 +16,4 @@
         .well.well-sm.album-index-album-description
           = album.description
     .col-md-12.text-center
-      = will_paginate @albums, renderer: BootstrapPagination::Rails
+      = will_paginate @albums, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 0

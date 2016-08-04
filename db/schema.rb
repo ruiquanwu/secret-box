@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718153939) do
+ActiveRecord::Schema.define(version: 20160802223248) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -77,10 +77,12 @@ ActiveRecord::Schema.define(version: 20160718153939) do
     t.string   "context"
     t.integer  "album_id"
     t.integer  "photo_id"
+    t.integer  "user_id"
   end
 
   add_index "pictures", ["album_id"], name: "index_pictures_on_album_id"
   add_index "pictures", ["photo_id"], name: "index_pictures_on_photo_id"
+  add_index "pictures", ["user_id"], name: "index_pictures_on_user_id"
 
   create_table "sample_albums", force: :cascade do |t|
     t.string   "name"

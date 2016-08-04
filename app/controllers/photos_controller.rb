@@ -4,7 +4,7 @@ class PhotosController < ApplicationController
     @album = Album.friendly.find(params[:album_id])
     authorize @album
     @photos = @album.photos.paginate(page: params[:page], per_page: @album.sample_album.photo_per_page)
-    @pictures = @album.pictures.where(:photo => nil).all#.limit(10)
+    @pictures = current_user.pictures.where(:photo_id => nil)
     
     respond_to do |format|
       format.html

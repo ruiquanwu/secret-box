@@ -1,0 +1,41 @@
+.container
+  %h1 
+    My Pictures
+    = link_to new_picture_path, class: "btn btn-success" do
+      %i.glyphicon.glyphicon-upload
+      %span  Upload Pictures
+
+    %span.btn.btn-success.fileinput-button
+      %i.glyphicon.glyphicon-plus
+      %span 
+        Add Pictures
+        = file_field(:picture, :context, multiple: true, id: 'picture_upload')
+    %button.btn.btn-danger#mass-delete-btn
+      %i.glyphicon.glyphicon-remove
+      %span Delete Pictures
+    %button.btn.btn-primary#click-me
+      Click Me
+      
+  %table.table.table-striped{:role => "presentation"}
+    %tbody#files
+
+  = form_tag mass_delete_pictures_path, class: "row", id: "pictures-form", method: :delete, remote: true do
+    .pictures#pictures
+      = render @pictures
+#page_links.text-center
+  = will_paginate @pictures, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 0
+  
+  
+%script#template-upload{:type => "text/x-tmpl"}
+  %tr.template-upload.fade.in
+    %td
+      %span
+        %img.preview{:width => '120', :height => '80'}
+    %td
+      %span.name
+        {%= o.name %}
+    %td
+      %p.size
+        {%=formatFileSize(o.size)%}
+      .progress.progress-striped.active{:role => "progressbar", "aria-valuemin" => "0", "aria-valuemax" => "100", "aria-valuenow" => 0}
+        .progress-bar.progress-bar-success{:style => "width:0%"}

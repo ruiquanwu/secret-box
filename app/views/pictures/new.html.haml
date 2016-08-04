@@ -12,7 +12,9 @@
     %button.btn.btn-success#start-upload
       Start-Upload
     = f.submit "Upload", class: 'btn btn-success'
-    = link_to "Cancel", album_photos_path(@album), class: 'btn btn-danger'
+    = link_to "Cancel", pictures_path, class: 'btn btn-danger'
+    .progress.progress-striped.active{:role => "progressbar", "aria-valuemin" => "0", "aria-valuemax" => "100", "aria-valuenow" => 0}
+      #progress-all-bar.progress-bar.progress-bar-success{:style => "width:0%"}
   %button#test-files.btn.btn-primary
     Click Me
   %table.table.table-striped{:role => "presentation"}
