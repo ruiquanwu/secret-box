@@ -48,10 +48,8 @@ gem 'activerecord-session_store'
 # markdown
 gem 'redcarpet'
 
-# Pagination
-gem 'will_paginate', '~> 3.0.5'
-# Pagination with booststrap style
-gem 'will_paginate-bootstrap'
+# pagination with kaminari
+gem "kaminari"
 
 # handling images
 gem 'carrierwave'

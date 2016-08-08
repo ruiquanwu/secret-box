@@ -8,30 +8,47 @@
   return (bytes / 1000).toFixed(2) + ' KB'
 
 $(document).on "page:change", ->
-    
+  
+  
+  # bind pagination with ajax request only limit to pictures page
+  #$(document).on 'click', '.pictures .pagination a', (event) ->
+  #  $.getScript @href
+    # set the url to current page 
+  #  location.hash = this.getAttribute('href')
+  #  false
+  
+  # mass delete ajax  
   $('#mass-delete-btn').click ->
     if $('input:checkbox:checked').length > 0
-      $('#pictures-form').submit()
+      current_page = $(".current").text().trim()
+      url = $('#pictures-form').attr("action") + "?page=" + current_page
+      $('#pictures-form').attr("action", url).submit()
   
   # picture#new
   $('#picture_upload').fileupload
     dataType: 'script'
     # when file is chosen, the add event execute
     add: (e, data) ->
-      # set the js tmpl file
-      data.context = $(tmpl("template-upload", data.files[0]))
-#     # append to html, and display the content
-      $('#files').append(data.context)
+      types = /(\.|\/)(gif|jpe?g|png)$/i
+      file = data.files[0]
       
-      # file reader to display preview of the images before uploading
-      reader = new FileReader()
-      reader.onload =() ->
-        dataURL = reader.result
-        data.context.find('.preview')[0].src = dataURL
-      reader.readAsDataURL(data.files[0])
-      #$('#start-upload').click ->
+      # if type valid, # set the js tmpl file
+      if types.test(file.type) || types.test(file.name)
+        data.context = $(tmpl("template-upload", file))
+#       # append to html, and display the content
+        $('#files').append(data.context)
       
-      data.submit()
+        # file reader to display preview of the images before uploading
+        reader = new FileReader()
+        reader.onload =() ->
+          dataURL = reader.result
+          data.context.find('.preview')[0].src = dataURL
+        reader.readAsDataURL(data.files[0])
+        #$('#start-upload').click ->
+        data.submit()
+        
+      else
+        alert "#{file.name} is not a gif, jpeg or png image file"
     progress: (e, data) ->
       if data.context
         progress = parseInt(data.loaded / data.total * 100, 10)

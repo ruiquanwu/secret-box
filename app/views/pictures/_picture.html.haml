@@ -1,7 +1,0 @@
-.col-md-4.col-xs-6.thumbnail
-  = label_tag "picture_ids_#{picture.id}", image_tag(picture.context.url, class: "img-responsive")
-  = check_box "picture", "ids", {:multiple => true}, picture.id, nil
-  - if picture.context.file
-    = picture.context.file.filename
-  - else
-    Unknown file

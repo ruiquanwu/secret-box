@@ -1,1 +1,2 @@
-$("#pictures").html("<%= escape_javascript(render(@pictures)) %>");
+$("#pictures").html("<%= escape_javascript(render("pictures", :pictures => @pictures)) %>");
+$("#page_links").html("<%= escape_javascript(paginate @pictures, :remote => true)%>")
