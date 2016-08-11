@@ -3,7 +3,8 @@ class AlbumsController < ApplicationController
   
   def index
     if current_user
-      @albums = current_user.albums.paginate(page: params[:page], per_page: 3)
+      @albums = current_user.albums.page(params[:page]).per(3)
+      #.paginate(page: params[:page], per_page: 3)
       #authorize @albums
     else
       flash[:error] = "You must be logged in"
@@ -31,6 +32,7 @@ class AlbumsController < ApplicationController
     @album = Album.friendly.find(params[:id])
     @album.update_attributes(album_params)
     @album.sample_album = SampleAlbum.find(@album.style)
+    
     if @album.save
       flash[:notice] = "Album was updated."
       redirect_to @album
@@ -58,6 +60,7 @@ class AlbumsController < ApplicationController
     @album.sample_album = @sample_album
 #    @album.setAttributes(@sample_album)
     authorize @album
+    
     if @album.save
       flash[:notice] = "Album was saved."
       redirect_to @album
@@ -73,6 +76,7 @@ class AlbumsController < ApplicationController
     if @album.orders.count > 0
       flash[:error] = "Cannot delete this album because There is at least one order associate with it."
     else
+      flash[:notice] = "Album #{@album.name} has deleted"
       @album.destroy
     end
 

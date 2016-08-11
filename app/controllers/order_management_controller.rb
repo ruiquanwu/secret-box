@@ -1,7 +1,8 @@
 class OrderManagementController < ApplicationController
   def index
     authorize :order_management, :index?
-    @orders =  Order.where(user_id: current_user.id).all.paginate(page: params[:page], per_page: 5)
+    @orders =  Order.where(user_id: current_user.id).page(params[:page]).per(5)
+    #all.paginate(page: params[:page], per_page: 5)
   end
 
   def show
@@ -9,7 +10,8 @@ class OrderManagementController < ApplicationController
   
   def admin_index
     authorize :order_management, :admin_index?
-    @orders = Order.all.paginate(page: params[:page], per_page: 10)
+    @orders = Order.page(params[:page]).per(10)
+    #all.paginate(page: params[:page], per_page: 10)
   end
   
   def edit

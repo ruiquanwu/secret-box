@@ -20,8 +20,14 @@
             = order.shipping_address.city
             , #{order.shipping_address.state} #{order.shipping_address.zipcode}
         - else
-          = link_to "Checkout", checkout_order_path(order), class: "btn btn-success"
-          = link_to "Delete", order_path(order), data:{confirm: "are you sure to delete this order?"}, method: :delete,class: "btn btn-danger"
+          = link_to checkout_order_path(order), class: "btn btn-success" do
+            %i.glyphicon.glyphicon-credit-card
+            %span
+              Checkout
+          = link_to order_path(order), data:{confirm: "are you sure to delete this order?"}, method: :delete,class: "btn btn-danger" do
+            %i.glyphicon.glyphicon-trash
+            %span
+              Delete
     .order-list-details.col-md-12
       .order-album-icon.col-md-4
         = image_tag(order.album.sample_album.avatar.url, class: "img-responsive")
@@ -32,7 +38,7 @@
         %p
           Photos Size:"#{order.album.photo_size}"
         %p
-          Photos Count: #{order.album.photos_inserted.count}
+          Photos Count: #{order.album.pictures.count}
         %div
           Order Options:
           %ul
@@ -52,5 +58,13 @@
           - if order.track_number
             = order.track_number
         - if order.trackable?
-          %p= link_to "Track package", order.tracking_link, class: "btn btn-success", target: "_blank"
-        %p= link_to "View this Album", album_path(order.album), class: "btn btn-success"
+          %p
+            = link_to order.tracking_link, class: "btn btn-success", target: "_blank" do
+              %i.glyphicon.glyphicon-plane
+              %span
+                Track package
+        %p
+          = link_to album_path(order.album), class: "btn btn-success" do
+            %i.glyphicon.glyphicon-search
+            %span
+              View this Album

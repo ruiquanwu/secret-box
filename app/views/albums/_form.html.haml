@@ -47,5 +47,11 @@
         = link_to "Previous", "#", class: 'btn btn-primary', id: "create-album-previous"
        
   .row.new-album-btn.text-right#album-btn-section
-    = f.submit action, class: 'btn btn-success'
-    = link_to "Cancel", back_url, class: 'btn btn-danger'
+    = button_tag type: "submit", class: "btn btn-success" do
+      %i.glyphicon.glyphicon-check
+      %span
+        = action
+    = link_to back_url, class: 'btn btn-danger' do
+      %i.glyphicon.glyphicon-remove
+      %span
+        Cancel

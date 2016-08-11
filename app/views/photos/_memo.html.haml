@@ -2,3 +2,20 @@
   .memo{"data-album-id" => album.id, "data-photo-id" => photo.id}
     %h5 Memo:
     %textarea.memo_body{:id => "photo_memo_" + photo.id.to_s, :rows => "6"} #{photo.memo}
+    .row.photo-action-icons
+      .col-md-6.col-xs-12
+        = link_to append_album_photo_path(album, photo), method: :post, class: "btn btn-success btn-block hidden-xs" do
+          %i.glyphicon.glyphicon-plus.pull-left
+          %span Append
+        = link_to append_album_photo_path(album, photo), method: :post, class: "btn btn-success btn-xs btn-block visible-xs-block" do
+          %i.glyphicon.glyphicon-plus
+          %span Append
+
+            
+      .col-md-6.col-xs-12
+        = link_to album_photo_path(album, photo), method: :delete, data: {confirm: "are you sure to delete this photo?"}, class: "btn btn-danger btn-block hidden-xs" do
+          %i.glyphicon.glyphicon-trash
+          %span Delete
+        = link_to album_photo_path(album, photo), method: :delete, data: {confirm: "are you sure to delete this photo?"}, class: "btn btn-danger btn-xs btn-block visible-xs-block" do
+          %i.glyphicon.glyphicon-trash
+          %span Delete

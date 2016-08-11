@@ -16,4 +16,4 @@
           = link_to "Delete", sample_picture, method: :delete, data:{confirm: "are you sure?"}, class: "btn btn-danger"
           
   .text-center
-    = will_paginate @sample_pictures, renderer: BootstrapPagination::Rails
+    = paginate @sample_pictures

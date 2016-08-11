@@ -1,9 +1,15 @@
 .container
   %h1.text-center
     = @album.name
-    = link_to "Edit", edit_album_path, class: 'btn btn-success'
-    = link_to "Delete", album_path(@album), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, |
-    :method => :delete
+    = link_to edit_album_path, class: 'btn btn-success' do
+      %i.glyphicon.glyphicon-edit
+      %span
+        Edit
+    = link_to album_path(@album), class: 'btn btn-danger', data: {:confirm => 'Are you sure?'}, :method => :delete do
+      %i.glyphicon.glyphicon-trash
+      %span
+        Delete
+    
   .row
     .col-md-2.text-right
       %span Album Progress:
@@ -41,17 +47,21 @@
             %td Photo Size:
             %td= @album.sample_album.photo_size
           %tr
-            %td Total Photos Uploaded:
-            %td= @album.pictures.count
-          %tr
             %td Total Photos Inserted:
-            %td= @album.photos_inserted.count
+            %td= @album.pictures.count
           %tr
             %td Total Photos Remains:
             %td= @album.remains_photos
           %tr
             %td Number of Album In Stock:
             %td= @album.sample_album.number_in_stock
-      = link_to "Order this Album", new_album_order_path(@album), class: "btn btn-success"
+      = link_to new_album_order_path(@album), class: "btn btn-success" do
+        %i.glyphicon.glyphicon-check
+        %span
+          Order this Album
+      
       - if @album.orders.count > 0
-        = link_to "View Order", order_management_index_path, class: "btn btn-success"
+        = link_to order_management_index_path, class: "btn btn-success" do
+          %i.glyphicon.glyphicon-list-alt
+          %span
+            View Order

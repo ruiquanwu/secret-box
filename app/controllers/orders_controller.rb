@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
     authorize @order
     @sample_album = SampleAlbum.find(@album.style)
     @sample_picture = SamplePicture.find_by_size(@album.sample_album.photo_size)
-    @picture_total = (@album.photos_inserted.count * @sample_picture.price).round(2)
+    @picture_total = (@album.pictures.count * @sample_picture.price).round(2)
 
     #gon.controller = model_name
 

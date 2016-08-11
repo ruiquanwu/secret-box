@@ -20,7 +20,8 @@ $(document).on "page:change", ->
   # mass delete ajax  
   $('#mass-delete-btn').click ->
     if $('input:checkbox:checked').length > 0
-      current_page = $(".current").text().trim()
+      # get current page from pagination div
+      current_page = $('.page-item.active a').html()
       url = $('#pictures-form').attr("action") + "?page=" + current_page
       $('#pictures-form').attr("action", url).submit()
   

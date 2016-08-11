@@ -53,7 +53,7 @@ class Order < ActiveRecord::Base
   end
   
   def picture_number
-    self.album.photos_inserted.count
+    self.album.pictures.count
   end
   
   def picture_total_price

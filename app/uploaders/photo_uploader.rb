@@ -38,7 +38,7 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   process :resize_to_fit => [50, 50]
   # end
 
-  process resize_to_fill(1800, 1200, gravity='Center')
+  process resize_to_fill(1200, 800, gravity='Center')
 
 #  portrait
 #  version :portrait do

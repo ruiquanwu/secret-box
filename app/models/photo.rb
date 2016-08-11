@@ -1,7 +1,7 @@
 class Photo < ActiveRecord::Base
   attr_accessor :picture_crop_x, :picture_crop_y, :picture_crop_w, :picture_crop_h
   belongs_to :album
-  has_one :picture
+  has_one :picture, dependent: :nullify
   #mount_uploader :picture, PhotoUploader
   #crop_uploaded :picture
 

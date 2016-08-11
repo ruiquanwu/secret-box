@@ -2,11 +2,17 @@
   %h1 Edit Order
   .col-md-12.order-detail
     .col-md-7
-      = image_tag(@album.avatar.url)
+      = image_tag(@album.sample_album.avatar.url, class: "img-responsive")
     .col-md-5
       = render partial: "order_detail"
       = form_for @order do |f|
         = render partial: "order_option", locals:{f: f}
         .order-btns.text-right
-          = f.submit "Checkout", class:"btn btn-success"
-          = link_to "Cancel", checkout_order_path(@order), class:"btn btn-danger"
+          = button_tag type: "submit", class: "btn btn-success" do
+            %i.glyphicon.glyphicon-credit-card
+            %span
+              Checkout
+          = link_to checkout_order_path(@order), class:"btn btn-danger" do
+            %i.glyphicon.glyphicon-trash
+            %span
+              Cancel

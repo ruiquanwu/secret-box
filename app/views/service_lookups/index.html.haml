@@ -19,4 +19,4 @@
             = link_to "Edit", edit_service_lookup_path(service), class: "btn btn-success"
             = link_to "Delete", service, data: {confirm:"are you sure?"}, class: "btn btn-danger", method: :delete
   .text-center          
-    = will_paginate @services, renderer: BootstrapPagination::Rails
+    = paginate @services

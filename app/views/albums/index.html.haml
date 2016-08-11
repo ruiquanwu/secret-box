@@ -2,7 +2,10 @@
   .albums-index-header
     %h1
       My Albums
-      =link_to "New Album", new_album_path, class: 'btn btn-success'
+      =link_to new_album_path, class: 'btn btn-success' do
+        %i.glyphicon.glyphicon-check
+        %span
+          New Album
   .row.albums-index-list
     - @albums.each do |album|
       .col-md-4
@@ -16,4 +19,4 @@
         .well.well-sm.album-index-album-description
           = album.description
     .col-md-12.text-center
-      = will_paginate @albums, renderer: BootstrapPagination::Rails, inner_window: 1, outer_window: 0
+      = paginate @albums

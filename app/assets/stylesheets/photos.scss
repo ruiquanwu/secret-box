@@ -9,7 +9,6 @@
 
 .memo {
   word-wrap: break-word;
-  border: 1px solid black;
   height: 100%;
 }
 
@@ -19,16 +18,34 @@
 }
 
 .memo_body {
+  resize: none;
   background: #eeeeee;
   width: 100%;
 }
+
+.action-icon {
+  height: 70px;
+  width: 70px;
+}
+
+.action-insert{
+  background-image: image_url("image-insert-icon");
+  background-size: cover;
+  width: 100%;
+}
+
+.action-delete{
+  background-image: image_url("image-delete-icon");
+  background-size: cover;
+  width: 100%;
+}
+
 
 .droppable-photo {
   background-image: url("http://placehold.it/750x500");
   background-position: center; 
   padding-left: 0px;
   padding-right: 0px;
-  border: 1px solid black;
 }
 
 .landscape-photo-page {

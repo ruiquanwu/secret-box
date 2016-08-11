@@ -21,7 +21,7 @@
 
 @media (max-width: $screen-xs) {
   .memo_body {
-    font-size: 14px;
+    font-size: 11px;
   }
   
   .photo-box-content {
@@ -41,7 +41,7 @@
 
 @media (min-width: $screen-md) {
   .memo_body {
-    font-size: 40px;
+    font-size: 38px;
   }
   .right-panel {
     position: fixed;
@@ -61,10 +61,15 @@
 }
 
 .row-eq-height{
+  border: 1px solid black;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+}
+
+.thumbnail {
+  margin-bottom: 0px;
 }
 
 .md-scroll-mask {

@@ -37,7 +37,8 @@ class SampleAlbumsController < ApplicationController
   end
 
   def index
-    @sample_albums = SampleAlbum.all.paginate(page: params[:page], per_page: 3)
+    @sample_albums = SampleAlbum.page(params[:page]).per(3)
+      #all.paginate(page: params[:page], per_page: 3)
     authorize @sample_albums
   end
   

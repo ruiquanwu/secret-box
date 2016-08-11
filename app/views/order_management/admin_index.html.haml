@@ -25,4 +25,4 @@
             = link_to "Edit", order_management_edit_path(order), class: "btn btn-success"
             = link_to "ViewAlbum", album_path(order.album), class: "btn btn-success"
   .col-md-12.text-center
-    = will_paginate @orders, renderer: BootstrapPagination::Rails
+    = paginate @orders

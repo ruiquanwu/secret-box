@@ -1,6 +1,7 @@
 class SamplePicturesController < ApplicationController
   def index
-    @sample_pictures = SamplePicture.all.paginate(page: params[:page], per_page: 10)
+    @sample_pictures = SamplePicture.page(params[:page]).per(10)
+    #.all.paginate(page: params[:page], per_page: 10)
     authorize @sample_pictures
   end
 

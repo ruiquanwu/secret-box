@@ -3,8 +3,9 @@ class PhotosController < ApplicationController
   def index
     @album = Album.friendly.find(params[:album_id])
     authorize @album
-    @photos = @album.photos.paginate(page: params[:page], per_page: @album.sample_album.photo_per_page)
-    @pictures = current_user.pictures.where(:photo_id => nil)
+    @photos = @album.photos.page(params[:page]).per(@album.sample_album.photo_per_page)
+    #paginate(page: params[:page], per_page: @album.sample_album.photo_per_page)
+    @pictures = current_user.pictures.where(:photo_id => nil).order("updated_at DESC")
     
     respond_to do |format|
       format.html
@@ -25,33 +26,30 @@ class PhotosController < ApplicationController
   end
 
   def create
+    # append new page with photo_per_page for belonging album
     @album = Album.friendly.find(params[:album_id])
-    if @album.photos.where(:picture_id => nil).first
-      @render_page = @album.photos.where(:picture_id => nil).first.photo_number
-    else
-      @render_page = @album.photos.count + 1
-    end
-
-    # Create new Picture for every uploaded file
-#params[:photo][:picture].each do |picture|
-      #@photo_in_panel = Photo.new(:picture => picture)
-    #raise params
-    @picture = Picture.new(:context => params[:picture][:context])
-    @picture.album = @album
-      # create new photo in album if there are more pictures
-    if @picture.save
-      if  @album.photos.count < @album.pictures.count
+    photos_per_page = @album.sample_album.photo_per_page
+    # check if photos reach album maximum photos
+    if @album.photos.count + photos_per_page > @album.sample_album.max_page * @album.sample_album.photo_per_page
+      flash.now[:error] = "Album Pages have reach maximum of " + @album.sample_album.max_page
+      redirect_to album_photos_photos
+    else    
+      # add a page to the album
+      # number of photos based on the album photos per page
+      @album.sample_album.photo_per_page.times do
         @photo = Photo.new
         @photo.album = @album
-        authorize @photo
         @photo.photo_number = @album.photos.count + 1
         @photo.save
       end
-    else
-      render :new
+      flash.now[:notice] = "Page is added."
     end
-    redirect_to album_photos_path+"?page="+ (@render_page.to_f/@album.photo_per_page).ceil.to_s
-
+    
+    
+    
+    respond_to do |format|
+      format.js{redirect_to album_photos_path(page: params[:page])}
+    end
   end
 
   def crop
@@ -67,17 +65,24 @@ class PhotosController < ApplicationController
   end
 
   def update_photos
+    # save album photos with ajax request
     params[:updates_params].each do |(key,update_params)|
       @album = Album.find(update_params[:album_id])
       @photo = Photo.find(update_params[:photo_id])
       authorize @photo
+      # check if new album_photo_frame is empty
       if update_params[:picture_id] == "0"
+        # if not empty, remove the previous photo to photo-box
         if @photo.picture
+          @photo.picture_id = nil
           @photo.picture = nil
           @photo.memo = update_params[:memo]
         end
       else
-        @photo.picture = Picture.find(update_params[:picture_id])
+        # assign whatever picture in current album_photo_frame to the corresponding photo
+        @picture = Picture.find(update_params[:picture_id])
+        @photo.picture_id = @picture.id
+        @photo.picture = @picture
         @photo.memo = update_params[:memo]
       end
       @photo.save
@@ -106,7 +111,7 @@ class PhotosController < ApplicationController
 
       flash[:notice] = "Photo was inserted"
       #redirect_to album_photos_path+"?page="+(@album.photos.count.to_i/2).to_s
-      redirect_to album_photos_path+"?page="+(@photo.photo_number.to_f/@album.photo_per_page).ceil.to_s
+      redirect_to album_photos_path+"?page="+(@photo.photo_number.to_f/@album.sample_album.photo_per_page).ceil.to_s
     else
       render action: 'insert'
       ##redirect_to [@album, @photo], notice: "Photo failed to save"
@@ -130,7 +135,7 @@ class PhotosController < ApplicationController
 
       flash[:notice] = "Photo was append"
       #redirect_to album_photos_path+"?page="+(@album.photos.count.to_i/2).to_s
-      redirect_to album_photos_path+"?page="+(@photo.photo_number.to_f/@album.photo_per_page).ceil.to_s
+      redirect_to album_photos_path+"?page="+(@photo.photo_number.to_f/@album.sample_album.photo_per_page).ceil.to_s
     else
       render action: 'append'
       ##redirect_to [@album, @photo], notice: "Photo failed to save"
@@ -143,16 +148,18 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @photo_number = @photo.photo_number
     
-    @album.photos.album_photos.each do |photo|
+    # update photo number after deleting
+    @album.photos.each do |photo|
       if photo.photo_number > @photo_number
         photo.photo_number -= 1
         photo.save
       end
     end
 
+    flash[:notice] = "Photo was delete. belonging image back to photo box."
     @photo.destroy
 
-    redirect_to album_photos_path+"?page="+(@photo_number.to_f/@album.photo_per_page).ceil.to_s
+    redirect_to album_photos_path+"?page="+(@photo_number.to_f/@album.sample_album.photo_per_page).ceil.to_s
   end
 
   private

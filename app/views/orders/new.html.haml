@@ -8,5 +8,11 @@
       = form_for [@album, @order] do |f|
         = render partial: "order_option", locals:{f: f}
         .order-btns.text-right
-          = f.submit "Checkout", class:"btn btn-success"
-          = link_to "Cancel", @album, class:"btn btn-danger"
+          = button_tag type: "submit", class: "btn btn-success" do
+            %i.glyphicon.glyphicon-credit-card
+            %span
+              Checkout
+          = link_to @album, class:"btn btn-danger" do
+            %i.glyphicon.glyphicon-trash
+            %span
+              Cancel

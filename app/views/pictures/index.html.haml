@@ -1,20 +1,14 @@
 .container
   %h1 
     My Pictures
-    = link_to new_picture_path, class: "btn btn-success" do
-      %i.glyphicon.glyphicon-upload
-      %span  Upload Pictures
-
     %span.btn.btn-success.fileinput-button
-      %i.glyphicon.glyphicon-plus
+      %i.glyphicon.glyphicon-upload
       %span 
-        Add Pictures
+        Upload Pictures
         = file_field(:picture, :context, multiple: true, id: 'picture_upload')
     %button.btn.btn-danger#mass-delete-btn
       %i.glyphicon.glyphicon-remove
       %span Delete Pictures
-    %button.btn.btn-primary#click-me
-      Click Me
       
   %table.table.table-striped{:role => "presentation"}
     %tbody#files
