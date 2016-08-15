@@ -20,6 +20,10 @@
 @Import 'bootstrap-select';
 
 @media (max-width: $screen-xs) {
+
+  div[class*="portrait-"] {
+    width: 360px;
+  }
   .memo_body {
     font-size: 11px;
   }
@@ -40,6 +44,10 @@
 }
 
 @media (min-width: $screen-md) {
+  div[class*="portrait-"] {
+    width: 540px;
+  }
+  
   .memo_body {
     font-size: 38px;
   }
@@ -61,6 +69,7 @@
 }
 
 .row-eq-height{
+  height: 100%;
   border: 1px solid black;
   display: -webkit-box;
   display: -webkit-flex;

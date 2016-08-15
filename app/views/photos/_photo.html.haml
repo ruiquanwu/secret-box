@@ -1,3 +1,6 @@
 .col-xs-9.col-md-9.droppable-photo{"data-album" => album.id, "data-photo"=>photo.id, "data-photo"=>photo.id}
   - if photo.picture
-    = image_tag(photo.picture.context.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + photo.picture.id.to_s, "data-picture": photo.picture.id)                                                                                             
+    - if album.sample_album.orientation == "landscape"
+      = image_tag(photo.picture.context.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + photo.picture.id.to_s, "data-picture": photo.picture.id)
+    - else
+      = image_tag(photo.picture.context.portrait.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + photo.picture.id.to_s, "data-picture": photo.picture.id)

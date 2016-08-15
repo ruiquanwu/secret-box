@@ -38,13 +38,12 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   process :resize_to_fit => [50, 50]
   # end
 
-  process resize_to_fill(1200, 800, gravity='Center')
-
-#  portrait
-#  version :portrait do
-#    process :auto_orient
-#    process resize_to_fill(600, 900, gravity='Center')
-#  end
+    process :process_landscape_version
+  #  resize_to_fill(1200, 800, gravity='Center')  
+  # portrait
+  version :portrait do
+    process :process_portait_version
+  end
   
 =begin
   version :thumb do
@@ -63,6 +62,40 @@ class PhotoUploader < CarrierWave::Uploader::Base
     process resize_to_limit: [1200, 800]
   end
 =end
+  
+protected
+  
+  def rotate_image degree
+    manipulate! do |img|
+      img.rotate degree
+      img
+    end
+  end
+  
+  def process_landscape_version
+    image = ::MiniMagick::Image::read(File.binread(@file.file))
+
+    if image[:width] > image[:height]
+        resize_to_fill 1200, 800
+    else
+      rotate_image "90"
+      resize_to_fill 1200, 800
+    end
+  end
+  
+  def process_portait_version
+    image = ::MiniMagick::Image::read(File.binread(@file.file))
+
+    if image[:width] > image[:height]
+      rotate_image "-90"
+      resize_to_fill 800, 1200
+    else
+      resize_to_fill 800, 1200
+    end
+  end
+
+  
+  
   def is_landscape? picture
     image = MiniMagick::Image.open(picture.path)
     image[:width] > image[:height]

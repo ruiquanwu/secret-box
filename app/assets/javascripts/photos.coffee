@@ -6,21 +6,8 @@ $(document).on "page:change", ->
     helper: 'clone'
     zIndex: 200
     start: (event, ui) ->
-      # set the image size when dragging base on the screen size
-      if $(window).width() > 992
-        width = 240
-        height =  160
-      else
-        width = 150
-        height = 100
-      # set over-flow to show drag-object on the top
-     # ui.helper[0].parentNode.style.overflow = "visible"
-      ui.helper.width(width).height(height)
-      #ui.helper.animate({width: width,height: height})
-      # set it back to auto in case there are more images
-    # stop: (event, ui) ->
-    #  ui.helper[0].parentNode.style.overflow = "auto"
-    # mouse cursor position after resizing when dragging
+      # resize image when dragging
+      ui.helper.width(this.width*0.6).height(this.height*0.6)
     cursorAt: {left:75, top:50}
   # album photo field is droppable  
   $('.droppable-photo').droppable 

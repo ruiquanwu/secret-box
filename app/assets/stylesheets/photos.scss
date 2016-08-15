@@ -1,10 +1,19 @@
+div[class*="photo-page"] {
+  height: 100%;
+}
+
 .album-page-body {
+  height: 100%;
   margin-top: 5px;
   margin-bottom: 5px;
 }
 
 .album-photos-index {
   max-width: 900px;
+}
+
+.photo-memo {
+  margin: auto;
 }
 
 .memo {
@@ -129,4 +138,11 @@ span.glyphicon {
 
 .photo-box-top-btn {
   width: 100%;
+}
+
+/* portrait page 
+*/
+
+div[class*="portrait-"] {
+  margin: auto;
 }

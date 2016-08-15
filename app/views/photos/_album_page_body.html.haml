@@ -1,14 +1,20 @@
-- if photos.current_page%2 == 1
-  .row.well.photo-page-right
-    - photos.each do |photo|
-      - if album.sample_album.orientation == "landscape"
-        = render 'landscape_page_right', :album => album, :photo => photo
-      - else
-        = render 'portrait_page_right', :album => album, :photo => photo
+- if album.sample_album.orientation == "landscape"
+  .photo-landscape-page
+    - if photos.current_page%2 == 1
+      .row.well.photo-page-left
+        - photos.each do |photo|
+          = render 'landscape_page_left', :album => album, :photo => photo
+    - else
+      .row.well.photo-page-right
+        - photos.each do |photo|
+          = render 'landscape_page_right', :album => album, :photo => photo
 - else
-  .row.well.photo-page-left
-    - photos.each do |photo|
-      - if album.sample_album.orientation == "landscape"
-        = render 'landscape_page_left', :album => album, :photo => photo
-      - else
-        = render 'portrait_page_left', :album => album, :photo => photo
+  .photo-portrait-page
+    - if photos.current_page%2 == 1
+      .row.well.photo-page-left
+        - photos.each do |photo|
+          = render 'portrait_page_left', :album => album, :photo => photo
+    - else
+      .row.well.photo-page-right
+        - photos.each do |photo|
+          = render 'portrait_page_right', :album => album, :photo => photo

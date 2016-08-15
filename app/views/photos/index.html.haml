@@ -25,7 +25,10 @@
         = @pictures.count
     .panel-body.photo-box-content
       - @pictures.each do |picture|
-        = image_tag(picture.context.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
+        - if @album.sample_album.orientation == "landscape"
+          = image_tag(picture.context.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
+        - else
+          = image_tag(picture.context.portrait.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
 
   #page_links.text-center
     = paginate @photos

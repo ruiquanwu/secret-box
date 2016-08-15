@@ -18,7 +18,7 @@ class PicturesController < ApplicationController
   
   def index
     #@pictures = Picture.all.order("created_at DESC").paginate(page: params[:page], per_page: 6)
-    @pictures = Picture.order("created_at DESC").page(params[:page]).per(6)
+    @pictures = current_user.pictures.order("created_at DESC").page(params[:page]).per(6)
     
    # respond_to do |format|
   #    format.html
