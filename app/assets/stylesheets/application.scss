@@ -12,9 +12,11 @@
  *
  *= require jquery.fileupload
  *= require jquery.fileupload-ui
+ *= require font-awesome
  *= require_self
  *= require_tree .
  */
+@import "font-awesome";
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @Import 'bootstrap-select';

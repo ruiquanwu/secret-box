@@ -2,6 +2,14 @@ div[class*="photo-page"] {
   height: 100%;
 }
 
+.photo-action-icons .thumbnail {
+  display: inline;
+}
+
+.photo-action-icons {
+  margin-bottom: 10px;
+}
+
 .album-page-body {
   height: 100%;
   margin-top: 5px;

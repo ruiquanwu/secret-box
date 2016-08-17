@@ -62,7 +62,6 @@ $(document).on "page:change", ->
       option_id = '#'+gon.option_id_prefix+name
       $(option_id).click ->
         if this.checked
-          console.log this
           add_option_detail this
         else
           remove_option_detail this

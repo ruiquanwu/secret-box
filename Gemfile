@@ -97,6 +97,9 @@ gem 'touchpunch-rails'
 # file upload and progress bar
 gem "jquery-fileupload-rails"
 
+# font awesome
+gem "font-awesome-rails"
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'

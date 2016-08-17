@@ -38,12 +38,24 @@ class PhotoUploader < CarrierWave::Uploader::Base
   #   process :resize_to_fit => [50, 50]
   # end
 
-    process :process_landscape_version
-  #  resize_to_fill(1200, 800, gravity='Center')  
+  # process the original image to landscape version
+  process :process_landscape_version
+
+  # rotate 180 to get landscape rotate version
+  version :landscape_rotate do
+    process :rotate_version
+  end
+
   # portrait
   version :portrait do
     process :process_portait_version
   end
+  
+  # portrait rotate version
+  version :portrait_rotate, from_version: :portrait_rotate do
+    process :rotate_version
+  end
+
   
 =begin
   version :thumb do
@@ -72,6 +84,13 @@ protected
     end
   end
   
+  def rotate_version
+    manipulate! do |img|
+      img.rotate 180
+      img
+    end
+  end
+  
   def process_landscape_version
     image = ::MiniMagick::Image::read(File.binread(@file.file))
 
@@ -83,15 +102,10 @@ protected
     end
   end
   
+  # rotate back 90 degree to get portrait version
   def process_portait_version
-    image = ::MiniMagick::Image::read(File.binread(@file.file))
-
-    if image[:width] > image[:height]
-      rotate_image "-90"
-      resize_to_fill 800, 1200
-    else
-      resize_to_fill 800, 1200
-    end
+    rotate_image "-90"
+    resize_to_fill 800, 1200
   end
 
   
@@ -109,10 +123,6 @@ protected
   # version :normal do
   #   process resize_to_fill: [900, 600]
   # end
- 
-  version :profile do
-    process resize_to_fill: [180, 120]
-  end
 
 
   # Add a white list of extensions which are allowed to be uploaded.

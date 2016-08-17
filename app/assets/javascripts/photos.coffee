@@ -7,7 +7,12 @@ $(document).on "page:change", ->
     zIndex: 200
     start: (event, ui) ->
       # resize image when dragging
-      ui.helper.width(this.width*0.6).height(this.height*0.6)
+      # if image from photo-box, resize to 0.8 original image size
+      if this.parentNode.classList.contains("photo-box-content")
+        ui.helper.width(this.width*0.8).height(this.height*0.8)
+      # if image from album-photo, resize to 0.4 of original image size
+      else
+        ui.helper.width(this.width*0.4).height(this.height*0.4)
     cursorAt: {left:75, top:50}
   # album photo field is droppable  
   $('.droppable-photo').droppable 
@@ -65,6 +70,23 @@ $(document).on "page:change", ->
     $('.right-panel').slideToggle("slow")
     $('.photo-box-btn').toggle()
     return false
+    
+  $('.rotate-image-btn').click (e) ->
+    e.preventDefault()
+    # get the associate album photo of the rotate button
+    associate_photo_id = "#album_photo_" + this.getAttribute("data-photo-id")
+    album_photo = $(associate_photo_id).children()
+    
+    # check if album_photo contains any image
+    if album_photo.length > 0
+      # rotate image
+      # if image container "rotate 180" class, remove it
+      if album_photo[0].classList.contains("fa-rotate-180")
+        album_photo.removeClass("fa-rotate-180")
+      # else add the class to rotate
+      else
+        album_photo.addClass("fa-rotate-180")
+
     
   $('#update_photos').click ->
     photos = $('div[data-photo]')
