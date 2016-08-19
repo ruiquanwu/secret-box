@@ -3,16 +3,16 @@
     %h5 Memo:
     %textarea.memo_body{:id => "photo_memo_" + photo.id.to_s, :rows => "6"} #{photo.memo}
     .photo-action-icons
-      = link_to "#" do
+      = link_to "#", data: {url: "#{update_memo_album_photo_path(album, photo)}", memo: "photo_memo_#{photo.id.to_s}"}, class: "update-memo-btn" do
         = fa_icon "floppy-o lg", title: "save memo", class: "visible-xs-inline thumbnail"
         = fa_icon "floppy-o 2x", title: "save memo", class: "hidden-xs thumbnail"
       = link_to append_album_photo_path(album, photo), method: :post do
         = fa_icon "plus lg", title: "append photo", class: "visible-xs-inline thumbnail"
         = fa_icon "plus 2x", title: "append photo", class: "hidden-xs thumbnail"
+      = link_to '#', class: "rotate-image-btn", data:{"photo-id" => photo.id} do
+        = fa_icon "refresh lg", title: "rotate photo", class: "visible-xs-inline thumbnail"
+        = fa_icon "refresh 2x", title: "rotate photo", class: "hidden-xs thumbnail"        
       = link_to album_photo_path(album, photo), method: :delete, data: {confirm: "are you sure to delete this photo?"} do
         = fa_icon "trash-o lg", title: "remove photo", class: "visible-xs-inline thumbnail"
         = fa_icon "trash-o 2x", title: "remove photo", class: "hidden-xs thumbnail"
-      = link_to '#', class: "rotate-image-btn", data:{"photo-id" => photo.id} do
-        = fa_icon "refresh lg", title: "rotate photo", class: "visible-xs-inline thumbnail"
-        = fa_icon "refresh 2x", title: "rotate photo", class: "hidden-xs thumbnail"
             

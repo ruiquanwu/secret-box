@@ -23,26 +23,41 @@ $(document).on "page:change", ->
       childNode = event.target.children.length
       drag = ui.draggable[0]
       drop = this.children[0]
-      temp = drag.parentNode.insertBefore(document.createTextNode(''), drag)
       
       drag.style["width"] = ""
       drag.style["height"] = ""
+      target_picture_id = drag.getAttribute("data-picture")
+      album_id = this.getAttribute("data-album")
+      photo_id = this.getAttribute("data-photo")
 
-      # append image to div if not image exist
+      # append image to album photo if not image exist
       if childNode == 0
-          # update photo-box number drag targer is from photo box
-        if this.className != ui.draggable[0].parentElement.className
+          # update photo-box number, drag targer is from photo box
+        if this.className != drag.parentElement.className
           $('#badge-top').html(parseInt($('#badge-top').html()) - 1)
           $('#badge-bottom').html($('#badge-top').html())
-        this.appendChild ui.draggable[0]
-        # update photo box photos number count
+        this.appendChild drag
+        # send ajax request to update database
+        $.ajax({
+          dataType: "Script",
+          type: "PATCH",
+          url: "/albums/" + album_id + "/photos/update_photos",
+          data: {type: "Append", photo_id: photo_id, target_picture_id: target_picture_id}  
+        })
 
         
       # swap images
       else
+        temp = drag.parentNode.insertBefore(document.createTextNode(''), drag)
         drop.parentNode.insertBefore(drag, drop)
         temp.parentNode.insertBefore(drop, temp)
         temp.parentNode.removeChild(temp)
+        $.ajax({
+          dataType: "Script",
+          type: "PATCH",
+          url: "/albums/" + album_id + "/photos/update_photos",
+          data: {type: "Swap", photo_id: photo_id, target_picture_id: target_picture_id}  
+        })
       #update_photo_box_badge()
       
 
@@ -50,14 +65,27 @@ $(document).on "page:change", ->
     tolerance: 'pointer'
     drop: (event, ui) ->
       hoverClass: "dragHover"
-      ui.draggable[0].style["width"] = ""
-      ui.draggable[0].style["height"] = ""
+      drag = ui.draggable[0]
+      drag.style["width"] = ""
+      drag.style["height"] = ""
+
+      target_picture_id = drag.getAttribute("data-picture")
+      album_id = drag.parentNode.getAttribute("data-album")
+      photo_id = drag.parentNode.getAttribute("data-photo")
       
-      if this.className != ui.draggable[0].parentElement.className
+      if this.className != drag.parentElement.className
         $('#badge-top').html(parseInt($('#badge-top').html()) + 1)
         $('#badge-bottom').html($('#badge-top').html())
         # prevent self container append
-        this.appendChild ui.draggable[0]
+        this.insertBefore drag, this.firstChild
+        # remove picture from album photo
+        $.ajax({
+          dataType: "Script",
+          type: "PATCH",
+          url: "/albums/" + album_id + "/photos/update_photos",
+          data: {type: "Remove", photo_id: photo_id, target_picture_id: target_picture_id}  
+        })
+        
 
     #  $('#badge-top').html(parseInt($('#badge-top').html()) + 1)
    #   $('#badge-bottom').html(parseInt($('#badge-bottom').html()) + 1)
@@ -71,6 +99,22 @@ $(document).on "page:change", ->
     $('.photo-box-btn').toggle()
     return false
     
+  # on click event for update memo button
+  $('.update-memo-btn').click (e) ->
+    e.preventDefault()
+    url = this.getAttribute('data-url')
+    memo_id = this.getAttribute('data-memo')
+    memo = $('#'+memo_id).val()
+    $.ajax({
+      dataType: "Script",
+      type: "PATCH",
+      url: url,
+      data: {memo: memo}  
+    })
+
+    
+    
+  # on click event for rotate image button  
   $('.rotate-image-btn').click (e) ->
     e.preventDefault()
     # get the associate album photo of the rotate button
@@ -87,29 +131,4 @@ $(document).on "page:change", ->
       else
         album_photo.addClass("fa-rotate-180")
 
-    
-  $('#update_photos').click ->
-    photos = $('div[data-photo]')
-
-    i = 0
-    updates_params = []
-    while i < photos.length
-      album_id = photos[i].getAttribute('data-album')
-      photo_id = photos[i].getAttribute('data-photo')
-      memo = $('#photo_memo_'+photo_id)[0].value
-      picture_id = "0"
-      if photos[i].children.length > 0
-        picture_id = photos[i].children[0].getAttribute('data-picture')
-
-      a = {memo: memo, album_id: album_id, photo_id: photo_id, picture_id: picture_id}
-      updates_params.push(a)
-      i += 1
-    
-    $.ajax({
-      dataType: "Script",
-      type: "PATCH",
-      url: "/albums/" + album_id + "/photos/update_photos"
-      data: {updates_params: updates_params}
-      })     
-    $('#update_photos').html("Saving...")
   

@@ -11,14 +11,10 @@
         %span Append Page
     %p
       current page: #{@photos.current_page}
-      = button_tag class: 'btn btn-success', id: 'update_photos' do
-        %i.glyphicon.glyphicon-floppy-saved
-        %span
-          Save Album
   .album_photos_page_body#album_photos_page_body
     = render 'album_page_body', :photos => @photos, :album => @album
 
-  .row.right-panel.panel.panel-info
+  .row.right-panel.panel.panel-info{:class => @album.is_portrait? ? "panel-portrait" : "panel-landscape"}
     = link_to "#", class: "btn btn-info photo-box-top-btn" do
       Photo-Box
       %span.badge#badge-top
@@ -28,7 +24,7 @@
         - if @album.sample_album.orientation == "landscape"
           = image_tag(picture.context.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
         - else
-          = image_tag(picture.context.portrait.url, class: "img-responsive draggable-photo thumbnail", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
+          = image_tag(picture.context.portrait.url, class: "img-responsive draggable-photo thumbnail portrait-img", id: "picture_id_" + picture.id.to_s,"data-picture": picture.id)
 
   #page_links.text-center
     = paginate @photos

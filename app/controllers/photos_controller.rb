@@ -63,32 +63,55 @@ class PhotosController < ApplicationController
       format.js
     end
   end
+  
+  def update_memo
+    @album = Album.friendly.find(params[:album_id])
+    @photo = Photo.find(params[:id])
+    @photo.memo = params[:memo]
+    @photo.save
+  end
 
   def update_photos
     # save album photos with ajax request
-    params[:updates_params].each do |(key,update_params)|
-      @album = Album.find(update_params[:album_id])
-      @photo = Photo.find(update_params[:photo_id])
-      authorize @photo
-      # check if new album_photo_frame is empty
-      if update_params[:picture_id] == "0"
-        # if not empty, remove the previous photo to photo-box
-        if @photo.picture
-          @photo.picture_id = nil
-          @photo.picture = nil
-          @photo.memo = update_params[:memo]
-        end
-      else
-        # assign whatever picture in current album_photo_frame to the corresponding photo
-        @picture = Picture.find(update_params[:picture_id])
-        @photo.picture_id = @picture.id
-        @photo.picture = @picture
-        @photo.memo = update_params[:memo]
-      end
+    case
+    # image drop to empty album photo
+    when params[:type] == "Append"
+      @photo = Photo.find(params[:photo_id])
+      @target_picture = Picture.find(params[:target_picture_id])
+      @target_photo = @target_picture.photo
+      # assign target picture to empty album photo
+      @photo.picture = @target_picture
+      @photo.picture_id = @target_picture.id
       @photo.save
-    end
-    respond_to do |format|
-      format.js
+      
+    # image remove from album photo
+    when params[:type] == "Remove"
+      @picture = Picture.find(params[:target_picture_id])
+      @photo = Photo.find(params[:photo_id])
+      @photo.picture = nil
+      @photo.picture_id = nil
+      @photo.save
+   # image swap
+   when params[:type] == "Swap"
+      @photo = Photo.find(params[:photo_id])
+      @picture = @photo.picture
+      @target_picture = Picture.find(params[:target_picture_id])
+      @target_photo = @target_picture.photo
+   
+      # if image from album photo
+      if @target_photo
+        @target_photo.picture = nil
+        @photo.picture = @target_picture
+        @photo.picture_id = @target_picture.id
+        @photo.save
+        @target_photo.picture = @picture
+        @target_photo.picture_id = @picture.id
+        @target_photo.save
+      else
+        @photo.picture = @target_picture
+        @photo.picture_id = @target_picture.id
+        @photo.save
+      end
     end
   end
 

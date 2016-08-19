@@ -36,6 +36,7 @@ Rails.application.routes.draw do
        # get 'crop'
         post 'insert'
         post 'append'
+        patch 'update_memo'
       end
     end 
   end

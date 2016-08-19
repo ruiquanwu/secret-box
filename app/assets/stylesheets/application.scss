@@ -39,10 +39,9 @@
   }
   
   .right-panel img {
-    width: 50%;
+    height: 100%;
     display: inline;
   }
-  
 }
 
 @media (min-width: $screen-md) {
@@ -66,7 +65,15 @@
   }
   .right-panel img {
     margin: 0 auto;
+  }
+  
+  .panel-landscape img{
     width: 80%;
+  }
+  
+  .panel-portrait img {
+    width: 45%;
+    display: inline;
   }
 }
 

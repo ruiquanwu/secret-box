@@ -70,4 +70,8 @@ class Album < ActiveRecord::Base
     end
   end
   
+  def is_portrait?
+    self.sample_album.orientation == "portrait"
+  end
+  
 end
