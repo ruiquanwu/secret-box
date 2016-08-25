@@ -32,3 +32,8 @@ $(document).on "page:change", ->
     $('#album-info-section').hide()
     $('#album-search-section').show()
     $('#album-style-section').show()      
+    
+    
+  # front-cover-page relative
+  $('#front-cover-picture-div').draggable()
+  $('#front-cover-picture').resizable()

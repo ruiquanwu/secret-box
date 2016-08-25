@@ -34,6 +34,31 @@ class PicturesController < ApplicationController
     end
   end
   
+  def update_rotation
+    @picture = Picture.find(params[:id])
+    # set picture rotation attributes based on orientation
+    case
+    when params[:orientation] == "landscape"
+      # flip the attribute for each request
+      if @picture.rotate_landscape
+        @picture.rotate_landscape = nil
+      else
+        @picture.rotate_landscape = true
+      end
+    when params[:orientation] == "portrait"
+      if @picture.rotate_portrait
+        @picture.rotate_portrait = nil
+      else
+        @picture.rotate_portrait = true
+      end
+    end
+    
+    @picture.save
+    respond_to do |format|
+      format.js {render "layouts/hide_loading_bar"}
+    end
+  end
+  
   private
   
   def picture_params

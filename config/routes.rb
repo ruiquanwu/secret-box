@@ -18,9 +18,15 @@ Rails.application.routes.draw do
     collection do
       delete 'mass_delete'
     end
+    member do
+      patch 'update_rotation'
+    end
   end
   
   resources :albums do
+    member do
+      get 'front_cover'
+    end
     resources :orders, shallow: true do 
       member do
         get 'checkout'

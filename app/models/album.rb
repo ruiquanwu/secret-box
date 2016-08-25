@@ -7,7 +7,7 @@ class Album < ActiveRecord::Base
   belongs_to :user
   belongs_to :sample_album
   has_many :photos, dependent: :destroy
-  #has_many :pictures, dependent: :destroy
+  has_many :pictures, dependent: :nullify
   has_many :orders
   mount_uploader :avatar, AlbumAvatarUploader
   mount_uploader :album_layout, AlbumLayoutUploader
@@ -37,10 +37,6 @@ class Album < ActiveRecord::Base
   
   def max_photos
     self.sample_album.max_page * self.sample_album.photo_per_page
-  end
-  
-  def pictures
-    self.photos.where("picture_id is not null")
   end
   
   def remains_photos

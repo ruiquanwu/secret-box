@@ -1,0 +1,15 @@
+.row.well-sm.album-page-header.text-left
+  %h1
+    = @album.name
+    = link_to @album, class: 'btn btn-success' do
+      %i.glyphicon.glyphicon-info-sign
+      %span
+        Album Summary
+    = link_to album_photos_path + "?page=#{@photos.current_page}", class: "btn btn-success", method: :post, remote: true do
+      %i.glyphicon.glyphicon-plus
+      %span Append Page
+  %p
+    current page: #{@photos.current_page}
+    .loading-bar
+      %i.fa.fa-spinner.fa-spin.fa-3x.fa-fw
+      %span updating...

@@ -1,2 +1,11 @@
-%h1 Albums#front_cover
-%p Find me in app/views/albums/front_cover.html.erb
+.container.album-photos-index
+  .row.well-sm.album-page-header.text-left
+    %h1
+      = @album.name
+      = link_to @album, class: 'btn btn-success' do
+        %i.glyphicon.glyphicon-info-sign
+        %span
+          Album Summary
+  .row.front-cover-background
+    = link_to album_photos_path(@album), title: "click to open album" do
+      = image_tag(@album.sample_album.avatar.url, class: "img-responsive center-block", alt: "click to open album")

@@ -41,19 +41,9 @@ class PhotoUploader < CarrierWave::Uploader::Base
   # process the original image to landscape version
   process :process_landscape_version
 
-  # rotate 180 to get landscape rotate version
-  version :landscape_rotate do
-    process :rotate_version
-  end
-
   # portrait
   version :portrait do
     process :process_portait_version
-  end
-  
-  # portrait rotate version
-  version :portrait_rotate, from_version: :portrait_rotate do
-    process :rotate_version
   end
 
   
@@ -95,17 +85,28 @@ protected
     image = ::MiniMagick::Image::read(File.binread(@file.file))
 
     if image[:width] > image[:height]
+      # create rotate version if image rotate attributes changed
+      if model.image_rotate?
+        rotate_version
+      end
         resize_to_fill 1200, 800
     else
       rotate_image "90"
       resize_to_fill 1200, 800
     end
+    
   end
   
   # rotate back 90 degree to get portrait version
   def process_portait_version
-    rotate_image "-90"
-    resize_to_fill 800, 1200
+    # create rotate version if image rotate attributes changed
+    if model.image_rotate?
+      rotate_image "-90"
+      resize_to_fill 800, 1200
+    else
+      rotate_image "-90"
+      resize_to_fill 800, 1200      
+    end
   end
 
   

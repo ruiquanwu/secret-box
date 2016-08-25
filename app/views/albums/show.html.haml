@@ -20,7 +20,7 @@
         = render "progress_bar", type: "success"
   .col-md-12.album-show
     .col-md-9.cover-page
-      = link_to album_photos_path(@album), {title: "click to open album"} do
+      = link_to front_cover_album_path(@album), {title: "click to open album"} do
         = image_tag(@album.sample_album.avatar.url, class:"img-responsive")
     .col-md-3
       .album-show-layout

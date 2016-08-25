@@ -2,6 +2,14 @@ div[class*="photo-page"] {
   height: 100%;
 }
 
+.ui-state-default {
+  border: 1px dashed black;
+}
+
+.ui-draggable {
+  cursor: move;
+}
+
 .photo-action-icons .thumbnail {
   display: inline;
 }
@@ -75,16 +83,18 @@ div[class*="photo-page"] {
 }
 
 .photo-page-left {
-  border-top: 10px solid black;
-  border-bottom: 10px solid black;
-  border-left: 20px solid black;
+  border-top: 15px solid black;
+  border-bottom: 15px solid black;
+  border-left: 30px solid black;
+  border-right: 2px dashed black;
   border-radius: 10px;
 }
 
 .photo-page-right {
-  border-top: 10px solid black;
-  border-bottom: 10px solid black;
-  border-right: 20px solid black;
+  border-top: 15px solid black;
+  border-bottom: 15px solid black;
+  border-right: 30px solid black;
+  border-left: 2px dashed black;
   border-radius: 10px;
 }
 

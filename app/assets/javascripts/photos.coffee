@@ -1,4 +1,5 @@
 $(document).on "page:change", ->  
+  $('.loading-bar').hide()
   # photos#index
   # all the img including album photos and photo-box-photos are draggable
   $('.draggable-photo').draggable
@@ -16,19 +17,20 @@ $(document).on "page:change", ->
     cursorAt: {left:75, top:50}
   # album photo field is droppable  
   $('.droppable-photo').droppable 
-    hoverClass: "dragHover"
+    activeClass: "ui-state-default"
     # when cursor point to the droppable area
     tolerance: 'pointer'
     drop: (event, ui) ->
       childNode = event.target.children.length
       drag = ui.draggable[0]
       drop = this.children[0]
+      current_picture_id = drag.getAttribute("data-picture")
+      album_id = this.getAttribute("data-album")
+      photo_id = this.getAttribute("data-photo")
+
       
       drag.style["width"] = ""
       drag.style["height"] = ""
-      target_picture_id = drag.getAttribute("data-picture")
-      album_id = this.getAttribute("data-album")
-      photo_id = this.getAttribute("data-photo")
 
       # append image to album photo if not image exist
       if childNode == 0
@@ -37,31 +39,30 @@ $(document).on "page:change", ->
           $('#badge-top').html(parseInt($('#badge-top').html()) - 1)
           $('#badge-bottom').html($('#badge-top').html())
         this.appendChild drag
-        # send ajax request to update database
-        $.ajax({
-          dataType: "Script",
-          type: "PATCH",
-          url: "/albums/" + album_id + "/photos/update_photos",
-          data: {type: "Append", photo_id: photo_id, target_picture_id: target_picture_id}  
-        })
-
-        
+        type = "Append"
       # swap images
       else
-        temp = drag.parentNode.insertBefore(document.createTextNode(''), drag)
-        drop.parentNode.insertBefore(drag, drop)
-        temp.parentNode.insertBefore(drop, temp)
-        temp.parentNode.removeChild(temp)
+        # if not same photo and same place drag and drop
+        if drag != drop
+          temp = drag.parentNode.insertBefore(document.createTextNode(''), drag)
+          drop.parentNode.insertBefore(drag, drop)
+          temp.parentNode.insertBefore(drop, temp)
+          temp.parentNode.removeChild(temp)
+          type = "Swap"
+      # send ajax request to update database
+      if drag != drop
         $.ajax({
-          dataType: "Script",
           type: "PATCH",
           url: "/albums/" + album_id + "/photos/update_photos",
-          data: {type: "Swap", photo_id: photo_id, target_picture_id: target_picture_id}  
-        })
-      #update_photo_box_badge()
-      
+          data: {type: type, photo_id: photo_id, current_picture_id: current_picture_id}
+          success:(data) ->
+            return false
+          }) 
+        $('.loading-bar').show()
+
 
   $('.photo-box-content').droppable
+    activeClass: "ui-state-default"
     tolerance: 'pointer'
     drop: (event, ui) ->
       hoverClass: "dragHover"
@@ -69,7 +70,7 @@ $(document).on "page:change", ->
       drag.style["width"] = ""
       drag.style["height"] = ""
 
-      target_picture_id = drag.getAttribute("data-picture")
+      current_picture_id = drag.getAttribute("data-picture")
       album_id = drag.parentNode.getAttribute("data-album")
       photo_id = drag.parentNode.getAttribute("data-photo")
       
@@ -83,9 +84,9 @@ $(document).on "page:change", ->
           dataType: "Script",
           type: "PATCH",
           url: "/albums/" + album_id + "/photos/update_photos",
-          data: {type: "Remove", photo_id: photo_id, target_picture_id: target_picture_id}  
+          data: {type: "Remove", photo_id: photo_id, current_picture_id: current_picture_id}  
         })
-        
+        $('.loading-bar').show()
 
     #  $('#badge-top').html(parseInt($('#badge-top').html()) + 1)
    #   $('#badge-bottom').html(parseInt($('#badge-bottom').html()) + 1)
@@ -111,7 +112,7 @@ $(document).on "page:change", ->
       url: url,
       data: {memo: memo}  
     })
-
+    $('.loading-bar').show()
     
     
   # on click event for rotate image button  
@@ -123,6 +124,11 @@ $(document).on "page:change", ->
     
     # check if album_photo contains any image
     if album_photo.length > 0
+      # update rotation url
+      picture_id = album_photo[0].getAttribute("data-picture")
+      url = "/pictures/#{picture_id}/update_rotation"
+      
+      orientation = album_photo[0].getAttribute("data-orientation")
       # rotate image
       # if image container "rotate 180" class, remove it
       if album_photo[0].classList.contains("fa-rotate-180")
@@ -130,5 +136,14 @@ $(document).on "page:change", ->
       # else add the class to rotate
       else
         album_photo.addClass("fa-rotate-180")
+      
+      #ajax request to update images
+      $.ajax({
+        dataType: "script",
+        type: "patch",
+        url: url,
+        data:{orientation: orientation}
+        })
+      $('.loading-bar').show()
 
   

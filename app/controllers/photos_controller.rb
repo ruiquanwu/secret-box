@@ -42,7 +42,7 @@ class PhotosController < ApplicationController
         @photo.photo_number = @album.photos.count + 1
         @photo.save
       end
-      flash.now[:notice] = "Page is added."
+      flash.now[:notice] = "Page was added."
     end
     
     
@@ -69,49 +69,48 @@ class PhotosController < ApplicationController
     @photo = Photo.find(params[:id])
     @photo.memo = params[:memo]
     @photo.save
+    
+    respond_to do |format|
+      format.js {render "layouts/hide_loading_bar"}
+    end
   end
 
   def update_photos
+    @album = Album.friendly.find(params[:album_id])
+    #current picture
+    @current_picture = Picture.find(params[:current_picture_id])
     # save album photos with ajax request
-    case
     # image drop to empty album photo
+    case
     when params[:type] == "Append"
-      @photo = Photo.find(params[:photo_id])
-      @target_picture = Picture.find(params[:target_picture_id])
-      @target_photo = @target_picture.photo
-      # assign target picture to empty album photo
-      @photo.picture = @target_picture
-      @photo.picture_id = @target_picture.id
-      @photo.save
-      
+      @current_picture.photo = Photo.find(params[:photo_id])
+      @current_picture.album = @album
+      @current_picture.save
     # image remove from album photo
     when params[:type] == "Remove"
-      @picture = Picture.find(params[:target_picture_id])
-      @photo = Photo.find(params[:photo_id])
-      @photo.picture = nil
-      @photo.picture_id = nil
-      @photo.save
-   # image swap
-   when params[:type] == "Swap"
-      @photo = Photo.find(params[:photo_id])
-      @picture = @photo.picture
-      @target_picture = Picture.find(params[:target_picture_id])
-      @target_photo = @target_picture.photo
-   
-      # if image from album photo
-      if @target_photo
-        @target_photo.picture = nil
-        @photo.picture = @target_picture
-        @photo.picture_id = @target_picture.id
-        @photo.save
-        @target_photo.picture = @picture
-        @target_photo.picture_id = @picture.id
-        @target_photo.save
+      @current_picture.photo = nil
+      @current_picture.album = nil
+      @current_picture.save
+    # image swap
+    when params[:type] == "Swap"
+      @swap_photo = @current_picture.photo
+      @swap_picture = Photo.find(params[:photo_id]).picture
+      
+      if @swap_photo
+        @swap_picture.photo = @swap_photo
       else
-        @photo.picture = @target_picture
-        @photo.picture_id = @target_picture.id
-        @photo.save
+        @swap_picture.photo = nil
+        @swap_picture.album = nil
       end
+      @swap_picture.save
+      @current_picture.photo = Photo.find(params[:photo_id])
+      @current_picture.album = @album
+      @current_picture.save
+      
+      
+    end
+    respond_to do |format|
+      format.js {render "layouts/hide_loading_bar"}
     end
   end
 

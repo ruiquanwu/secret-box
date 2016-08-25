@@ -9,7 +9,7 @@
       = link_to append_album_photo_path(album, photo), method: :post do
         = fa_icon "plus lg", title: "append photo", class: "visible-xs-inline thumbnail"
         = fa_icon "plus 2x", title: "append photo", class: "hidden-xs thumbnail"
-      = link_to '#', class: "rotate-image-btn", data:{"photo-id" => photo.id} do
+      = link_to '#', class: "rotate-image-btn", data:{"photo-id" => photo.id}, remote: true do
         = fa_icon "refresh lg", title: "rotate photo", class: "visible-xs-inline thumbnail"
         = fa_icon "refresh 2x", title: "rotate photo", class: "hidden-xs thumbnail"        
       = link_to album_photo_path(album, photo), method: :delete, data: {confirm: "are you sure to delete this photo?"} do

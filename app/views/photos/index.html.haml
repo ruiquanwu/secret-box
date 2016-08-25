@@ -1,16 +1,5 @@
 .container.album-photos-index
-  .row.album-page-header.text-left
-    %h1
-      = @album.name
-      = link_to @album, class: 'btn btn-success' do
-        %i.glyphicon.glyphicon-info-sign
-        %span
-          Album Summary
-      = link_to album_photos_path + "?page=#{@photos.current_page}", class: "btn btn-success", method: :post, remote: true do
-        %i.glyphicon.glyphicon-plus
-        %span Append Page
-    %p
-      current page: #{@photos.current_page}
+  = render "album_page_header"
   .album_photos_page_body#album_photos_page_body
     = render 'album_page_body', :photos => @photos, :album => @album
 

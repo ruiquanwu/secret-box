@@ -84,6 +84,11 @@ class AlbumsController < ApplicationController
       format.html { redirect_to albums_path}
     end
   end
+  
+  def front_cover
+    @album = Album.friendly.find(params[:id])
+    @picture = current_user.pictures.last
+  end
 
   private
 
