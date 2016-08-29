@@ -68,6 +68,24 @@
   .form-group
     .row
       .col-md-2
+        = f.label :has_front_cover, "Has Front Cover:"
+      .col-md-10.text-left
+        = f.check_box :has_front_cover, class: 'form-control'
+  .form-group
+    .row
+      .col-md-2
+        = f.label :front_cover_width_percentage, "Front cover widht(%)"
+      .col-md-10.text-left
+        = f.text_field :front_cover_width_percentage, class: 'form-control', placeholder: "enter front cover width percentage"
+  .form-group
+    .row
+      .col-md-2
+        = f.label :front_cover_height_percentage, "Front cover height(%)"
+      .col-md-10.text-left
+        = f.text_field :front_cover_height_percentage, class: 'form-control', placeholder: "enter front cover height percentage"
+  .form-group
+    .row
+      .col-md-2
         = f.label :avatar, "Album Avatar:"
       .col-md-10.text-left
         = f.file_field :avatar

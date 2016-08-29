@@ -54,6 +54,7 @@ class SampleAlbumsController < ApplicationController
   
   def sample_album_params
     params.require(:sample_album).permit(:name, :max_page, :photo_per_page, :color, :photo_size,
-      :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo, :features)
+      :orientation, :avatar, :album_layout, :description, :price, :number_in_stock, :has_memo, :features,
+      :has_front_cover, :front_cover_width_percentage, :front_cover_height_percentage)
   end
 end

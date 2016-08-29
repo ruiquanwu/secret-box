@@ -6,4 +6,8 @@ class AlbumPolicy < ApplicationPolicy
   def show?
     @user.present? && @record.user == user || @user.admin?
   end
+  
+  def update_front_cover?
+    show?
+  end
 end

@@ -35,5 +35,37 @@ $(document).on "page:change", ->
     
     
   # front-cover-page relative
-  $('#front-cover-picture-div').draggable()
-  $('#front-cover-picture').resizable()
+  if $('#front-cover-picture-div').length > 0
+    width = $('#album-front-cover-background').width()
+    height = $('#album-front-cover-background').height()
+    
+    front_cover_width =  parseFloat($('#front-cover-picture-div')[0].getAttribute("data-front-cover-width"))
+    front_cover_height =  parseFloat($('#front-cover-picture-div')[0].getAttribute("data-front-cover-height"))
+    console.log front_cover_width
+    console.log front_cover_height
+    
+    $('#front-cover-picture-div').width(width * front_cover_width)
+    $('#front-cover-picture-div').height(height * front_cover_height)
+   # console.log width
+   # console.log height
+   # $('#front-cover-picture-div')[0].style.left = (-width*0.64).toString() + "px"
+   # $('#front-cover-picture-div')[0].style.top = (height*0.25).toString() + "px"
+    $('#front-cover-picture-div').draggable()
+    $('#front-cover-picture-div').droppable
+      drop: (event, ui) ->
+        drag = ui.draggable[0]
+        src = drag.getAttribute("src")
+        url = this.getAttribute("update_url")
+        this.style.background = 'url(' + src + ')'
+        this.style["background-size"] = "contain"
+        this.style["background-repeat"] = "no-repeat"
+        this.style["background-position"] = "center"
+        this.style["background-size"] = "100%"
+        $.ajax({
+          dataType: "script",
+          type: "PATCH",
+          url: url,
+          data: {front_cover: src}
+        }) 
+    
+  #$('#front-cover-picture').resizable()

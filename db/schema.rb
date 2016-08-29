@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160819143626) do
+ActiveRecord::Schema.define(version: 20160829153422) do
 
   create_table "albums", force: :cascade do |t|
     t.string   "name"
@@ -97,11 +97,14 @@ ActiveRecord::Schema.define(version: 20160819143626) do
     t.string   "has_memo"
     t.integer  "number_in_stock"
     t.float    "price"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "features"
     t.string   "color"
     t.string   "photo_size"
+    t.boolean  "has_front_cover"
+    t.float    "front_cover_width_percentage"
+    t.float    "front_cover_height_percentage"
   end
 
   create_table "sample_pictures", force: :cascade do |t|

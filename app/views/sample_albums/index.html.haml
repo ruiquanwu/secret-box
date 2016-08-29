@@ -2,40 +2,45 @@
   %h1
     Sample Album Management
     = link_to 'New', new_sample_album_path, class: 'btn btn-success'
-  - @sample_albums.each do |album|
+  - @sample_albums.each do |sample_album|
     .row.sample_album_block
       .col-md-3
         %h4 Album Cover
-        = image_tag(album.avatar, class: "img-responsive")
-      .col-md-3
+        = image_tag(sample_album.avatar, class: "img-responsive")
         %h4 Album Layout
-        = image_tag(album.album_layout, class: "img-responsive")
-      .col-md-6.text-left
+        = image_tag(sample_album.album_layout, class: "img-responsive")
+      .col-md-9.text-left
         .row
-          = link_to 'Edit', edit_sample_album_path(album), class:'btn btn-success'
-          = link_to 'Delete', sample_album_path(album), method: :delete, data:{confirm: "are you sure?"},class:'btn btn-danger'
+          = link_to 'Edit', edit_sample_album_path(sample_album), class:'btn btn-success'
+          = link_to 'Delete', sample_album_path(sample_album), method: :delete, data:{confirm: "are you sure?"},class:'btn btn-danger'
           %p
-            Album Name: #{album.name}
+            Album Name: #{sample_album.name}
         .row
           %p
-            Description: #{album.description}
+            Description: #{sample_album.description}
           %p
-            Features: #{album.features}
+            Features: #{sample_album.features}
           %p
-            Color: #{album.color}
+            Color: #{sample_album.color}
           %p
-            Has memo: #{album.has_memo}
+            Has memo: #{sample_album.has_memo}
           %p
-            Orientation: #{album.orientation}
+            Orientation: #{sample_album.orientation}
           %p
-            Max page: #{album.max_page}
+            Max page: #{sample_album.max_page}
           %p
-            Photos per page: #{album.photo_per_page}
+            Photos per page: #{sample_album.photo_per_page}
           %p
-            Photo size: #{album.photo_size}
+            Photo size: #{sample_album.photo_size}
           %p
-            Price: #{album.price}
+            Price: #{sample_album.price}
           %p
-            Number in stock: #{album.number_in_stock}
-  = paginate @sample_albums
+            Number in stock: #{sample_album.number_in_stock}
+          %p
+            Has Front Cover: #{sample_album.has_front_cover}
+          %p
+            Front Cover Width(%): #{sample_album.front_cover_width_percentage}
+          %p
+            Front Cover Height(%): #{sample_album.front_cover_height_percentage}
+= paginate @sample_albums
   

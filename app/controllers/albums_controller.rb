@@ -87,7 +87,15 @@ class AlbumsController < ApplicationController
   
   def front_cover
     @album = Album.friendly.find(params[:id])
-    @picture = current_user.pictures.last
+    @pictures = current_user.pictures.order("created_at DESC")
+  end
+  
+  def update_front_cover
+    @album = Album.friendly.find(params[:id])
+    authorize @album
+    @album.front_cover = params[:front_cover]
+    @album.save
+    render :nothing => true
   end
 
   private

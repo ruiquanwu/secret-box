@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :albums do
     member do
       get 'front_cover'
+      patch 'update_front_cover'
     end
     resources :orders, shallow: true do 
       member do

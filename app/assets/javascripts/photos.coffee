@@ -35,7 +35,7 @@ $(document).on "page:change", ->
       # append image to album photo if not image exist
       if childNode == 0
           # update photo-box number, drag targer is from photo box
-        if this.className != drag.parentElement.className
+        if drag.parentElement.classList.contains("photo-box-content")
           $('#badge-top').html(parseInt($('#badge-top').html()) - 1)
           $('#badge-bottom').html($('#badge-top').html())
         this.appendChild drag
