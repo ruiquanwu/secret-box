@@ -2,7 +2,7 @@
   %h1 Manager Order Edit
   .col-md-12
     .col-md-4
-      = image_tag(@order.album.avatar, class: "img-responsive")
+      = image_tag(@order.album.sample_album.avatar, class: "img-responsive")
     .col-md-4
       %h3 Order Details:
       %p
@@ -12,7 +12,7 @@
       %p
         Photos Size:"#{@order.album.photo_size}"
       %p
-        Photos Count: #{@order.album.photos_inserted.count}
+        Photos Count: #{@order.album.pictures.count}
       %div
         Order Options:
         %ul

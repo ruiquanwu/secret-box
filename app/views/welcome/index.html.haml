@@ -1,18 +1,66 @@
-%h1
-  Welcome back #{current_user.name || current_user.email}!
-  %h1
-
 .container
-  %p#test-drag Drag me around
+  %h1
+    Welcome back #{current_user.name || current_user.email}!
   
-  .drag class drop1
-  
-  .drag class drop2
+  .panel-group
+    .panel.panel-primary
+      .panel-heading 
+        = link_to "Albums", albums_path, class: "btn btn-primary"
+      .panel-body 
+        %p 
+          you have #{@albums.count} albums created.
+        - if @recent_album
+          %p your most recent album:
+          .row
+            .col-md-3.col-xs-6
+              = image_tag(@recent_album.sample_album.avatar.url, class: "img-responsive thumbnail")
+            .col-md-3.col-xs-6
+              .well.well-sm
+                Name: #{@recent_album.name}
+              .well.well-sm
+                Description: #{@recent_album.description}
+              =link_to album_path(@recent_album), class: 'btn btn-success' do
+                %i.glyphicon.glyphicon-folder-open
+                %span
+                  Open Album
+        -else
+          =link_to new_album_path, class: 'btn btn-success' do
+            %i.glyphicon.glyphicon-check
+            %span
+              Create New Album
 
-  #drop-zone
-    .well#test-drop1
-      %p drop here 1
-    .well#test-drop2
-      %p drop here 2
-    
-    
+  .panel-group
+    .panel.panel-primary
+      .panel-heading 
+        = link_to "Pictures", pictures_path, class: "btn btn-primary"
+      .panel-body 
+        %p 
+          you have #{@pictures.count} pictures uploaded.
+        %p
+          #{@pictures_in_album.count} out of #{@pictures.count} were inserted into album.
+        = link_to pictures_path, class: "btn btn-success" do
+          %i.glyphicon.glyphicon-picture
+          %span
+            Manage Pictures
+          
+  .panel-group
+    .panel.panel-primary
+      .panel-heading 
+        = link_to "Orders", order_management_index_path, class: "btn btn-primary"
+      .panel-body 
+        %p 
+          you have #{@orders.count} orders in Progress.  
+        - if @recent_order
+          %h3 Rencent Order:
+          .col-md-3.col-xs-6
+            = image_tag(@recent_order.album.sample_album.avatar.url, class: "img-responsive thumbnail")
+          .col-md-3.col-xs-6
+            .well.well-sm
+              %p ORDER PLACED: #{local_time(@recent_order.created_at)}
+              %p ORDER TOTAL: $#{@recent_order.total_price}
+              %p ORDER STATUS: #{@recent_order.status}
+              %p 
+            = link_to order_management_index_path, class: "btn btn-success" do
+              %i.glyphicon.glyphicon-search
+              %span
+                View this order

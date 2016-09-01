@@ -1,7 +1,7 @@
 class OrderManagementController < ApplicationController
   def index
     authorize :order_management, :index?
-    @orders =  Order.where(user_id: current_user.id).page(params[:page]).per(5)
+    @orders =  Order.where(user_id: current_user.id).page(params[:page]).per(5).order(created_at: :desc)
     #all.paginate(page: params[:page], per_page: 5)
   end
 
@@ -10,7 +10,7 @@ class OrderManagementController < ApplicationController
   
   def admin_index
     authorize :order_management, :admin_index?
-    @orders = Order.page(params[:page]).per(10)
+    @orders = Order.page(params[:page]).per(10).order(created_at: :desc)
     #all.paginate(page: params[:page], per_page: 10)
   end
   
@@ -38,7 +38,6 @@ class OrderManagementController < ApplicationController
     require 'rubygems'
     require 'zip'
     @order = Order.friendly.find(params[:id])
-    authorize @order
     filename = @order.user.name + "_" + @order.album.name + "_" + @order.created_at.to_formatted_s(:number) + ".zip"
     temp_file = Tempfile.new(filename)
     
@@ -46,8 +45,19 @@ class OrderManagementController < ApplicationController
       Zip::OutputStream.open(temp_file) {|zos|}
       
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zip|
+        if @order.album.front_cover
+          zip.add("front_cover.jpg", open(@order.album.front_cover))
+        end
         @order.album.photos.each do |photo|
-          zip.add("photo"+photo.photo_number.to_s+".jpg", open(photo.picture.context.url))
+          if @order.album.sample_album.orientation == "landscape"
+            if photo.picture.context.url
+              zip.add("photo"+photo.photo_number.to_s+".jpg", open(photo.picture.context.url))
+            end
+          else
+            if photo.picture.context.portrait.url
+              zip.add("photo"+photo.photo_number.to_s+".jpg", open(photo.picture.context.portrait.url))
+            end
+          end
         end
       end
       

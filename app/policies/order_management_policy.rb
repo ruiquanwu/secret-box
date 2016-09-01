@@ -14,7 +14,7 @@ class OrderManagementPolicy < Struct.new(:user, :order_management)
     admin_index?
   end
   
-  def download
+  def download?
     admin_index?
   end
 end

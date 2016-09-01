@@ -9,7 +9,7 @@
     %td= @sample_album.name
     %td 1
     %td
-      $#{@sample_album.price}
+      $ #{@sample_album.price}
     %td
       $
       %span.item-total= @sample_album.price.round(2)
@@ -20,10 +20,21 @@
     %td
       = @album.pictures.count
     %td
-      $#{@sample_picture.price}
+      $ #{@sample_picture.price}
     %td
       $
       %span.item-total= @order.picture_total_price
+    -if @album.front_cover
+      %tr.front_cover_detail
+        %td
+          Front Cover
+        %td
+          1
+        %td
+          $ #{@sample_picture.price}
+        %td
+          $
+          %span.item-total= @sample_picture.price
   %tr.order-shipping
     %td
       %span#display-shipment-name= @shipments.first.name

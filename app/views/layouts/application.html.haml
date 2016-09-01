@@ -36,7 +36,10 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to "SecretAlbum", root_url, class: "navbar-brand"
+          -if current_user
+            = link_to "SecretAlbum", welcome_path, class: "navbar-brand"
+          -else
+            = link_to "SecretAlbum", root_url, class: "navbar-brand"
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li
