@@ -1,0 +1,15 @@
+.container
+  %h1 album view only mode
+  .row
+    - if @album.sample_album.orientation == "landscape"
+      .photo-landscape-page
+        .col-md-6
+          .row.well.view-photo-page-left
+            - @photos_left_page.each do |photo|
+              = render 'albums/view_only_partial/view_landscape_left', :album => @album, :photo => photo
+        .col-md-6
+          .row.well.view-photo-page-right
+            - @photos_right_page.each do |photo|
+              = render 'albums/view_only_partial/view_landscape_right', :album => @album, :photo => photo
+  #page_links.text-center
+    = paginate @photos  

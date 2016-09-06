@@ -6,6 +6,10 @@
         %i.glyphicon.glyphicon-info-sign
         %span
           Album Summary
+      = link_to view_only_album_path(@album), class: 'btn btn-success', id: 'view-only-btn' do
+        %i.glyphicon.glyphicon-book
+        %span
+          View-Only-Mode
   .row
     .col-md-8.col-xs-8
       = link_to album_photos_path(@album), title: "click to open album" do

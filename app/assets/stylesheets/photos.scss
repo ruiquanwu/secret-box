@@ -98,6 +98,22 @@ div[class*="photo-page"] {
   border-radius: 10px;
 }
 
+.view-photo-page-left {
+  border-top: 10px solid black;
+  border-bottom: 10px solid black;
+  border-left: 20px solid black;
+  border-right: 2px dashed black;
+  border-radius: 10px;
+}
+
+.view-photo-page-right {
+  border-top: 10px solid black;
+  border-bottom: 10px solid black;
+  border-right: 20px solid black;
+  border-left: 2px dashed black;
+  border-radius: 10px;
+}
+
 .jumbotron {
   padding-top: 10px;
   padding-bottom: 10px;

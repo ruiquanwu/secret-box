@@ -69,7 +69,17 @@ class AlbumsController < ApplicationController
       render :new
     end
   end
-
+  
+  # use for displying album content with both page
+  def view_only
+    @album = Album.friendly.find(params[:id])
+    photo_per_page = @album.sample_album.photo_per_page
+    authorize @album
+    @photos = @album.photos.page(params[:page]).per(photo_per_page*2)
+    @photos_left_page = @photos.first(photo_per_page)
+    @photos_right_page = @photos.last(photo_per_page)
+  end
+  
   def destroy
     @album = Album.friendly.find(params[:id])
     authorize @album

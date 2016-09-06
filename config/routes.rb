@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     member do
       get 'front_cover'
       patch 'update_front_cover'
+      get 'view_only'
     end
     resources :orders, shallow: true do 
       member do

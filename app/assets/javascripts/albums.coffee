@@ -67,5 +67,8 @@ $(document).on "page:change", ->
           url: url,
           data: {front_cover: src}
         }) 
-    
-  #$('#front-cover-picture').resizable()
+  if $('#view-only-btn').length > 0
+    if $(window).width() > 992
+      $('#view-only-btn').show()
+    else
+      $('#view-only-btn').hide()

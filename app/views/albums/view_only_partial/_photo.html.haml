@@ -1,0 +1,6 @@
+.col-xs-9.col-md-9.droppable-photo
+  - if photo.picture
+    - if album.sample_album.orientation == "landscape"
+      = image_tag(photo.picture.context.url, class: "img-responsive thumbnail")
+    - else
+      = image_tag(photo.picture.context.portrait.url, class: "img-responsive thumbnail")

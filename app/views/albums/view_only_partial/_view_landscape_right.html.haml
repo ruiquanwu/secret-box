@@ -1,0 +1,6 @@
+.album-page-body 
+  /= render partial: 'photo_header', locals: {album: @album, photo: photo}
+  .row.row-eq-height.landscape-photo-page
+    = render partial: 'albums/view_only_partial/photo', locals: {album: @album, photo: photo}
+    = render partial: 'albums/view_only_partial/memo', locals: {album: @album, photo: photo}
+
