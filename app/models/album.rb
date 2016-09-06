@@ -1,6 +1,10 @@
 class Album < ActiveRecord::Base
   extend FriendlyId
   
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :style, presence: true
+  
   after_create :append_first_page
   
   friendly_id :name, use: :slugged
@@ -17,22 +21,6 @@ class Album < ActiveRecord::Base
 
   def should_generate_new_friendly_id?
     name_changed?
-  end
-  
-  def setAttributes(sample_album)
-    self.style = sample_album.id
-    self.description = sample_album.description
-    self.features = sample_album.features
-    self.has_memo = sample_album.has_memo
-    self.avatar = sample_album.avatar
-    self.album_layout = sample_album.album_layout
-    self.max_page = sample_album.max_page
-    self.photo_per_page = sample_album.photo_per_page
-    self.orientation = sample_album.orientation
-    self.number_in_stock = sample_album.number_in_stock
-    self.price = sample_album.price
-    self.color = sample_album.color
-    self.photo_size = sample_album.photo_size
   end
   
   def max_photos
