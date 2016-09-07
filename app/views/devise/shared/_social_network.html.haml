@@ -2,14 +2,14 @@
   .col-md-6
     = link_to omniauth_authorize_path(resource_name, :google_oauth2) do
       .well.well-sm
-        = image_tag(image_url("google-icon"), class: "social-icon")
+        = image_tag(image_url("google-icon.png"), class: "social-icon")
         %span.social-text
           = action 
           with Google+
   .col-md-6
     = link_to omniauth_authorize_path(resource_name, :facebook) do
       .well.well-sm
-        = image_tag(image_url("facebook-icon"), class: "social-icon")
+        = image_tag(image_url("facebook-icon.png"), class: "social-icon")
         %span.social-text
           = action 
           with Facebook

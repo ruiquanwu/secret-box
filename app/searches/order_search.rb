@@ -1,5 +1,5 @@
 class OrderSearch < Lupa::Search
-  class scope
+  class Scope
     def name
       scope.where(status: search_attributes[:status])
     end
