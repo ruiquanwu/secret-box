@@ -1,0 +1,27 @@
+.container
+  .row
+    %h1 What are secret albums?
+    .well.well-sm
+      well, there is no secret unless you create it.
+    %h1 It is Easy, all you need to do is drag and drop
+    .well.well-sm
+      Try it yourself Below
+    .col-md-6.col-md-offset-1.col-xs-8.view-photo-page-left
+      = render partial: 'landscape_left', locals: {memo: "yes", picture: nil}
+    .col-md-4.col-xs-4
+      %p.text-center Drag me!
+      = image_tag(image_url("img_forest.jpg"), class: "img-responsive draggable-photo thumbnail")
+
+  %h2 More Album Demos   
+  .col-md-6.col-xs-12
+    .well.well-sm
+      %p Landscape Album with 2 photos per page and has Memo Field
+    .view-photo-page-left
+      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo1.jpg")}
+      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo2.jpg")}      
+  .col-md-6.col-xs-12
+    .well.well-sm
+      %p Landscape Album with 2 photos per page and has no Memo Field
+    .view-photo-page-right
+      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo1.jpg") }
+      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo2.jpg") }

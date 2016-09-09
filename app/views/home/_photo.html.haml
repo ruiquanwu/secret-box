@@ -1,0 +1,5 @@
+.view_photo.col-md-10.col-xs-9.droppable-photo-demo{memo == "yes" ? {} : {class: "col-md-offset-1 col-xs-offset-1"}}
+  -if picture
+    =image_tag(picture, class: "img-responsive")
+  -else
+    %h1 Drop Here

@@ -164,6 +164,11 @@ label {
   border: 2px solid black;
 }
 
+.view_photo_memo {
+  margin: auto;
+  padding: 0px;
+}
+
 .view_memo_body {
   resize: none;
   background: #eeeeee;
@@ -172,4 +177,9 @@ label {
 
 .view_memo {
   margin-top: 0px;
+}
+
+.view_photo {
+  padding: 0px;
+  background: #eee;
 }

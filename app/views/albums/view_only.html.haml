@@ -1,5 +1,10 @@
 .container
-  %h1 album view only mode
+  %h1 
+    album view only mode
+    = link_to @album, class: 'btn btn-success' do
+      %i.glyphicon.glyphicon-info-sign
+      %span
+        Back
   .row
     - if @album.sample_album.orientation == "landscape"
       .photo-landscape-page

@@ -1,4 +1,5 @@
 .album-page-body 
   .row.row-eq-height
     = render partial: 'photo', locals: {album: @album, photo: photo}
-    = render partial: 'memo', locals: {album: @album, photo: photo}
+    - if @album.sample_album.has_memo == "Yes"
+      = render partial: 'memo', locals: {album: @album, photo: photo}

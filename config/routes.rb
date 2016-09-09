@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   get 'about' => 'welcome#about'
   get 'welcome' => 'welcome#index'
+  get 'learn_more' => 'home#learn_more'
   
   root to: 'home#index'
 

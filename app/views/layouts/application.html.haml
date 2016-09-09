@@ -3,7 +3,7 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
-    %title SecretAlbum
+    %title SecretAlbums
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css", :rel => "stylesheet", :type => "text/css"}/
     %link{:href =>"https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"}/
     %link{:href => "https://fonts.googleapis.com/css?family=Open+Sans", :rel => "stylesheet", :type => "text/css"}/
@@ -37,9 +37,9 @@
             %span.icon-bar
             %span.icon-bar
           -if current_user
-            = link_to "SecretAlbum", welcome_path, class: "navbar-brand"
+            = link_to "SecretAlbums", welcome_path, class: "navbar-brand"
           -else
-            = link_to "SecretAlbum", root_url, class: "navbar-brand"
+            = link_to "SecretAlbums", root_url, class: "navbar-brand"
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             %li
@@ -84,5 +84,5 @@
                   %span Login
     = yield
     .footer
-      %p.text-center.footer-text Copyright © SecrectAlbum, Contact me at: ruiquanwu@gmail.com
+      %p.text-center.footer-text Copyright © SecrectAlbums, Contact me at: ruiquanwu@gmail.com
     = include_gon

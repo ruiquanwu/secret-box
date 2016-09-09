@@ -22,13 +22,50 @@
 @import "bootstrap";
 @Import 'bootstrap-select';
 
+@media (min-width: 1501px) {
+  .album-photos-index {
+    max-width: 900px;
+  }
+  
+  .memo_body {
+    font-size: 31px;
+  }
+  .view_memo_body {
+    font-size: 30px;
+  }
+  
+  .right-panel {
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 20%;
+    height: 82%;
+  }
+  
+  .photo-box-content {
+    height: 90%;
+  }
+  .right-panel img {
+    margin: 0 auto;
+  }
+  
+  .panel-landscape img{
+    width: 80%;
+  }
+  
+  .panel-portrait img {
+    width: 45%;
+    display: inline;
+  }
+}
+
 @media (max-width: $screen-xs) {
 
   div[class*="portrait-"] {
     width: 360px;
   }
   .memo_body {
-    font-size: 11px;
+    font-size: 10px;
   }
   
   .photo-box-content {
@@ -45,16 +82,21 @@
   }
 }
 
-@media (min-width: $screen-md) {
+@media (min-width: $screen-md) and (max-width: 1500px){
+  
+  .album-photos-index {
+    max-width: 750px;
+  }
+  
   div[class*="portrait-"] {
     width: 540px;
   }
   
   .memo_body {
-    font-size: 38px;
+    font-size: 31px;
   }
   .view_memo_body {
-    font-size: 29px;
+    font-size: 24px;
   }
   
   .right-panel {
