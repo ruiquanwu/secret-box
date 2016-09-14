@@ -104,6 +104,7 @@ class OrdersController < ApplicationController
     @order.update_number_in_stock
     @order.save
     @shipping_address.save
+    UserNotifier.send_order_received_email(current_user).deliver_now
 
     
     rescue Stripe::CardError => e

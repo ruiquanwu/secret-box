@@ -11,15 +11,7 @@
       .col-md-3
         .order-list-label Order Status
         .order-list-content= order.status
-      .col-md-3
-        - if order.has_shpping_address?
-          .order-list-label
-            SHIP TO: #{order.shipping_address.name}
-          .order-list-content= order.shipping_address.address_line1
-          .order-list-content
-            = order.shipping_address.city
-            , #{order.shipping_address.state} #{order.shipping_address.zipcode}
-        - else
+        -if order.status == 'Pending'
           = link_to checkout_order_path(order), class: "btn btn-success" do
             %i.glyphicon.glyphicon-credit-card
             %span
@@ -28,6 +20,15 @@
             %i.glyphicon.glyphicon-trash
             %span
               Delete
+        
+      .col-md-3
+        - if order.has_shpping_address?
+          .order-list-label
+            SHIP TO: #{order.shipping_address.name}
+          .order-list-content= order.shipping_address.address_line1
+          .order-list-content
+            = order.shipping_address.city
+            , #{order.shipping_address.state} #{order.shipping_address.zipcode}
     .order-list-details.col-md-12
       .order-album-icon.col-md-4
         = image_tag(order.album.sample_album.avatar.url, class: "img-responsive")

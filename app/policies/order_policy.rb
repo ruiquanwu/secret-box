@@ -21,6 +21,7 @@ class OrderPolicy < ApplicationPolicy
   
   def checkout?
     update?
+    #@user == @record.album.user && @record.status.downcase == "submitted"
   end
   
   def confirm?
