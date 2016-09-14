@@ -1,5 +1,18 @@
 - if memo == "yes"
-  .col-md-2.col-xs-3.view_photo_memo
+  .col-md-2.col-xs-2.view_photo_memo
     .memo
       %h5.view_memo Memo:
-      %textarea.view_memo_body{:rows => "6"} You Memo goes here.
+      %textarea.view_memo_body{:rows => "6"} Your Memo goes here.
+    -if droppable == 'yes'
+      .photo-action-icons
+        = fa_icon "floppy-o lg", title: "save memo", class: "visible-xs-inline thumbnail"
+        = fa_icon "floppy-o 2x", title: "save memo", class: "hidden-xs thumbnail"
+      
+        = fa_icon "plus lg", title: "append photo", class: "visible-xs-inline thumbnail"
+        = fa_icon "plus 2x", title: "append photo", class: "hidden-xs thumbnail"
+
+        = fa_icon "refresh lg", title: "rotate photo", class: "visible-xs-inline thumbnail"
+        = fa_icon "refresh 2x", title: "rotate photo", class: "hidden-xs thumbnail"
+      
+        = fa_icon "trash-o lg", title: "remove photo", class: "visible-xs-inline thumbnail"
+        = fa_icon "trash-o 2x", title: "remove photo", class: "hidden-xs thumbnail"

@@ -28,6 +28,7 @@ div[class*="photo-page"] {
 }
 
 .photo-memo {
+  padding: 0px;
   margin: auto;
 }
 
@@ -87,6 +88,7 @@ div[class*="photo-page"] {
   border-left: 30px solid black;
   border-right: 2px dashed black;
   border-radius: 10px;
+  margin-bottom: 10px;  
 }
 
 .photo-page-right {
@@ -95,6 +97,7 @@ div[class*="photo-page"] {
   border-right: 30px solid black;
   border-left: 2px dashed black;
   border-radius: 10px;
+  margin-bottom: 10px;  
 }
 
 .view-photo-page-left {
@@ -103,6 +106,7 @@ div[class*="photo-page"] {
   border-left: 20px solid black;
   border-right: 2px dashed black;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .view-photo-page-right {
@@ -111,6 +115,7 @@ div[class*="photo-page"] {
   border-right: 20px solid black;
   border-left: 2px dashed black;
   border-radius: 10px;
+  margin-bottom: 10px;
 }
 
 .jumbotron {
@@ -177,5 +182,10 @@ span.glyphicon {
 */
 
 div[class*="portrait-"] {
+  margin: auto;
+}
+
+.no-memo-photo {
+  min-height: 300px;
   margin: auto;
 }

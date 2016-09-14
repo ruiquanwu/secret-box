@@ -3,7 +3,7 @@ class AlbumsController < ApplicationController
   
   def index
     if current_user
-      @albums = current_user.albums.page(params[:page]).per(3)
+      @albums = current_user.albums.page(params[:page]).per(3).order(updated_at: :desc)
       #.paginate(page: params[:page], per_page: 3)
       #authorize @albums
     else
@@ -46,7 +46,6 @@ class AlbumsController < ApplicationController
   def new
     @album = Album.new
     @sample_albums = SampleAlbumSearch.search(sample_album_search_params).results
-    #@sample_albums  = SampleAlbum.all
     gon.sample_albums = @sample_albums
     gon.format_features_array = SampleAlbum.format_features_array
     @default_sample_album = @sample_albums.first
@@ -58,6 +57,12 @@ class AlbumsController < ApplicationController
     @album.user = current_user
     @sample_album = SampleAlbum.find(@album.style)
     @album.sample_album = @sample_album
+    
+    # variables to use when render new
+    @sample_albums = SampleAlbumSearch.search(sample_album_search_params).results
+    gon.sample_albums = @sample_albums
+    gon.format_features_array = SampleAlbum.format_features_array
+    @default_sample_album = @sample_albums.first
 #    @album.setAttributes(@sample_album)
     authorize @album
     

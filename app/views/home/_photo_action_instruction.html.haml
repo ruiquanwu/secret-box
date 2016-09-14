@@ -1,0 +1,8 @@
+.media.thumbnail
+  .media-left.media-right.media-middle
+    = fa_icon  icon + " lg", title: title, class: "visible-xs-inline thumbnail"
+    = fa_icon  icon + " 2x", title: title, class: "hidden-xs media-object thumbnail"
+  .media-body
+    %h4 
+      =title
+    =description

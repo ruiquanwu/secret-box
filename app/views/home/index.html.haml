@@ -8,15 +8,20 @@
   .about-header
     %h2.about-title What's this All About？
     %h4.about-description
-      Basically,This is the website we hope you to spend some time,
-      value the one you care about, putting effort on making them a physical photo album. This
-      is all about:
+      %p
+        The idea of building this site comes from my own experience for making photo album. There is no easy way to make an old-fashioned photo album in current market. You have to order an album, and print out photos, and then place photos to your album.
+      %p Wouldn't be nice if you can order an album and print out the photos and assemble them all in one place? With that you can focus on selecting the photos and place them nicely in the album.
+  .why-so-secret.headline-title 
+    %h2 Why secret?
+    .well
+      %h4 Because only you can view your own album, and it doesn't exist until you finished it.
+  %h3.about-title.about-feature This is all about:
   .row.text-center.about.section
     .col-md-4
       .about-icon
         = image_tag(image_url("album-photo-icon.png"))
-      %h2.about-feature Old-Fashion photo album
-      %p.about-feature-description No instant sharing, no showing off, no fancy stuff.
+      %h2.about-feature Old-Fashioned photo album
+      %p.about-feature-description Old fashioned photo is alway sweet and warm. No instant sharing, no showing off, no fancy stuff.
     .col-md-4
       .about-icon
         = image_tag(image_url("gift-icon.png"), class: "img-responsive")
@@ -27,11 +32,6 @@
         = image_tag(image_url("love-letter-icon.png"), class: "img-responsive")
       %h2.about-feature Full of love and memories
       %p.about-feature-description Feel the love and memories along the way
-.why-so-secret
-  .container.narrow
-    .well
-      %h2 Why so Secret？
-      %h4 Because it is a Secret, and Surprise. Until you send it out, no one beside you will know.
 .what-you-need
   .container.narrow
     .what-you-need-header
@@ -40,17 +40,17 @@
       .what-you-need-list
         .col-md-12
           .col-md-2.list-icon
-            = image_tag(image_url("home-icon.png"))
+            = image_tag(image_url("device.jpg"))
           .col-md-10
-            %h3.list-title Quiet Room
-            %p.list-description You will need quiet room so that you can focus on choosing your photos
+            %h3.list-title A Device
+            %p.list-description You will need a device(computer or phone) to use this site and create your own album
       .what-you-need-list
         .col-md-12
           .col-md-2.list-icon
             = image_tag(image_url("time-icon.png"))
           .col-md-10
-            %h3.list-title Some Time
-            %p.list-description Always plan some time for the best you can make
+            %h3.list-title Time
+            %p.list-description Select an album style, Select photos, Select the way photos display, it will take time if you want to make a better album
       .what-you-need-list
         .col-md-12
           .col-md-2.list-icon
@@ -86,7 +86,7 @@
           %h2.step-text Step3
         .col-md-9
           %h3.step-title Upload and place photos to album
-          %p.step-description Upload photos and drag them to the album, just like the way real photo album wroks.
+          %p.step-description Upload photos, and use drag and drop method to place them into album, just like the way physical photo album wroks.
     .col-md-12
       .how-it-works-step
         .col-md-3.step-icon
@@ -95,5 +95,5 @@
         .col-md-9
           %h3.step-title Submit your order or Build it by yourself
           %p.step-description
-            After completing your album, you can either keep it as refrence and build the actual album yourself
-            or you can submit your order to us, and we will help you to build the exact same album you have created.
+            After completing your album, you can either keep it as reference and build the physical album yourself
+            or you can submit your order to us, and we will help you to build the exact same album as you have created.

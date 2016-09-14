@@ -1,27 +1,57 @@
 .container
-  .row
-    %h1 What are secret albums?
-    .well.well-sm
-      well, there is no secret unless you create it.
-    %h1 It is Easy, all you need to do is drag and drop
-    .well.well-sm
-      Try it yourself Below
-    .col-md-6.col-md-offset-1.col-xs-8.view-photo-page-left
-      = render partial: 'landscape_left', locals: {memo: "yes", picture: nil}
-    .col-md-4.col-xs-4
+  %h1 What are secret albums?
+  .well.well-sm
+    Well, they are just normal, old fashioned albums, there is no secret until you put secret on it.
+  %h3 But
+  %ul.list-group
+    %li.list-group-item.list-site-feature
+      We offer large selection of albums, and..
+    %li.list-group-item.list-site-feature
+      You can changes any album style any time during development process and..
+    %li.list-group-item.list-site-feature
+      We print out photos and assemble for you without any extra fee
+  %h1 It is Easy to create, all you need to do is drag and drop
+  .well.well-sm
+    Try it yourself Below
+  .col-md-12#demo-try-it-yourself
+    .col-md-4.col-md-offset-1.col-xs-12s#demo-drag-images
       %p.text-center Drag me!
-      = image_tag(image_url("img_forest.jpg"), class: "img-responsive draggable-photo thumbnail")
-
-  %h2 More Album Demos   
+      = image_tag(image_url("img_forest.jpg"), class: "img-responsive draggable-photo thumbnail", id: "demo-drag-picture")    
+  
+    .col-md-6.col-xs-12
+      .view-photo-page-left
+        = render partial: 'landscape_left', locals: {memo: "yes", picture: nil, droppable: "yes"}
+    .col-md-6.col-xs-12#photo-action-instructions
+      = render partial: 'photo_action_instruction', locals: {icon: 'floppy-o', title: 'Save Memo', description: 'Save memo after editing'}
+      = render partial: 'photo_action_instruction', locals: {icon: 'plus', title: 'Append Photo', description: 'Append new photo after current photo'}
+      = render partial: 'photo_action_instruction', locals: {icon: 'refresh', title: 'Rotate Photo', description: 'Rotate photo 180 degrees'}
+      = render partial: 'photo_action_instruction', locals: {icon: 'trash', title: 'Delete Photo', description: 'Delete current photo'}
+  .col-md-12
+    %h2 More Album Styles
   .col-md-6.col-xs-12
-    .well.well-sm
-      %p Landscape Album with 2 photos per page and has Memo Field
+    .well.well-sm.text-center
+      %h4 Landscape Album with Memo Field
     .view-photo-page-left
-      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo1.jpg")}
-      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo2.jpg")}      
+      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo1.jpg"), droppable: "no"}
+      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo2.jpg"), droppable: "no"}
   .col-md-6.col-xs-12
-    .well.well-sm
-      %p Landscape Album with 2 photos per page and has no Memo Field
+    .well.well-sm.text-center
+      %h4 Landscape Album without Memo Field
     .view-photo-page-right
-      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo1.jpg") }
-      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo2.jpg") }
+      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo1.jpg"), droppable: "no"}
+      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo2.jpg"), droppable: "no"}
+  
+  .col-md-6.col-xs-12
+    .well.well-sm.text-center
+      %h4 Portrait Album with Memo Field
+    .view-photo-page-left
+      = render partial: 'landscape_left', locals: {memo: "yes", picture: image_url("album-demo-photo3.jpg"), droppable: "no"}
+  .col-md-6.col-xs-12
+    .well.well-sm.text-center
+      %h4 Portrait Album without Memo Field
+    .view-photo-page-right
+      = render partial: 'landscape_right', locals: {memo: "no", picture: image_url("album-demo-photo3.jpg"), droppable: "no"} 
+  .row.col-md-12.learn-more-btn-link
+    .text-center
+      = link_to "Back to Home", root_path, class: 'btn btn-outline-primary'
+      = link_to "Try it out", new_user_session_path, class: 'btn btn-outline-primary'

@@ -1,4 +1,4 @@
-.view_photo.col-md-10.col-xs-9.droppable-photo-demo{memo == "yes" ? {} : {class: "col-md-offset-1 col-xs-offset-1"}}
+.view_photo.col-md-10.col-xs-10{memo == "yes" ? {} : {class: "col-md-offset-1 col-xs-offset-1"}, droppable == "yes" ? {class: "droppable-photo-demo"} : {}}
   -if picture
     =image_tag(picture, class: "img-responsive")
   -else

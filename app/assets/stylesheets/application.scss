@@ -23,15 +23,19 @@
 @Import 'bootstrap-select';
 
 @media (min-width: 1501px) {
+  .photo-portrait-page {
+    max-width: 600px;
+  }
+  
   .album-photos-index {
-    max-width: 900px;
+    max-width: 750px;
   }
   
   .memo_body {
     font-size: 31px;
   }
   .view_memo_body {
-    font-size: 30px;
+    font-size: 19px;
   }
   
   .right-panel {
@@ -64,6 +68,10 @@
   div[class*="portrait-"] {
     width: 360px;
   }
+  .view_photo_memo {
+    font-size: 11px;
+  }
+  
   .memo_body {
     font-size: 10px;
   }
@@ -84,8 +92,13 @@
 
 @media (min-width: $screen-md) and (max-width: 1500px){
   
+  .photo-portrait-page {
+    max-width: 400px;
+  }
+  
+  
   .album-photos-index {
-    max-width: 750px;
+    max-width: 600px;
   }
   
   div[class*="portrait-"] {
@@ -96,7 +109,7 @@
     font-size: 31px;
   }
   .view_memo_body {
-    font-size: 24px;
+    font-size: 20px;
   }
   
   .right-panel {
@@ -215,4 +228,16 @@ body {
 
 .social-text {
   margin-left: 20px;
+}
+
+.btn-outline-primary {
+  color: #0275d8;
+  background-image: none;
+  background-color: transparent;
+  border-color: #0275d8;
+  margin-bottom: 20px;
+}
+
+.btn-outline-primary:hover {
+  background: #4ae;
 }
