@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
       #user.image = auth.info.image # assuming the user model has an image
       user.skip_confirmation!
       user.save!
+      UserNotifier.send_signup_email(user).deliver_now
     end
   end
   

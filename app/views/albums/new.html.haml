@@ -2,5 +2,8 @@
   .container
     .album-new-content
       %h1 Create New Photo Album
+      %ul.error_messages
+      - @album.errors.full_messages.each do |msg|
+        %li.text-red= msg
       = render 'search_sample', url: new_album_path
       = render 'form', action: "Create", back_url: albums_path

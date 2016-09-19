@@ -24,6 +24,19 @@ class OrderManagementController < ApplicationController
     @order = Order.friendly.find(params[:id])
     
     if @order.update_attributes(order_params)
+      # if update status is equal to In Progress, send "in progress" notification to user
+      if @order.status == "In Progress"
+        UserNotifier.send_order_in_progress_email(@order.user, @order).deliver_now
+      end
+      # if update status is equal to Shipped, send "shipped" notification to user
+      if @order.status == "Shipped"
+        UserNotifier.send_order_shipped_email(@order.user, @order).deliver_now
+      end
+      
+      #if update status is Cancel Request, send refund notice
+      if @order.status == "Cancel"
+        UserNotifier.send_order_cancel_confirm_email(@order.user, @order).deliver_now
+      end
       flash[:notice] = "Order was updated"
       redirect_to order_management_edit_path(@order)
     else

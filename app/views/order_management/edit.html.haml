@@ -39,7 +39,7 @@
         = f.label :track_number
         = f.text_field :track_number
         = f.label :status
-        = f.select(:status, [["Pending", "Pending"], ["Submitted", "Submitted"], ["In Progress", "In Progress"], ["Shipped", "Shipped"], ["Delivered", "Delivered"]])
+        = f.select(:status, [["Pending", "Pending"], ["Submitted", "Submitted"], ["In Progress", "In Progress"], ["Shipped", "Shipped"], ["Delivered", "Delivered"], ["Request Cancelation", "Request Cancelation"],["Cancel", "Cancel"]])
         %p
           Download Album Photos:
           \#{link_to "Download Photos", order_management_download_path(@order), class: "btn btn-success"}

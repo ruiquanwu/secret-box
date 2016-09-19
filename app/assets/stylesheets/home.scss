@@ -96,6 +96,11 @@
   line-height: 125%;
 }
 
+.how-it-works-step {
+  float: left;
+  margin-bottom: 20px;
+}
+
 .how-it-works-title {
   font-size: 2.8em;
   margin-bottom: 50px;
@@ -108,8 +113,8 @@
 }
 
 .step-icon {
+  margin: auto;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .step-text {
@@ -127,4 +132,8 @@
 
 .list-site-feature {
   background-color: #f5f5f5;
+}
+
+.list-icon {
+  margin: auto;
 }

@@ -22,6 +22,7 @@
     .col-md-9.cover-page
       = link_to front_cover_album_path(@album), {title: "click to open album"} do
         = image_tag(@album.sample_album.avatar.url, class:"img-responsive")
+      %p.text-center click on album to open
     .col-md-3
       .album-show-layout
         %h4 Album Layout:
@@ -58,8 +59,13 @@
             %td= @album.remains_photos
           %tr
             %td Number of Album In Stock:
-            %td= @album.sample_album.number_in_stock
-      = link_to new_album_order_path(@album), class: "btn btn-success" do
+            /%td= @album.sample_album.number_in_stock
+            - if @album.sample_album.number_in_stock == 0
+              %td.text-red Out of Stock
+            - else
+              %td= @album.sample_album.number_in_stock
+      - css_class = (@album.sample_album.number_in_stock == 0) ? "disabled" : "active"
+      = link_to new_album_order_path(@album), class: "btn btn-success #{css_class}" do
         %i.glyphicon.glyphicon-check
         %span
           Order this Album

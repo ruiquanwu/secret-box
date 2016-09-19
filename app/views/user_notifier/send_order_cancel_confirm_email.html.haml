@@ -1,0 +1,10 @@
+%h1 Your Secret Album Order has been cancel, and refund will be make within 3~5 business day.
+
+%p if you have any questions, please contact us at help@secretalbums.com
+
+= render partial: "display_order_detail", locals: {order: @order}
+
+%p Thank you for using SecretAlbums
+
+%h3
+  =link_to "SecretAlbums.com", "secretalbums.com"

@@ -20,8 +20,9 @@ class AlbumsController < ApplicationController
 
   def edit
     @album = Album.friendly.find(params[:id])
-    @sample_albums = SampleAlbumSearch.search(sample_album_search_params).results
+    @results = SampleAlbumSearch.search(sample_album_search_params).results
     
+    @sample_albums = @results.select{|x| x.capacity >= @album.pictures.count }
     gon.sample_albums = @sample_albums
     gon.format_features_array = SampleAlbum.format_features_array
     @default_sample_album = @sample_albums.first
@@ -70,7 +71,7 @@ class AlbumsController < ApplicationController
       flash[:notice] = "Album was saved."
       redirect_to @album
     else
-      flash.now[:error] = "There is error on saving album"
+      flash.now[:error] = "There are errors on saving album"
       render :new
     end
   end

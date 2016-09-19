@@ -1,0 +1,19 @@
+%p Hello #{@user.name},
+%br/
+%p Your secret album order "#{@order.album.name}" has shipped.
+%p Shipped to:
+%h4 #{@order.shipping_address.name}
+%h4 #{@order.shipping_address.address_line1}
+%h4  #{@order.shipping_address.city}, #{@order.shipping_address.state} #{@order.shipping_address.zipcode}
+
+%p if you have any question, please contact us at help@secretalbums.com
+
+%p Thank you for using secret albums.
+
+= render partial: "display_order_detail", locals: {order: @order}
+
+%br/
+We hope you enjoy our service.
+
+%h3
+  =link_to "SecretAlbums.com", "secretalbums.com"

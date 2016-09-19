@@ -1,0 +1,23 @@
+%h4 Here is your order details:
+.order-list-details.col-md-12
+  .order-album-icon.col-md-4
+    = image_tag(order.album.sample_album.avatar.url, class: "img-responsive")
+  .order-album-details.col-md-6
+    %p
+      Album Sample: #{order.album.sample_album.name}
+    %p
+      Photos Size:"#{order.album.sample_album.photo_size}"
+    %p
+      Photos Count: #{order.album.pictures.count}
+    %div
+      Order Options:
+      %ul
+        - if order.options
+          - order.options.each do |option|
+            %li= option
+    %p
+      Shipment: #{order.shippment}
+    %p
+      Order Status: #{order.status}
+%br/
+%p Order Total: $#{order.total_price}

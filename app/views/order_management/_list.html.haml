@@ -69,3 +69,16 @@
             %i.glyphicon.glyphicon-search
             %span
               View this Album
+        -if order.status == "Submitted"
+          %p#cancel-request
+            = link_to cancel_order_path(order), class: "btn btn-danger", data:{confirm: "Are you sure to cancle this order?"}, method: :post do
+              %i.glyphicon.glyphicon-trash
+              %span
+                Cancel Order
+          
+        -if order.status == "Request Cancelation"
+          %p Your cancel request has been sent, we will process and get you refund shortly, or you want
+          = link_to cancel_order_path(order), class: "btn btn-danger", data:{confirm: "Are you sure to undo cancle request?"}, method: :post do
+            %i.glyphicon.glyphicon-trash
+            %span
+              Undo Cancel Request

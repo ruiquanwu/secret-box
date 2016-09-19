@@ -27,4 +27,8 @@ class OrderPolicy < ApplicationPolicy
   def confirm?
     update?
   end
+  
+  def cancel?
+    @user == @record.album.user && (@record.status.downcase == "submitted" || @record.status.downcase == "request cancelation")
+  end
 end

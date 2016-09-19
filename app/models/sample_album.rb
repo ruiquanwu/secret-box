@@ -37,5 +37,7 @@ class SampleAlbum < ActiveRecord::Base
     specifications
   end
   
-  
+  def capacity
+    self.photo_per_page * self.max_page
+  end
 end

@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController  
   def index
+    authorize :welcome, :index?
     @albums = current_user.albums.order(updated_at: :desc)
     @recent_album = @albums.first
     @pictures = current_user.pictures

@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       member do
         get 'checkout'
         post 'confirm'
+        post 'cancel'
       end
     end
     

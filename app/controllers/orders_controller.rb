@@ -104,13 +104,30 @@ class OrdersController < ApplicationController
     @order.update_number_in_stock
     @order.save
     @shipping_address.save
-    UserNotifier.send_order_received_email(current_user).deliver_now
+    UserNotifier.send_order_received_email(current_user, @order).deliver_now
+    UserNotifier.send_order_received_email_to_system(current_user, @order).deliver_now
 
     
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to checkout_order_path(@order)
     
+  end
+  
+  def cancel
+    @order = Order.friendly.find(params[:id])
+    if @order.status == "Submitted"
+      @order.status = "Request Cancelation"
+      UserNotifier.send_order_cancel_request_email_to_system(current_user, @order).deliver_now
+      UserNotifier.send_order_cancel_request_email(current_user, @order).deliver_now
+    else
+      @order.status = "Submitted"
+      UserNotifier.send_order_undo_cancel_request_email_to_system(current_user, @order).deliver_now
+      UserNotifier.send_order_undo_cancel_request_email(current_user, @order).deliver_now
+    end
+    if @order.save
+      redirect_to order_management_index_path
+    end
   end
   
   private

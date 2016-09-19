@@ -100,6 +100,8 @@ gem "jquery-fileupload-rails"
 # font awesome
 gem "font-awesome-rails"
 
+#mailgun rails
+gem 'mailgunner', '~> 2.4'
 
 group :production do
   gem 'pg'

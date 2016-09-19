@@ -1,0 +1,12 @@
+%p Hello #{@user.name},
+%br/
+%p Your secret album order "#{@order.album.name}" is in progress now. We will print out all the photos that you inserted in the album and assemble for you. Any changes you make at this point will not be considered.
+%p if you have any question, please contact us at help@secretalbums.com
+%p We will notify you once your album is ready and ship, thank you for patient.
+
+= render partial: "display_order_detail", locals: {order: @order}
+%br/
+We hope you enjoy our service.
+
+%h3
+  =link_to "SecretAlbums.com", "secretalbums.com"

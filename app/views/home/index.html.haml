@@ -38,62 +38,15 @@
       %h2.what-you-need-title What do you need?
     .row.section
       .what-you-need-list
-        .col-md-12
-          .col-md-2.list-icon
-            = image_tag(image_url("device.jpg"))
-          .col-md-10
-            %h3.list-title A Device
-            %p.list-description You will need a device(computer or phone) to use this site and create your own album
-      .what-you-need-list
-        .col-md-12
-          .col-md-2.list-icon
-            = image_tag(image_url("time-icon.png"))
-          .col-md-10
-            %h3.list-title Time
-            %p.list-description Select an album style, Select photos, Select the way photos display, it will take time if you want to make a better album
-      .what-you-need-list
-        .col-md-12
-          .col-md-2.list-icon
-            = image_tag(image_url("images-icon.png"))
-          .col-md-10
-            %h3.list-title Photos
-            %p.list-description Of course you need Photos, or what else can you put in to your album?
+        =render partial: "what_you_need_list", locals: {picture: "device.jpg", title: "A Device", description: "You will need a device(computer or phone) to use this site and create your own album."}
+        =render partial: "what_you_need_list", locals: {picture: "time-icon.png", title: "Time", description: "Select an album style, Select photos, Select the way photos display, it will take time if you want to make a better album."}
+        =render partial: "what_you_need_list", locals: {picture: "images-icon.png", title: "Photos", description: "Of course you need Photos, or what else can you put in to your album?"}
 .container.narrow
   .how-it-works-header
     %h2.how-it-works-title How it Works?
     %p.how-it-works-description Simple, just follow the below four steps:
   .row.how-it-works.section
-    .col-md-12
-      .how-it-works-step
-        .col-md-3.step-icon
-          = image_tag(image_url("user-group-icon.png"))
-          %h2.step-text Step1
-        .col-md-9
-          %h3.step-title Register or Login
-          %p.step-description you will need an account to begin and save your work.
-    .col-md-12
-      .how-it-works-step
-        .col-md-3.step-icon
-          = image_tag(image_url("album-step-icon.jpg"))
-          %h2.step-text Step2
-        .col-md-9
-          %h3.step-title Choose an Album to Start
-          %p.step-description you can choose different albums based on your need, all the albums are available online.
-    .col-md-12
-      .how-it-works-step
-        .col-md-3.step-icon
-          = image_tag(image_url("upload-icon.png"))
-          %h2.step-text Step3
-        .col-md-9
-          %h3.step-title Upload and place photos to album
-          %p.step-description Upload photos, and use drag and drop method to place them into album, just like the way physical photo album wroks.
-    .col-md-12
-      .how-it-works-step
-        .col-md-3.step-icon
-          = image_tag(image_url("order-form.jpg"))
-          %h2.step-text Step4
-        .col-md-9
-          %h3.step-title Submit your order or Build it by yourself
-          %p.step-description
-            After completing your album, you can either keep it as reference and build the physical album yourself
-            or you can submit your order to us, and we will help you to build the exact same album as you have created.
+    =render partial: "how_it_works_step", locals: {picture: "user-group-icon.png", step: "Step1", title: "Register or Login", description: "you will need an account to begin and save your work. You can use your facebook or google+ account for one-click signup/login."}
+    =render partial: "how_it_works_step", locals: {picture: "album-step-icon.jpg", step: "Step2", title: "Choose an Album to Start", description: "you can choose different albums based on your need, all the albums are available online."}
+    =render partial: "how_it_works_step", locals: {picture: "upload-icon.png", step: "Step3", title: "Upload and place photos to album", description: "Upload photos, and use drag and drop method to place them into album, just like the way physical photo album wroks."}
+    =render partial: "how_it_works_step", locals: {picture: "order-form.jpg", step: "Step4", title: "Submit your order or Build it by yourself", description: "After completing your album, you can either keep it as reference and build the physical album yourself or you can submit your order to us, and we will help you to build the exact same album as you have created."}

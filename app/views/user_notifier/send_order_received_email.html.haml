@@ -1,1 +1,14 @@
-%p Your album order was received. Thank you for using secret albums.
+%p Hello #{@user.name},
+%br/
+%p Your secret album order "#{@order.album.name}" was received. Thank you for using Secret-Albums, we will process your order shortly.
+
+= render partial: "display_order_detail", locals: {order: @order}
+
+%br/
+%p Order Total: $#{@order.total_price}
+
+%br/
+We hope you enjoy our service.
+
+%h3
+  =link_to "SecretAlbums.com", "secretalbums.com"

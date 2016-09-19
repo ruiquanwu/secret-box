@@ -1,4 +1,6 @@
 .container
   %h1 Edit Album
   = render 'search_sample', url: edit_album_path(@album)
+  %p.text-red
+    Note: Only Sample Albums with equal or higher capacity(number of photos inserted) will shown.
   = render 'form', action: "Update", back_url: @album

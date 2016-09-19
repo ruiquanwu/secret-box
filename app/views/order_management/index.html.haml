@@ -5,10 +5,11 @@
     %ul
       %li Pending: your order was created, but you have not checkout yet.
       %li Submitted: your order was checkout out, order will be processed shortly.
-      %li In Progress: actual album in progress, any changes may not apply.
-      %li Shipped: your order was ready and shipped.
-      %li Delivered: your order was delivered, thank you for using Secrect Album.
-    %p any changes on your album after order is "In Progress" status may not change the actual order
+      %li Request Cancelation: your cancelation request has been send, refund will be make shortly.
+      %li Cancel: your order cancelation is confirm, full refund will be available wihtin 3 days.
+      %li In Progress: actual album in progress, you cannot cancel order this time.
+      %li Shipped: your order was ready and shipped, tracking information is also available.
+    %p any changes on your album(Insert/Change Photos) after order is "In Progress" status will not apply.
     = render partial: "list"
     .col-md-12.text-center
       = paginate @orders

@@ -15,12 +15,13 @@
       = link_to album_photos_path(@album), title: "click to open album" do
         .front-cover-background
           = image_tag(@album.sample_album.avatar.url, class: "img-responsive", alt: "click to open album", id: "album-front-cover-background")
+      %p.text-center click on the album to open
     -if @album.sample_album.has_front_cover
       .col-md-4.col-xs-4
         #front-cover-picture-div{update_url: "#{update_front_cover_album_path(@album)}", "style" => "background:url('#{@album.front_cover}') center center / 100% no-repeat", data: {"front-cover-width" => @album.sample_album.front_cover_width_percentage, "front_cover_height" => @album.sample_album.front_cover_height_percentage}}
       %p Drop a Picture here to replace your Front cover
       %p You can move the picture to Preview it
-      .row.right-panel.panel.panel-info.panel-portrait
+      .right-panel.panel.panel-info.panel-portrait
         = link_to "#", class: "btn btn-info photo-box-top-btn" do
           Photo-Box
           %span.badge#badge-top
