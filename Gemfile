@@ -104,6 +104,7 @@ gem "font-awesome-rails"
 gem 'mailgunner', '~> 2.4'
 
 group :production do
+  gem 'unicorn'
   gem 'pg'
   gem 'rails_12factor'
 end
