@@ -27,9 +27,9 @@
 @changeShipment = (element) ->
   name = element.getAttribute('data-name')
   price = element.getAttribute('data-price')
-  $('#display-shipment-name').text(name)
-  $('#display-shipment-price').text(price)
-  $('#display-shipment-total').text(price)
+  $('#display-shipment-name').text(name+" Shipment")
+  $('#display-shipment-price').text("$" + price)
+  $('#display-shipment-total').text("$" + price)
   
 @calculateTotal = () ->
   item_totals = $('.item-total')
@@ -59,7 +59,7 @@ $(document).on "page:change", ->
   if $(".orders").length > 0
     initialize()
     for name of gon.options
-      option_id = '#'+gon.option_id_prefix+name
+      option_id = '#'+gon.option_id_prefix+name.toLowerCase()
       $(option_id).click ->
         if this.checked
           add_option_detail this

@@ -3,12 +3,24 @@
   - if @orders.count > 0
     %p Notes: Order Status indicate how order is processed.
     %ul
-      %li Pending: your order was created, but you have not checkout yet.
-      %li Submitted: your order was checkout out, order will be processed shortly.
-      %li Request Cancelation: your cancelation request has been send, refund will be make shortly.
-      %li Cancel: your order cancelation is confirm, full refund will be available wihtin 3 days.
-      %li In Progress: actual album in progress, you cannot cancel order this time.
-      %li Shipped: your order was ready and shipped, tracking information is also available.
+      %li 
+        %span.text-red Pending: 
+        your order was created, but you have not checkout yet.
+      %li 
+        %span.text-red Submitted: 
+        your order was checkout out, order will be processed shortly.
+      %li 
+        %span.text-red Request Cancelation: 
+        your cancelation request has been send, refund will be make shortly.
+      %li 
+        %span.text-red Cancel: 
+        your order cancelation is confirm, full refund will be available wihtin 3 days.
+      %li 
+        %span.text-red In Progress: 
+        actual album in progress, you cannot cancel order this time.
+      %li 
+        %span.text-red Shipped: 
+        your order was ready and shipped, tracking information is also available.
     %p any changes on your album(Insert/Change Photos) after order is "In Progress" status will not apply.
     = render partial: "list"
     .col-md-12.text-center

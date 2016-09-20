@@ -1,54 +1,29 @@
 %table#display-order-detail.table
   %tr
     %h2 Order Details:
-  %th Item
-  %th Qty.
-  %th Price
-  %th Total
-  %tr.album_detail
-    %td= @sample_album.name
-    %td 1
-    %td
-      $ #{@sample_album.price}
-    %td
-      $
-      %span.item-total= @sample_album.price.round(2)
-  %tr.pictures_detail
-    %td
-      = @album.photo_size
-      photos
-    %td
-      = @album.pictures.count
-    %td
-      $ #{@sample_picture.price}
-    %td
-      $
-      %span.item-total= @order.picture_total_price
-    -if @album.front_cover
-      %tr.front_cover_detail
-        %td
-          Front Cover
-        %td
-          1
-        %td
-          $ #{@sample_picture.price}
-        %td
-          $
-          %span.item-total= @sample_picture.price
+    %th.col-md-6 Item
+    %th.col-md-2 Qty.
+    %th.col-md-2 Price
+    %th.col-md-2 Total
+  = render partial: "order_detail_table_row", locals: {tr_class: "album_detail", item_name: @sample_album.name, qty: 1, item_price: @sample_album.price, item_total: @sample_album.price.round(2)}
+  = render partial: "order_detail_table_row", locals: {tr_class: "pictures_detail", item_name: @album.photo_size+' photos', qty: @album.pictures.count, item_price: @sample_picture.price, item_total: @order.picture_total_price}
+  -if @album.front_cover
+    = render partial: "order_detail_table_row", locals: {tr_class: "front_cover_detail", item_name: "Front Cover", qty: 1, item_price: @sample_picture.price, item_total: @sample_picture.price}
   %tr.order-shipping
     %td
       %span#display-shipment-name= @shipments.first.name
     %td
     %td
-      $
-      %span#display-shipment-price= @shipments.first.price.round(2)
+      %span#display-shipment-price
+        ${@shipments.first.price.round(2)}
     %td
-      $
-      %span#display-shipment-total.item-total= @shipments.first.price.round(2)
+      %span#display-shipment-total.item-total
+        ${@shipments.first.price.round(2)}
   %tr.net-total
+    %td.text-red
+      Grand Total
     %td
     %td
-    %td
-    %td
+    %td.text-red
       $
       %span#net-total

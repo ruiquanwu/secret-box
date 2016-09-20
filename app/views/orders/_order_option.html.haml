@@ -3,16 +3,16 @@
   %ul
     - @options.each do |option|
       .checkbox
-        = f.check_box :options, {:multiple => true}, option.name, nil
-        = option.name
+        = f.check_box :options, {:multiple => true}, option.name.capitalize, nil
+        = "#{option.name.capitalize}: #{option.description}"
 .order-shippment
   %h4 Select A Shipment Method:
   %ul
     - @shipments.each_with_index do |shipment, index|
       .radio
         - if index == 0
-          = f.radio_button :shippment, shipment.name, data: {name: shipment.name, price: shipment.price}, checked: true
+          = f.radio_button :shippment, shipment.name, data: {name: shipment.name.capitalize, price: shipment.price}, checked: true
         - else
-          = f.radio_button :shippment, shipment.name, data: {name: shipment.name, price: shipment.price}
-        = shipment.name
+          = f.radio_button :shippment, shipment.name, data: {name: shipment.name.capitalize, price: shipment.price}
+        = shipment.name.capitalize
         \-- #{shipment.price}

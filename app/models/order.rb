@@ -17,7 +17,7 @@ class Order < ActiveRecord::Base
     options_hash = {}
     options = ServiceLookup.where(categories: "option")
     options.each do |option|
-      options_hash[option.name] = option.price
+      options_hash[option.name.capitalize] = option.price
     end
     options_hash
   end
