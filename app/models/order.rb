@@ -33,7 +33,7 @@ class Order < ActiveRecord::Base
     # Option price
     if self.options
       self.options.each do |option|
-        total += ServiceLookup.find_by_name(option).price
+        total += ServiceLookup.find_by_name(option.downcase).price
       end
     end
     

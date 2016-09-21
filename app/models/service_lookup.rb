@@ -4,6 +4,6 @@ class ServiceLookup < ActiveRecord::Base
   end
   
   def self.PriceLookup name
-    ServiceLookup.find_by_name(name).price
+    ServiceLookup.find_by_name(name.downcase).price
   end
 end
