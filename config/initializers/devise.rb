@@ -3,7 +3,8 @@
 Devise.setup do |config|
   
   config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], {
-    :prompt => "consent",
+    :scope => "plus.profile.emails.read, plus.login",
+    :prompt => "consent"
   }
   
   # The secret key used by Devise. Devise uses this key to generate
