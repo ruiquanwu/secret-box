@@ -6,7 +6,7 @@
     %th.col-md-2 Price
     %th.col-md-2 Total
   = render partial: "order_detail_table_row", locals: {tr_class: "album_detail", item_name: @sample_album.name, qty: 1, item_price: @sample_album.price, item_total: @sample_album.price.round(2)}
-  = render partial: "order_detail_table_row", locals: {tr_class: "pictures_detail", item_name: @album.photo_size+' photos', qty: @album.pictures.count, item_price: @sample_picture.price, item_total: @order.picture_total_price}
+  = render partial: "order_detail_table_row", locals: {tr_class: "pictures_detail", item_name: @sample_album.photo_size+' photos', qty: @sample_album.pictures.count, item_price: @sample_picture.price, item_total: @order.picture_total_price}
   -if @album.front_cover
     = render partial: "order_detail_table_row", locals: {tr_class: "front_cover_detail", item_name: "Front Cover", qty: 1, item_price: @sample_picture.price, item_total: @sample_picture.price}
   %tr.order-shipping
