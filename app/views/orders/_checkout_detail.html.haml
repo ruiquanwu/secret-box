@@ -1,6 +1,4 @@
 %table.table
-  %tr
-    %h2 Order Details:
   %th Item
   %th Qty.
   %th Price
@@ -13,6 +11,14 @@
     %td
       $
       %span.item-total= @sample_album.price
+  -if @album.front_cover
+    %tr.front_cover
+      %td Front Cover
+      %td 1
+      %td $#{@sample_picture.price}
+      %td
+        $
+        %span.item-total= @sample_picture.price
   %tr.pictures_detail
     %td
       = @album.photo_size
@@ -44,9 +50,9 @@
       $
       %span#display-shipment-total.item-total= @shipment.price
   %tr.checkout-total
-    %td Total Amount
+    %td.text-red Grand Total:
     %td
     %td
     %td
       $
-      %span= @order.total_price
+      %span.text-red= @order.total_price

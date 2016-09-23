@@ -32,7 +32,9 @@ Rails.application.routes.draw do
     resources :orders, shallow: true do 
       member do
         get 'checkout'
-        post 'confirm'
+        get 'confirm'
+        post 'stripe_payment_confirm'
+        post 'paypal_payment_confirm'
         post 'cancel'
       end
     end

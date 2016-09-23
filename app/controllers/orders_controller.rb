@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   before_action :setup_gon_variables
+  protect_from_forgery except: [:paypal_payment_confirm]
+
   def new
     @album = Album.friendly.find(params[:album_id])
     @order = @album.orders.new
@@ -82,6 +84,11 @@ class OrdersController < ApplicationController
   def confirm
     @order = Order.friendly.find(params[:id])
     authorize @order
+  end
+  
+  def stripe_payment_confirm
+    @order = Order.friendly.find(params[:id])
+    authorize @order
     @amount = (@order.total_price * 100).round
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
@@ -106,12 +113,34 @@ class OrdersController < ApplicationController
     @shipping_address.save
     UserNotifier.send_order_received_email(current_user, @order).deliver_now
     UserNotifier.send_order_received_email_to_system(current_user, @order).deliver_now
+    
+    redirect_to confirm_order_path(@order)
 
     
     rescue Stripe::CardError => e
       flash[:error] = e.message
       redirect_to checkout_order_path(@order)
+  end
+  
+  def paypal_payment_confirm
+    @order = Order.friendly.find(params[:id])
+    #authorize @order
+    params.permit!
+    status = params[:payment_status]
     
+    if status == "Completed" && @order.paypal_valid?(params, raw_post)
+      @shipping_address = ShippingAddress.new(name: params[:address_name], address_line1: params[:address_street], state: params[:address_state], city: params[:address_city], zipcode: params[:address_zip])
+      @shipping_address.order = @order    
+    
+      @order.status = "Submitted"
+      # update number of sample album in store
+      @order.update_number_in_stock
+      @order.save
+      @shipping_address.save
+      UserNotifier.send_order_received_email(current_user, @order).deliver_now
+      UserNotifier.send_order_received_email_to_system(current_user, @order).deliver_now      
+    end
+    render nothing: true
   end
   
   def cancel

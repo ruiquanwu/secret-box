@@ -25,6 +25,14 @@ class OrderPolicy < ApplicationPolicy
   end
   
   def confirm?
+    create?
+  end
+  
+  def stripe_payment_confirm?
+    update?
+  end
+
+  def paypal_payment_confirm?
     update?
   end
   
