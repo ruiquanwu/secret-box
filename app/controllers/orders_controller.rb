@@ -63,11 +63,15 @@ class OrdersController < ApplicationController
   def destroy
     #@album = Album.friendly.find(params[:album_id])
     @order = Order.friendly.find(params[:id])
-    @album = @order.album
     authorize @order
-    @order.destroy
+    if @order.status == "Pending"
+      @order.destroy
+      flash[:notice] = "order #{@order.album.name} was deleted."
+    else
+      flash[:error] = "order cannot deleted at this time."
+    end
     
-    redirect_to @album
+    redirect_to order_management_index_path
   end
 
   def checkout
@@ -128,7 +132,7 @@ class OrdersController < ApplicationController
     params.permit!
     status = params[:payment_status]
     
-    if status == "Completed" && @order.paypal_valid?(params, raw_post)
+    if status == "Completed" && @order.paypal_valid?(params, request.raw_post)
       @shipping_address = ShippingAddress.new(name: params[:address_name], address_line1: params[:address_street], state: params[:address_state], city: params[:address_city], zipcode: params[:address_zip])
       @shipping_address.order = @order    
     
@@ -137,8 +141,8 @@ class OrdersController < ApplicationController
       @order.update_number_in_stock
       @order.save
       @shipping_address.save
-      UserNotifier.send_order_received_email(current_user, @order).deliver_now
-      UserNotifier.send_order_received_email_to_system(current_user, @order).deliver_now      
+      UserNotifier.send_order_received_email(@order.user, @order).deliver_now
+      UserNotifier.send_order_received_email_to_system(@order.user, @order).deliver_now      
     end
     render nothing: true
   end
@@ -158,7 +162,7 @@ class OrdersController < ApplicationController
       redirect_to order_management_index_path
     end
   end
-  
+
   private
   
   def order_params

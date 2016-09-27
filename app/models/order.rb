@@ -109,14 +109,14 @@ class Order < ActiveRecord::Base
   end
   
   def paypal_valid?(params, raw_post)
-    uri = URI.parse(ENV['PAYPAL_HOST'] + '/webscr?cmd=_notify-validate')
+    uri = URI.parse(ENV['PAYPAL_HOST'] + '/cgi-bin/webscr?cmd=_notify-validate')
     
     http = Net::HTTP.new(uri.host, uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = true
-    respond = http.post(uri.request_uri, raw_post).body
+    response = http.post(uri.request_uri, raw_post).body
     
     raise StandardError.new("Faulty paypal result: #{response}") unless ["VERIFIED", "INVALID"].include?(response)
     raise StandardError.new("Invaild IPN: #{response}") unless response == "VERIFIED"
